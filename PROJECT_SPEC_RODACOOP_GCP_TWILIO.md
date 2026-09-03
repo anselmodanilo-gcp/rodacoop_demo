@@ -23,12 +23,12 @@ A **Rodacoop** opera o transporte rodoviário de cargas para grandes players (ex
 | Componente | Função na Arquitetura | Benefício Google Cloud / Twilio |
 |---|---|---|
 | **Canal de Mensageria** | **Twilio Messaging API (WhatsApp)** | Conectividade ágil, webhooks seguros e suporte a Sandbox imediato. |
+| **Orquestrador de Conversa (Opcional)** | **Dialogflow CX (Flows & Intents)** | Gerenciamento de fluxos determinísticos, menus, transições de estado e fallback para IA Generativa. |
 | **Orquestrador de Serviços** | **Google Cloud Run (FastAPI)** | Microsserviço serverless, autoscaling imediato e execução orientada a eventos. |
-| **Processamento Multimodal** | **Vertex AI (Gemini 2.0 Flash)** | Extração visual e semântica com *Structured JSON Output* em menos de 2 segundos. |
+| **Processamento Multimodal** | **Vertex AI (Gemini 2.0 Flash / Cloud ADK)** | Extração visual e semântica com *Structured JSON Output* e Tool Use em menos de 2 segundos. |
 | **Armazenamento de Mídia** | **Google Cloud Storage (GCS)** | Repositório seguro e imutável para documentos (CNHs, CRLVs e comprovantes). |
-| **Persistência de Sessão** | **Google Cloud Firestore** | Armazena o estado das viagens, dados do cooperado e histórico de validações. |
-| **Segurança & Credenciais** | **Google Secret Manager** | Armazenamento de tokens do Twilio (`ACCOUNT_SID`, `AUTH_TOKEN`) e chaves de API. |
-| **Integração ERP** | **Escalasoft REST API** | Atualização cadastral em tempo real via `POST` de metadados e URLs assinadas. |
+| **Data Warehouse & Audit** | **Google Cloud BigQuery** | Registros de compliance, análise de SLA e auditoria em tempo real. |
+| **Plataforma de Agentes** | **Gemini Agent Platform / Enterprise** | Governança corporativa, controle de acesso (IAM) e orquestração de agentes. |
 
 ---
 
