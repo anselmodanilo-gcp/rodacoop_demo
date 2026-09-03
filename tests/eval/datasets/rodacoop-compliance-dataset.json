@@ -1,0 +1,69 @@
+{
+  "eval_cases": [
+    {
+      "eval_case_id": "policy_query_interstate_grains",
+      "prompt": {
+        "role": "user",
+        "parts": [{"text": "Quais documentos são obrigatórios para liberar uma viagem interestadual de transporte de grãos segundo as políticas de compliance da cooperativa?"}]
+      },
+      "reference": {
+        "response": {
+          "role": "model",
+          "parts": [{"text": "Os documentos obrigatórios são CNH do motorista com EAR ativa, CRLV do veículo com licenciamento do ano corrente e cadastro ativo na ANTT/RNTRC."}]
+        }
+      }
+    },
+    {
+      "eval_case_id": "cnh_validation_status",
+      "prompt": {
+        "role": "user",
+        "parts": [{"text": "Minha CNH venceu em 2023, posso liberar o carregamento para a viagem V-98214?"}]
+      },
+      "reference": {
+        "response": {
+          "role": "model",
+          "parts": [{"text": "Não. CNHs vencidas bloqueiam a liberação da viagem segundo as regras de compliance da Rodacoop."}]
+        }
+      }
+    },
+    {
+      "eval_case_id": "trip_release_check_approved",
+      "prompt": {
+        "role": "user",
+        "parts": [{"text": "Verifique a situação da viagem V-98214 no ERP."}]
+      },
+      "reference": {
+        "response": {
+          "role": "model",
+          "parts": [{"text": "A viagem V-98214 está com status LIBERADO no Escalasoft ERP. Nenhuma pendência ativa foi encontrada."}]
+        }
+      }
+    },
+    {
+      "eval_case_id": "trip_blocked_cnh_expired",
+      "prompt": {
+        "role": "user",
+        "parts": [{"text": "Qual o status da viagem V-98215 e quais as pendências encontradas no ERP?"}]
+      },
+      "reference": {
+        "response": {
+          "role": "model",
+          "parts": [{"text": "A viagem V-98215 do motorista Joaquim Barbosa está com status BLOQUEADO / EM ANÁLISE no Escalasoft ERP devido às pendências: CNH Vencida (2023) e Exame Toxicológico Pendente."}]
+        }
+      }
+    },
+    {
+      "eval_case_id": "trip_blocked_tacografo_expired",
+      "prompt": {
+        "role": "user",
+        "parts": [{"text": "Consulte a viagem V-98216 e informe se está liberada para o veículo QRS1T23."}]
+      },
+      "reference": {
+        "response": {
+          "role": "model",
+          "parts": [{"text": "A viagem V-98216 está BLOQUEADO / EM ANÁLISE no Escalasoft ERP para o veículo QRS1T23 devido às pendências: CRLV Não Licenciado e Laudo de Cronotacógrafo Expirado."}]
+        }
+      }
+    }
+  ]
+}

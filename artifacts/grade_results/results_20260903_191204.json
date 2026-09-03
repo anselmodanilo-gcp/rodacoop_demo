@@ -1,0 +1,2238 @@
+{
+  "eval_case_results": [
+    {
+      "eval_case_index": 0,
+      "response_candidate_results": [
+        {
+          "response_index": 0,
+          "metric_results": {
+            "custom_response_quality": {
+              "metric_name": "custom_response_quality",
+              "score": 5.0,
+              "explanation": "A resposta do modelo \u00e9 excelente, detalhada e precisa. Ela abrange todos os pontos mencionados na resposta esperada (CNH com EAR, CRLV e RNTRC/ANTT) e apresenta a listagem completa e estruturada da pol\u00edtica de compliance oficial consultada.",
+              "rubric_verdicts": null,
+              "raw_output": null,
+              "error_message": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "eval_case_index": 1,
+      "response_candidate_results": [
+        {
+          "response_index": 0,
+          "metric_results": {
+            "custom_response_quality": {
+              "metric_name": "custom_response_quality",
+              "score": 5.0,
+              "explanation": "The agent correctly consulted the compliance policy and accurately informed the user that an expired CNH prevents the load from being released for the specified trip, perfectly aligning with the expected answer.",
+              "rubric_verdicts": null,
+              "raw_output": null,
+              "error_message": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "eval_case_index": 2,
+      "response_candidate_results": [
+        {
+          "response_index": 0,
+          "metric_results": {
+            "custom_response_quality": {
+              "metric_name": "custom_response_quality",
+              "score": 1.0,
+              "explanation": "The final response directly contradicts the expected answer. While the agent reported that the driver's registration is not approved due to pending CRLV and CNH documents based on the initial tool response, the expected ground truth states that the trip status is LIBERADO and all documents/compliance terms are validated.",
+              "rubric_verdicts": null,
+              "raw_output": null,
+              "error_message": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "eval_case_index": 3,
+      "response_candidate_results": [
+        {
+          "response_index": 0,
+          "metric_results": {
+            "custom_response_quality": {
+              "metric_name": "custom_response_quality",
+              "score": 3.0,
+              "explanation": "O agente utilizou corretamente a ferramenta de consulta ao ERP e reportou fielmente o resultado obtido para a viagem V-98215. No entanto, houve diverg\u00eancia em rela\u00e7\u00e3o \u00e0 resposta esperada quanto aos detalhes espec\u00edficos das pend\u00eancias (CRLV/CNH vs CNH Vencida/Exame Toxicol\u00f3gico) e a explicita\u00e7\u00e3o do status de bloqueio da viagem.",
+              "rubric_verdicts": null,
+              "raw_output": null,
+              "error_message": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "eval_case_index": 4,
+      "response_candidate_results": [
+        {
+          "response_index": 0,
+          "metric_results": {
+            "custom_response_quality": {
+              "metric_name": "custom_response_quality",
+              "score": 3.0,
+              "explanation": "The agent correctly concluded that the vehicle cannot proceed with the trip. However, the specific reasons cited in the final response (vehicle mismatch with BRA2E19 and CNH pending, derived from the tool response) differ from the expected answer (CRLV not licensed and expired chronotachograph report).",
+              "rubric_verdicts": null,
+              "raw_output": null,
+              "error_message": null
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "summary_metrics": [
+    {
+      "metric_name": "custom_response_quality",
+      "num_cases_total": 5,
+      "num_cases_valid": 5,
+      "num_cases_error": 0,
+      "mean_score": 3.4,
+      "stdev_score": 1.6733200530681511,
+      "pass_rate": null
+    }
+  ],
+  "win_rates": null,
+  "evaluation_dataset": [
+    {
+      "bigquery_source": null,
+      "gcs_source": null,
+      "eval_cases": [
+        {
+          "prompt": {
+            "parts": [
+              {
+                "media_resolution": null,
+                "code_execution_result": null,
+                "executable_code": null,
+                "file_data": null,
+                "function_call": null,
+                "function_response": null,
+                "inline_data": null,
+                "text": "Quais documentos s\u00e3o obrigat\u00f3rios para liberar uma viagem interestadual de transporte de gr\u00e3os segundo as pol\u00edticas de compliance da cooperativa?",
+                "thought": null,
+                "thought_signature": null,
+                "video_metadata": null,
+                "tool_call": null,
+                "tool_response": null,
+                "part_metadata": null,
+                "audio_transcription": null,
+                "media_processing": null
+              }
+            ],
+            "role": "user"
+          },
+          "responses": [
+            {
+              "response": {
+                "parts": [
+                  {
+                    "media_resolution": null,
+                    "code_execution_result": null,
+                    "executable_code": null,
+                    "file_data": null,
+                    "function_call": null,
+                    "function_response": null,
+                    "inline_data": null,
+                    "text": "De acordo com a pol\u00edtica de compliance documental da Rodacoop (Vers\u00e3o: 2026.1 - Vig\u00eancia: 2026-2027), para a libera\u00e7\u00e3o de uma viagem interestadual de transporte de gr\u00e3os, os seguintes documentos s\u00e3o obrigat\u00f3rios:\n\n**2.1. Do Cooperado (Centralizador de Cobran\u00e7a e Responsabilidade)**\n*   Termo de Ades\u00e3o e Responsabilidade de Compliance homologado com assinatura digital v\u00e1lida.\n\n**2.2. Do Motorista (Condutor Designado)**\n*   **CNH (Carteira Nacional de Habilita\u00e7\u00e3o):**\n    *   Categoria profissional compat\u00edvel (C, D ou E).\n    *   Observa\u00e7\u00e3o obrigat\u00f3ria de EAR (Exerce Atividade Remunerada).\n    *   Exame Toxicol\u00f3gico peri\u00f3dico com resultado negativo e dentro do prazo de validade.\n    *   Validade f\u00edsica da habilita\u00e7\u00e3o regular.\n\n**2.3. Do Ve\u00edculo de Carga (Cavalo Mec\u00e2nico e Reboque/Semirreboque)**\n*   **CRLV (Certificado de Registro e Licenciamento de Ve\u00edculo):**\n    *   Exerc\u00edcio anual vigente quitado (IPVA, DPVAT e taxa de licenciamento).\n    *   Sem restri\u00e7\u00f5es judiciais ou bloqueios administrativos.\n*   **RNTRC / ANTT:** Registro Nacional de Transportadores Rodovi\u00e1rios de Cargas ativo e vinculado \u00e0 placa.\n*   **Laudo de Inspe\u00e7\u00e3o Veicular e Cronotac\u00f3grafo:** Certificado de verifica\u00e7\u00e3o metrol\u00f3gica do tac\u00f3grafo v\u00e1lido.\n\n**2.4. Documenta\u00e7\u00e3o Fiscal e de Carga (Emiss\u00e3o Escalasoft / SEFAZ)**\n*   **CT-e (Conhecimento de Transporte Eletr\u00f4nico):** Autorizado e validado na SEFAZ.\n*   **MDF-e (Manifesto Eletr\u00f4nico de Documentos Fiscais):** Emitido com as placas do ve\u00edculo e condutor associados.\n*   **Ap\u00f3lice de Seguro de Transporte:** Seguro Obrigat\u00f3rio de Responsabilidade Civil do Transportador Rodovi\u00e1rio de Carga (RCTR-C) e RC-DC (Desaparecimento de Carga).",
+                    "thought": null,
+                    "thought_signature": null,
+                    "video_metadata": null,
+                    "tool_call": null,
+                    "tool_response": null,
+                    "part_metadata": null,
+                    "audio_transcription": null,
+                    "media_processing": null
+                  }
+                ],
+                "role": "model"
+              }
+            }
+          ],
+          "reference": {
+            "response": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": null,
+                  "function_response": null,
+                  "inline_data": null,
+                  "text": "Os documentos obrigat\u00f3rios s\u00e3o CNH do motorista com EAR ativa, CRLV do ve\u00edculo com licenciamento do ano corrente e cadastro ativo na ANTT/RNTRC.",
+                  "thought": null,
+                  "thought_signature": null,
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null,
+                  "audio_transcription": null,
+                  "media_processing": null
+                }
+              ],
+              "role": "model"
+            }
+          },
+          "system_instruction": null,
+          "conversation_history": null,
+          "rubric_groups": null,
+          "eval_case_id": "policy_query_interstate_grains",
+          "intermediate_events": null,
+          "agent_info": null,
+          "agent_data": {
+            "agents": {
+              "rodacoop_compliance_agent": {
+                "agent_id": "rodacoop_compliance_agent",
+                "agent_type": "LlmAgent",
+                "description": "Agente Especialista em Compliance Documental e Log\u00edstica Rodacoop (Google Cloud ADK)",
+                "instruction": "Voc\u00ea \u00e9 o Agente de Compliance Documental Rodacoop rodando no Google Cloud Agent Development Kit (ADK).\n- Quando o usu\u00e1rio fizer perguntas sobre exig\u00eancias, regras, documenta\u00e7\u00f5es obrigat\u00f3rias ou pol\u00edticas de compliance da cooperativa, invoque SEMPRE a ferramenta 'tool_read_compliance_policy_from_gcs' para consultar a documenta\u00e7\u00e3o oficial armazenada no Google Cloud Storage.\n- Ao receber documentos ou dados de uma viagem, consulte o ERP com 'tool_get_trip_context'.\n- Para auditoria e m\u00e9tricas, utilize 'tool_save_to_gcs_and_bigquery'.\n- Para formalizar o termo e assinar digitalmente, execute 'tool_generate_compliance_signature'.\n- Ao final da aprova\u00e7\u00e3o, libere a viagem com 'tool_update_escalasoft_erp'.",
+                "tools": [
+                  {
+                    "retrieval": null,
+                    "computer_use": null,
+                    "file_search": null,
+                    "google_search": null,
+                    "google_maps": null,
+                    "code_execution": null,
+                    "enterprise_web_search": null,
+                    "function_declarations": [
+                      {
+                        "description": "L\u00ea as pol\u00edticas oficiais de compliance e regulamentos de transporte diretamente do Google Cloud Storage (GCS).",
+                        "name": "tool_read_compliance_policy_from_gcs",
+                        "parameters": null,
+                        "parameters_json_schema": null,
+                        "response": null,
+                        "response_json_schema": {
+                          "type": "string"
+                        },
+                        "behavior": null
+                      }
+                    ],
+                    "google_search_retrieval": null,
+                    "parallel_ai_search": null,
+                    "url_context": null,
+                    "mcp_servers": null,
+                    "exa_ai_search": null
+                  },
+                  {
+                    "retrieval": null,
+                    "computer_use": null,
+                    "file_search": null,
+                    "google_search": null,
+                    "google_maps": null,
+                    "code_execution": null,
+                    "enterprise_web_search": null,
+                    "function_declarations": [
+                      {
+                        "description": "Busca o contexto cadastral completo da viagem e pend\u00eancias ativas no Escalasoft ERP.",
+                        "name": "tool_get_trip_context",
+                        "parameters": null,
+                        "parameters_json_schema": {
+                          "properties": {
+                            "trip_id": {
+                              "title": "Trip Id",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "trip_id"
+                          ],
+                          "title": "tool_get_trip_contextParams",
+                          "type": "object"
+                        },
+                        "response": null,
+                        "response_json_schema": {
+                          "type": "string"
+                        },
+                        "behavior": null
+                      }
+                    ],
+                    "google_search_retrieval": null,
+                    "parallel_ai_search": null,
+                    "url_context": null,
+                    "mcp_servers": null,
+                    "exa_ai_search": null
+                  },
+                  {
+                    "retrieval": null,
+                    "computer_use": null,
+                    "file_search": null,
+                    "google_search": null,
+                    "google_maps": null,
+                    "code_execution": null,
+                    "enterprise_web_search": null,
+                    "function_declarations": [
+                      {
+                        "description": "Gera o Termo de Compliance e Assinatura Digital nativa com Hash SHA-256 no Google Cloud Storage.",
+                        "name": "tool_generate_compliance_signature",
+                        "parameters": null,
+                        "parameters_json_schema": {
+                          "properties": {
+                            "cooperado_nome": {
+                              "title": "Cooperado Nome",
+                              "type": "string"
+                            },
+                            "trip_id": {
+                              "title": "Trip Id",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "cooperado_nome",
+                            "trip_id"
+                          ],
+                          "title": "tool_generate_compliance_signatureParams",
+                          "type": "object"
+                        },
+                        "response": null,
+                        "response_json_schema": {
+                          "type": "string"
+                        },
+                        "behavior": null
+                      }
+                    ],
+                    "google_search_retrieval": null,
+                    "parallel_ai_search": null,
+                    "url_context": null,
+                    "mcp_servers": null,
+                    "exa_ai_search": null
+                  },
+                  {
+                    "retrieval": null,
+                    "computer_use": null,
+                    "file_search": null,
+                    "google_search": null,
+                    "google_maps": null,
+                    "code_execution": null,
+                    "enterprise_web_search": null,
+                    "function_declarations": [
+                      {
+                        "description": "Registra os metadados do documento validado no BigQuery para Analytics e auditoria no GCS.",
+                        "name": "tool_save_to_gcs_and_bigquery",
+                        "parameters": null,
+                        "parameters_json_schema": {
+                          "properties": {
+                            "filename": {
+                              "title": "Filename",
+                              "type": "string"
+                            },
+                            "doc_type": {
+                              "title": "Doc Type",
+                              "type": "string"
+                            },
+                            "status": {
+                              "title": "Status",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "filename",
+                            "doc_type",
+                            "status"
+                          ],
+                          "title": "tool_save_to_gcs_and_bigqueryParams",
+                          "type": "object"
+                        },
+                        "response": null,
+                        "response_json_schema": {
+                          "type": "string"
+                        },
+                        "behavior": null
+                      }
+                    ],
+                    "google_search_retrieval": null,
+                    "parallel_ai_search": null,
+                    "url_context": null,
+                    "mcp_servers": null,
+                    "exa_ai_search": null
+                  },
+                  {
+                    "retrieval": null,
+                    "computer_use": null,
+                    "file_search": null,
+                    "google_search": null,
+                    "google_maps": null,
+                    "code_execution": null,
+                    "enterprise_web_search": null,
+                    "function_declarations": [
+                      {
+                        "description": "Atualiza o ERP Escalasoft e libera a viagem do cooperado.",
+                        "name": "tool_update_escalasoft_erp",
+                        "parameters": null,
+                        "parameters_json_schema": {
+                          "properties": {
+                            "trip_id": {
+                              "title": "Trip Id",
+                              "type": "string"
+                            },
+                            "doc_type": {
+                              "title": "Doc Type",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "trip_id",
+                            "doc_type"
+                          ],
+                          "title": "tool_update_escalasoft_erpParams",
+                          "type": "object"
+                        },
+                        "response": null,
+                        "response_json_schema": {
+                          "type": "string"
+                        },
+                        "behavior": null
+                      }
+                    ],
+                    "google_search_retrieval": null,
+                    "parallel_ai_search": null,
+                    "url_context": null,
+                    "mcp_servers": null,
+                    "exa_ai_search": null
+                  }
+                ],
+                "sub_agents": []
+              }
+            },
+            "turns": [
+              {
+                "turn_index": 0,
+                "turn_id": "turn_0",
+                "events": [
+                  {
+                    "author": "rodacoop_compliance_agent",
+                    "content": {
+                      "parts": [
+                        {
+                          "media_resolution": null,
+                          "code_execution_result": null,
+                          "executable_code": null,
+                          "file_data": null,
+                          "function_call": {
+                            "id": "adk-c5ac62fc-bfe7-4354-873f-fd6c653fb9d9",
+                            "args": {},
+                            "name": "tool_read_compliance_policy_from_gcs",
+                            "partial_args": null,
+                            "will_continue": null
+                          },
+                          "function_response": null,
+                          "inline_data": null,
+                          "text": null,
+                          "thought": null,
+                          "thought_signature": null,
+                          "video_metadata": null,
+                          "tool_call": null,
+                          "tool_response": null,
+                          "part_metadata": null,
+                          "audio_transcription": null,
+                          "media_processing": null
+                        }
+                      ],
+                      "role": "model"
+                    },
+                    "event_time": "2026-09-03T19:11:43.166790Z",
+                    "state_delta": null,
+                    "active_tools": null
+                  },
+                  {
+                    "author": "rodacoop_compliance_agent",
+                    "content": {
+                      "parts": [
+                        {
+                          "media_resolution": null,
+                          "code_execution_result": null,
+                          "executable_code": null,
+                          "file_data": null,
+                          "function_call": null,
+                          "function_response": {
+                            "will_continue": null,
+                            "scheduling": null,
+                            "parts": null,
+                            "id": "adk-c5ac62fc-bfe7-4354-873f-fd6c653fb9d9",
+                            "name": "tool_read_compliance_policy_from_gcs",
+                            "response": {
+                              "result": "# POL\u00cdTICA DE COMPLIANCE DOCUMENTAL E TRANSPORTE DE CARGAS - RODACOOP\nVers\u00e3o: 2026.1 - Vig\u00eancia: 2026-2027\n\u00c1rea: Diretoria de Opera\u00e7\u00f5es, Log\u00edstica e Compliance\n\n## 1. OBJETIVO\nDefinir os requisitos obrigat\u00f3rios e crit\u00e9rios de conformidade documental para a libera\u00e7\u00e3o de viagens intermunicipais e interestaduais de transporte de gr\u00e3os e cargas agroindustriais vinculadas \u00e0 cooperativa.\n\n## 2. DOCUMENTA\u00c7\u00c3O OBRIGAT\u00d3RIA PARA LIBERA\u00c7\u00c3O DE VIAGEM\n\n### 2.1. Do Cooperado (Centralizador de Cobran\u00e7a e Responsabilidade)\n- O Cooperado \u00e9 o respons\u00e1vel direto perante a cooperativa por todas as pend\u00eancias da frota e dos condutores vinculados \u00e0 sua conta.\n- Termo de Ades\u00e3o e Responsabilidade de Compliance homologado com assinatura digital v\u00e1lida registrada em ambiente seguro (Google Cloud Storage).\n\n### 2.2. Do Motorista (Condutor Designado)\n- **CNH (Carteira Nacional de Habilita\u00e7\u00e3o):**\n  - Categoria profissional compat\u00edvel (C, D ou E).\n  - Observa\u00e7\u00e3o obrigat\u00f3ria de EAR (Exerce Atividade Remunerada).\n  - Exame Toxicol\u00f3gico peri\u00f3dico com resultado negativo e dentro do prazo de validade (art. 148-A do CTB).\n  - Validade f\u00edsica da habilita\u00e7\u00e3o regular perante a base nacional do SENATRAN.\n\n### 2.3. Do Ve\u00edculo de Carga (Cavalo Mec\u00e2nico e Reboque/Semirreboque)\n- **CRLV (Certificado de Registro e Licenciamento de Ve\u00edculo):**\n  - Exerc\u00edcio anual vigente quitado (IPVA, DPVAT e taxa de licenciamento).\n  - Sem restri\u00e7\u00f5es judiciais ou bloqueios administrativos impeditivos de circula\u00e7\u00e3o.\n- **RNTRC / ANTT:**\n  - Registro Nacional de Transportadores Rodovi\u00e1rios de Cargas ativo e devidamente vinculado \u00e0 placa no sistema da Ag\u00eancia Nacional de Transportes Terrestres.\n- **Laudo de Inspe\u00e7\u00e3o Veicular e Cronotac\u00f3grafo:**\n  - Certificado de verifica\u00e7\u00e3o metrol\u00f3gica do tac\u00f3grafo v\u00e1lido emitido pelo IPEM/INMETRO.\n\n### 2.4. Documenta\u00e7\u00e3o Fiscal e de Carga (Emiss\u00e3o Escalasoft / SEFAZ)\n- **CT-e (Conhecimento de Transporte Eletr\u00f4nico):** Autorizado e validado na SEFAZ.\n- **MDF-e (Manifesto Eletr\u00f4nico de Documentos Fiscais):** Emitido com as placas do ve\u00edculo e condutor associados.\n- **Ap\u00f3lice de Seguro de Transporte:** Seguro Obrigat\u00f3rio de Responsabilidade Civil do Transportador Rodovi\u00e1rio de Carga (RCTR-C) e RC-DC (Desaparecimento de Carga).\n\n## 3. PROCEDIMENTO OPERACIONAL DE VALIDA\u00c7\u00c3O VIA AGENTE\n1. Consulta autom\u00e1tica ao sistema Escalasoft ERP para identifica\u00e7\u00e3o da viagem.\n2. An\u00e1lise de OCR e intelig\u00eancia multimodal sobre o documento digitalizado.\n3. Grava\u00e7\u00e3o de auditoria no Google Cloud Storage e Google BigQuery.\n4. Emiss\u00e3o de Hash SHA-256 e Certificado de Compliance.\n5. Libera\u00e7\u00e3o imediata do status no ERP Escalasoft.\n"
+                            }
+                          },
+                          "inline_data": null,
+                          "text": null,
+                          "thought": null,
+                          "thought_signature": null,
+                          "video_metadata": null,
+                          "tool_call": null,
+                          "tool_response": null,
+                          "part_metadata": null,
+                          "audio_transcription": null,
+                          "media_processing": null
+                        }
+                      ],
+                      "role": "user"
+                    },
+                    "event_time": "2026-09-03T19:11:50.742675Z",
+                    "state_delta": null,
+                    "active_tools": null
+                  },
+                  {
+                    "author": "rodacoop_compliance_agent",
+                    "content": {
+                      "parts": [
+                        {
+                          "media_resolution": null,
+                          "code_execution_result": null,
+                          "executable_code": null,
+                          "file_data": null,
+                          "function_call": null,
+                          "function_response": null,
+                          "inline_data": null,
+                          "text": "De acordo com a pol\u00edtica de compliance documental da Rodacoop (Vers\u00e3o: 2026.1 - Vig\u00eancia: 2026-2027), para a libera\u00e7\u00e3o de uma viagem interestadual de transporte de gr\u00e3os, os seguintes documentos s\u00e3o obrigat\u00f3rios:\n\n**2.1. Do Cooperado (Centralizador de Cobran\u00e7a e Responsabilidade)**\n*   Termo de Ades\u00e3o e Responsabilidade de Compliance homologado com assinatura digital v\u00e1lida.\n\n**2.2. Do Motorista (Condutor Designado)**\n*   **CNH (Carteira Nacional de Habilita\u00e7\u00e3o):**\n    *   Categoria profissional compat\u00edvel (C, D ou E).\n    *   Observa\u00e7\u00e3o obrigat\u00f3ria de EAR (Exerce Atividade Remunerada).\n    *   Exame Toxicol\u00f3gico peri\u00f3dico com resultado negativo e dentro do prazo de validade.\n    *   Validade f\u00edsica da habilita\u00e7\u00e3o regular.\n\n**2.3. Do Ve\u00edculo de Carga (Cavalo Mec\u00e2nico e Reboque/Semirreboque)**\n*   **CRLV (Certificado de Registro e Licenciamento de Ve\u00edculo):**\n    *   Exerc\u00edcio anual vigente quitado (IPVA, DPVAT e taxa de licenciamento).\n    *   Sem restri\u00e7\u00f5es judiciais ou bloqueios administrativos.\n*   **RNTRC / ANTT:** Registro Nacional de Transportadores Rodovi\u00e1rios de Cargas ativo e vinculado \u00e0 placa.\n*   **Laudo de Inspe\u00e7\u00e3o Veicular e Cronotac\u00f3grafo:** Certificado de verifica\u00e7\u00e3o metrol\u00f3gica do tac\u00f3grafo v\u00e1lido.\n\n**2.4. Documenta\u00e7\u00e3o Fiscal e de Carga (Emiss\u00e3o Escalasoft / SEFAZ)**\n*   **CT-e (Conhecimento de Transporte Eletr\u00f4nico):** Autorizado e validado na SEFAZ.\n*   **MDF-e (Manifesto Eletr\u00f4nico de Documentos Fiscais):** Emitido com as placas do ve\u00edculo e condutor associados.\n*   **Ap\u00f3lice de Seguro de Transporte:** Seguro Obrigat\u00f3rio de Responsabilidade Civil do Transportador Rodovi\u00e1rio de Carga (RCTR-C) e RC-DC (Desaparecimento de Carga).",
+                          "thought": null,
+                          "thought_signature": null,
+                          "video_metadata": null,
+                          "tool_call": null,
+                          "tool_response": null,
+                          "part_metadata": null,
+                          "audio_transcription": null,
+                          "media_processing": null
+                        }
+                      ],
+                      "role": "model"
+                    },
+                    "event_time": "2026-09-03T19:11:50.780413Z",
+                    "state_delta": null,
+                    "active_tools": null
+                  }
+                ]
+              }
+            ]
+          },
+          "user_scenario": null,
+          "interactions_data_source": null
+        },
+        {
+          "prompt": {
+            "parts": [
+              {
+                "media_resolution": null,
+                "code_execution_result": null,
+                "executable_code": null,
+                "file_data": null,
+                "function_call": null,
+                "function_response": null,
+                "inline_data": null,
+                "text": "Minha CNH venceu em 2023, posso liberar o carregamento para a viagem V-98214?",
+                "thought": null,
+                "thought_signature": null,
+                "video_metadata": null,
+                "tool_call": null,
+                "tool_response": null,
+                "part_metadata": null,
+                "audio_transcription": null,
+                "media_processing": null
+              }
+            ],
+            "role": "user"
+          },
+          "responses": [
+            {
+              "response": {
+                "parts": [
+                  {
+                    "media_resolution": null,
+                    "code_execution_result": null,
+                    "executable_code": null,
+                    "file_data": null,
+                    "function_call": null,
+                    "function_response": null,
+                    "inline_data": null,
+                    "text": "N\u00e3o, de acordo com a nossa Pol\u00edtica de Compliance, a CNH (Carteira Nacional de Habilita\u00e7\u00e3o) do motorista deve ter **validade f\u00edsica regular**. Como sua CNH venceu em 2023, ela n\u00e3o atende a este requisito, e a libera\u00e7\u00e3o do carregamento para a viagem V-98214 n\u00e3o pode ser realizada.",
+                    "thought": null,
+                    "thought_signature": null,
+                    "video_metadata": null,
+                    "tool_call": null,
+                    "tool_response": null,
+                    "part_metadata": null,
+                    "audio_transcription": null,
+                    "media_processing": null
+                  }
+                ],
+                "role": "model"
+              }
+            }
+          ],
+          "reference": {
+            "response": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": null,
+                  "function_response": null,
+                  "inline_data": null,
+                  "text": "N\u00e3o. CNHs vencidas bloqueiam a libera\u00e7\u00e3o da viagem segundo as regras de compliance da Rodacoop.",
+                  "thought": null,
+                  "thought_signature": null,
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null,
+                  "audio_transcription": null,
+                  "media_processing": null
+                }
+              ],
+              "role": "model"
+            }
+          },
+          "system_instruction": null,
+          "conversation_history": null,
+          "rubric_groups": null,
+          "eval_case_id": "cnh_validation_status",
+          "intermediate_events": null,
+          "agent_info": null,
+          "agent_data": {
+            "agents": {
+              "rodacoop_compliance_agent": {
+                "agent_id": "rodacoop_compliance_agent",
+                "agent_type": "LlmAgent",
+                "description": "Agente Especialista em Compliance Documental e Log\u00edstica Rodacoop (Google Cloud ADK)",
+                "instruction": "Voc\u00ea \u00e9 o Agente de Compliance Documental Rodacoop rodando no Google Cloud Agent Development Kit (ADK).\n- Quando o usu\u00e1rio fizer perguntas sobre exig\u00eancias, regras, documenta\u00e7\u00f5es obrigat\u00f3rias ou pol\u00edticas de compliance da cooperativa, invoque SEMPRE a ferramenta 'tool_read_compliance_policy_from_gcs' para consultar a documenta\u00e7\u00e3o oficial armazenada no Google Cloud Storage.\n- Ao receber documentos ou dados de uma viagem, consulte o ERP com 'tool_get_trip_context'.\n- Para auditoria e m\u00e9tricas, utilize 'tool_save_to_gcs_and_bigquery'.\n- Para formalizar o termo e assinar digitalmente, execute 'tool_generate_compliance_signature'.\n- Ao final da aprova\u00e7\u00e3o, libere a viagem com 'tool_update_escalasoft_erp'.",
+                "tools": [
+                  {
+                    "retrieval": null,
+                    "computer_use": null,
+                    "file_search": null,
+                    "google_search": null,
+                    "google_maps": null,
+                    "code_execution": null,
+                    "enterprise_web_search": null,
+                    "function_declarations": [
+                      {
+                        "description": "L\u00ea as pol\u00edticas oficiais de compliance e regulamentos de transporte diretamente do Google Cloud Storage (GCS).",
+                        "name": "tool_read_compliance_policy_from_gcs",
+                        "parameters": null,
+                        "parameters_json_schema": null,
+                        "response": null,
+                        "response_json_schema": {
+                          "type": "string"
+                        },
+                        "behavior": null
+                      }
+                    ],
+                    "google_search_retrieval": null,
+                    "parallel_ai_search": null,
+                    "url_context": null,
+                    "mcp_servers": null,
+                    "exa_ai_search": null
+                  },
+                  {
+                    "retrieval": null,
+                    "computer_use": null,
+                    "file_search": null,
+                    "google_search": null,
+                    "google_maps": null,
+                    "code_execution": null,
+                    "enterprise_web_search": null,
+                    "function_declarations": [
+                      {
+                        "description": "Busca o contexto cadastral completo da viagem e pend\u00eancias ativas no Escalasoft ERP.",
+                        "name": "tool_get_trip_context",
+                        "parameters": null,
+                        "parameters_json_schema": {
+                          "properties": {
+                            "trip_id": {
+                              "title": "Trip Id",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "trip_id"
+                          ],
+                          "title": "tool_get_trip_contextParams",
+                          "type": "object"
+                        },
+                        "response": null,
+                        "response_json_schema": {
+                          "type": "string"
+                        },
+                        "behavior": null
+                      }
+                    ],
+                    "google_search_retrieval": null,
+                    "parallel_ai_search": null,
+                    "url_context": null,
+                    "mcp_servers": null,
+                    "exa_ai_search": null
+                  },
+                  {
+                    "retrieval": null,
+                    "computer_use": null,
+                    "file_search": null,
+                    "google_search": null,
+                    "google_maps": null,
+                    "code_execution": null,
+                    "enterprise_web_search": null,
+                    "function_declarations": [
+                      {
+                        "description": "Gera o Termo de Compliance e Assinatura Digital nativa com Hash SHA-256 no Google Cloud Storage.",
+                        "name": "tool_generate_compliance_signature",
+                        "parameters": null,
+                        "parameters_json_schema": {
+                          "properties": {
+                            "cooperado_nome": {
+                              "title": "Cooperado Nome",
+                              "type": "string"
+                            },
+                            "trip_id": {
+                              "title": "Trip Id",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "cooperado_nome",
+                            "trip_id"
+                          ],
+                          "title": "tool_generate_compliance_signatureParams",
+                          "type": "object"
+                        },
+                        "response": null,
+                        "response_json_schema": {
+                          "type": "string"
+                        },
+                        "behavior": null
+                      }
+                    ],
+                    "google_search_retrieval": null,
+                    "parallel_ai_search": null,
+                    "url_context": null,
+                    "mcp_servers": null,
+                    "exa_ai_search": null
+                  },
+                  {
+                    "retrieval": null,
+                    "computer_use": null,
+                    "file_search": null,
+                    "google_search": null,
+                    "google_maps": null,
+                    "code_execution": null,
+                    "enterprise_web_search": null,
+                    "function_declarations": [
+                      {
+                        "description": "Registra os metadados do documento validado no BigQuery para Analytics e auditoria no GCS.",
+                        "name": "tool_save_to_gcs_and_bigquery",
+                        "parameters": null,
+                        "parameters_json_schema": {
+                          "properties": {
+                            "filename": {
+                              "title": "Filename",
+                              "type": "string"
+                            },
+                            "doc_type": {
+                              "title": "Doc Type",
+                              "type": "string"
+                            },
+                            "status": {
+                              "title": "Status",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "filename",
+                            "doc_type",
+                            "status"
+                          ],
+                          "title": "tool_save_to_gcs_and_bigqueryParams",
+                          "type": "object"
+                        },
+                        "response": null,
+                        "response_json_schema": {
+                          "type": "string"
+                        },
+                        "behavior": null
+                      }
+                    ],
+                    "google_search_retrieval": null,
+                    "parallel_ai_search": null,
+                    "url_context": null,
+                    "mcp_servers": null,
+                    "exa_ai_search": null
+                  },
+                  {
+                    "retrieval": null,
+                    "computer_use": null,
+                    "file_search": null,
+                    "google_search": null,
+                    "google_maps": null,
+                    "code_execution": null,
+                    "enterprise_web_search": null,
+                    "function_declarations": [
+                      {
+                        "description": "Atualiza o ERP Escalasoft e libera a viagem do cooperado.",
+                        "name": "tool_update_escalasoft_erp",
+                        "parameters": null,
+                        "parameters_json_schema": {
+                          "properties": {
+                            "trip_id": {
+                              "title": "Trip Id",
+                              "type": "string"
+                            },
+                            "doc_type": {
+                              "title": "Doc Type",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "trip_id",
+                            "doc_type"
+                          ],
+                          "title": "tool_update_escalasoft_erpParams",
+                          "type": "object"
+                        },
+                        "response": null,
+                        "response_json_schema": {
+                          "type": "string"
+                        },
+                        "behavior": null
+                      }
+                    ],
+                    "google_search_retrieval": null,
+                    "parallel_ai_search": null,
+                    "url_context": null,
+                    "mcp_servers": null,
+                    "exa_ai_search": null
+                  }
+                ],
+                "sub_agents": []
+              }
+            },
+            "turns": [
+              {
+                "turn_index": 0,
+                "turn_id": "turn_0",
+                "events": [
+                  {
+                    "author": "rodacoop_compliance_agent",
+                    "content": {
+                      "parts": [
+                        {
+                          "media_resolution": null,
+                          "code_execution_result": null,
+                          "executable_code": null,
+                          "file_data": null,
+                          "function_call": {
+                            "id": "adk-e3bf2dc0-1c22-41cf-9af3-3098d6d1c196",
+                            "args": {},
+                            "name": "tool_read_compliance_policy_from_gcs",
+                            "partial_args": null,
+                            "will_continue": null
+                          },
+                          "function_response": null,
+                          "inline_data": null,
+                          "text": null,
+                          "thought": null,
+                          "thought_signature": null,
+                          "video_metadata": null,
+                          "tool_call": null,
+                          "tool_response": null,
+                          "part_metadata": null,
+                          "audio_transcription": null,
+                          "media_processing": null
+                        }
+                      ],
+                      "role": "model"
+                    },
+                    "event_time": "2026-09-03T19:11:43.221685Z",
+                    "state_delta": null,
+                    "active_tools": null
+                  },
+                  {
+                    "author": "rodacoop_compliance_agent",
+                    "content": {
+                      "parts": [
+                        {
+                          "media_resolution": null,
+                          "code_execution_result": null,
+                          "executable_code": null,
+                          "file_data": null,
+                          "function_call": null,
+                          "function_response": {
+                            "will_continue": null,
+                            "scheduling": null,
+                            "parts": null,
+                            "id": "adk-e3bf2dc0-1c22-41cf-9af3-3098d6d1c196",
+                            "name": "tool_read_compliance_policy_from_gcs",
+                            "response": {
+                              "result": "# POL\u00cdTICA DE COMPLIANCE DOCUMENTAL E TRANSPORTE DE CARGAS - RODACOOP\nVers\u00e3o: 2026.1 - Vig\u00eancia: 2026-2027\n\u00c1rea: Diretoria de Opera\u00e7\u00f5es, Log\u00edstica e Compliance\n\n## 1. OBJETIVO\nDefinir os requisitos obrigat\u00f3rios e crit\u00e9rios de conformidade documental para a libera\u00e7\u00e3o de viagens intermunicipais e interestaduais de transporte de gr\u00e3os e cargas agroindustriais vinculadas \u00e0 cooperativa.\n\n## 2. DOCUMENTA\u00c7\u00c3O OBRIGAT\u00d3RIA PARA LIBERA\u00c7\u00c3O DE VIAGEM\n\n### 2.1. Do Cooperado (Centralizador de Cobran\u00e7a e Responsabilidade)\n- O Cooperado \u00e9 o respons\u00e1vel direto perante a cooperativa por todas as pend\u00eancias da frota e dos condutores vinculados \u00e0 sua conta.\n- Termo de Ades\u00e3o e Responsabilidade de Compliance homologado com assinatura digital v\u00e1lida registrada em ambiente seguro (Google Cloud Storage).\n\n### 2.2. Do Motorista (Condutor Designado)\n- **CNH (Carteira Nacional de Habilita\u00e7\u00e3o):**\n  - Categoria profissional compat\u00edvel (C, D ou E).\n  - Observa\u00e7\u00e3o obrigat\u00f3ria de EAR (Exerce Atividade Remunerada).\n  - Exame Toxicol\u00f3gico peri\u00f3dico com resultado negativo e dentro do prazo de validade (art. 148-A do CTB).\n  - Validade f\u00edsica da habilita\u00e7\u00e3o regular perante a base nacional do SENATRAN.\n\n### 2.3. Do Ve\u00edculo de Carga (Cavalo Mec\u00e2nico e Reboque/Semirreboque)\n- **CRLV (Certificado de Registro e Licenciamento de Ve\u00edculo):**\n  - Exerc\u00edcio anual vigente quitado (IPVA, DPVAT e taxa de licenciamento).\n  - Sem restri\u00e7\u00f5es judiciais ou bloqueios administrativos impeditivos de circula\u00e7\u00e3o.\n- **RNTRC / ANTT:**\n  - Registro Nacional de Transportadores Rodovi\u00e1rios de Cargas ativo e devidamente vinculado \u00e0 placa no sistema da Ag\u00eancia Nacional de Transportes Terrestres.\n- **Laudo de Inspe\u00e7\u00e3o Veicular e Cronotac\u00f3grafo:**\n  - Certificado de verifica\u00e7\u00e3o metrol\u00f3gica do tac\u00f3grafo v\u00e1lido emitido pelo IPEM/INMETRO.\n\n### 2.4. Documenta\u00e7\u00e3o Fiscal e de Carga (Emiss\u00e3o Escalasoft / SEFAZ)\n- **CT-e (Conhecimento de Transporte Eletr\u00f4nico):** Autorizado e validado na SEFAZ.\n- **MDF-e (Manifesto Eletr\u00f4nico de Documentos Fiscais):** Emitido com as placas do ve\u00edculo e condutor associados.\n- **Ap\u00f3lice de Seguro de Transporte:** Seguro Obrigat\u00f3rio de Responsabilidade Civil do Transportador Rodovi\u00e1rio de Carga (RCTR-C) e RC-DC (Desaparecimento de Carga).\n\n## 3. PROCEDIMENTO OPERACIONAL DE VALIDA\u00c7\u00c3O VIA AGENTE\n1. Consulta autom\u00e1tica ao sistema Escalasoft ERP para identifica\u00e7\u00e3o da viagem.\n2. An\u00e1lise de OCR e intelig\u00eancia multimodal sobre o documento digitalizado.\n3. Grava\u00e7\u00e3o de auditoria no Google Cloud Storage e Google BigQuery.\n4. Emiss\u00e3o de Hash SHA-256 e Certificado de Compliance.\n5. Libera\u00e7\u00e3o imediata do status no ERP Escalasoft.\n"
+                            }
+                          },
+                          "inline_data": null,
+                          "text": null,
+                          "thought": null,
+                          "thought_signature": null,
+                          "video_metadata": null,
+                          "tool_call": null,
+                          "tool_response": null,
+                          "part_metadata": null,
+                          "audio_transcription": null,
+                          "media_processing": null
+                        }
+                      ],
+                      "role": "user"
+                    },
+                    "event_time": "2026-09-03T19:11:49.282979Z",
+                    "state_delta": null,
+                    "active_tools": null
+                  },
+                  {
+                    "author": "rodacoop_compliance_agent",
+                    "content": {
+                      "parts": [
+                        {
+                          "media_resolution": null,
+                          "code_execution_result": null,
+                          "executable_code": null,
+                          "file_data": null,
+                          "function_call": null,
+                          "function_response": null,
+                          "inline_data": null,
+                          "text": "N\u00e3o, de acordo com a nossa Pol\u00edtica de Compliance, a CNH (Carteira Nacional de Habilita\u00e7\u00e3o) do motorista deve ter **validade f\u00edsica regular**. Como sua CNH venceu em 2023, ela n\u00e3o atende a este requisito, e a libera\u00e7\u00e3o do carregamento para a viagem V-98214 n\u00e3o pode ser realizada.",
+                          "thought": null,
+                          "thought_signature": null,
+                          "video_metadata": null,
+                          "tool_call": null,
+                          "tool_response": null,
+                          "part_metadata": null,
+                          "audio_transcription": null,
+                          "media_processing": null
+                        }
+                      ],
+                      "role": "model"
+                    },
+                    "event_time": "2026-09-03T19:11:49.395413Z",
+                    "state_delta": null,
+                    "active_tools": null
+                  }
+                ]
+              }
+            ]
+          },
+          "user_scenario": null,
+          "interactions_data_source": null
+        },
+        {
+          "prompt": {
+            "parts": [
+              {
+                "media_resolution": null,
+                "code_execution_result": null,
+                "executable_code": null,
+                "file_data": null,
+                "function_call": null,
+                "function_response": null,
+                "inline_data": null,
+                "text": "Verifique a situa\u00e7\u00e3o da viagem V-98214 e se o cadastro do motorista Carlos Eduardo est\u00e1 aprovado.",
+                "thought": null,
+                "thought_signature": null,
+                "video_metadata": null,
+                "tool_call": null,
+                "tool_response": null,
+                "part_metadata": null,
+                "audio_transcription": null,
+                "media_processing": null
+              }
+            ],
+            "role": "user"
+          },
+          "responses": [
+            {
+              "response": {
+                "parts": [
+                  {
+                    "media_resolution": null,
+                    "code_execution_result": null,
+                    "executable_code": null,
+                    "file_data": null,
+                    "function_call": null,
+                    "function_response": null,
+                    "inline_data": null,
+                    "text": "A situa\u00e7\u00e3o da viagem V-98214 \u00e9 a seguinte: o cooperado \u00e9 Roberto Silva, o ve\u00edculo \u00e9 BRA2E19 e o motorista \u00e9 Carlos Eduardo.\n\nNo entanto, o cadastro do motorista Carlos Eduardo *n\u00e3o est\u00e1 aprovado* no momento, pois existem pend\u00eancias relativas ao CRLV e \u00e0 CNH.",
+                    "thought": null,
+                    "thought_signature": null,
+                    "video_metadata": null,
+                    "tool_call": null,
+                    "tool_response": null,
+                    "part_metadata": null,
+                    "audio_transcription": null,
+                    "media_processing": null
+                  }
+                ],
+                "role": "model"
+              }
+            }
+          ],
+          "reference": {
+            "response": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": null,
+                  "function_response": null,
+                  "inline_data": null,
+                  "text": "A viagem V-98214 est\u00e1 com status LIBERADO no Escalasoft ERP. Os documentos CNH e CRLV do motorista Carlos Eduardo foram validados e o Termo de Compliance foi assinado.",
+                  "thought": null,
+                  "thought_signature": null,
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null,
+                  "audio_transcription": null,
+                  "media_processing": null
+                }
+              ],
+              "role": "model"
+            }
+          },
+          "system_instruction": null,
+          "conversation_history": null,
+          "rubric_groups": null,
+          "eval_case_id": "trip_release_check_approved",
+          "intermediate_events": null,
+          "agent_info": null,
+          "agent_data": {
+            "agents": {
+              "rodacoop_compliance_agent": {
+                "agent_id": "rodacoop_compliance_agent",
+                "agent_type": "LlmAgent",
+                "description": "Agente Especialista em Compliance Documental e Log\u00edstica Rodacoop (Google Cloud ADK)",
+                "instruction": "Voc\u00ea \u00e9 o Agente de Compliance Documental Rodacoop rodando no Google Cloud Agent Development Kit (ADK).\n- Quando o usu\u00e1rio fizer perguntas sobre exig\u00eancias, regras, documenta\u00e7\u00f5es obrigat\u00f3rias ou pol\u00edticas de compliance da cooperativa, invoque SEMPRE a ferramenta 'tool_read_compliance_policy_from_gcs' para consultar a documenta\u00e7\u00e3o oficial armazenada no Google Cloud Storage.\n- Ao receber documentos ou dados de uma viagem, consulte o ERP com 'tool_get_trip_context'.\n- Para auditoria e m\u00e9tricas, utilize 'tool_save_to_gcs_and_bigquery'.\n- Para formalizar o termo e assinar digitalmente, execute 'tool_generate_compliance_signature'.\n- Ao final da aprova\u00e7\u00e3o, libere a viagem com 'tool_update_escalasoft_erp'.",
+                "tools": [
+                  {
+                    "retrieval": null,
+                    "computer_use": null,
+                    "file_search": null,
+                    "google_search": null,
+                    "google_maps": null,
+                    "code_execution": null,
+                    "enterprise_web_search": null,
+                    "function_declarations": [
+                      {
+                        "description": "L\u00ea as pol\u00edticas oficiais de compliance e regulamentos de transporte diretamente do Google Cloud Storage (GCS).",
+                        "name": "tool_read_compliance_policy_from_gcs",
+                        "parameters": null,
+                        "parameters_json_schema": null,
+                        "response": null,
+                        "response_json_schema": {
+                          "type": "string"
+                        },
+                        "behavior": null
+                      }
+                    ],
+                    "google_search_retrieval": null,
+                    "parallel_ai_search": null,
+                    "url_context": null,
+                    "mcp_servers": null,
+                    "exa_ai_search": null
+                  },
+                  {
+                    "retrieval": null,
+                    "computer_use": null,
+                    "file_search": null,
+                    "google_search": null,
+                    "google_maps": null,
+                    "code_execution": null,
+                    "enterprise_web_search": null,
+                    "function_declarations": [
+                      {
+                        "description": "Busca o contexto cadastral completo da viagem e pend\u00eancias ativas no Escalasoft ERP.",
+                        "name": "tool_get_trip_context",
+                        "parameters": null,
+                        "parameters_json_schema": {
+                          "properties": {
+                            "trip_id": {
+                              "title": "Trip Id",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "trip_id"
+                          ],
+                          "title": "tool_get_trip_contextParams",
+                          "type": "object"
+                        },
+                        "response": null,
+                        "response_json_schema": {
+                          "type": "string"
+                        },
+                        "behavior": null
+                      }
+                    ],
+                    "google_search_retrieval": null,
+                    "parallel_ai_search": null,
+                    "url_context": null,
+                    "mcp_servers": null,
+                    "exa_ai_search": null
+                  },
+                  {
+                    "retrieval": null,
+                    "computer_use": null,
+                    "file_search": null,
+                    "google_search": null,
+                    "google_maps": null,
+                    "code_execution": null,
+                    "enterprise_web_search": null,
+                    "function_declarations": [
+                      {
+                        "description": "Gera o Termo de Compliance e Assinatura Digital nativa com Hash SHA-256 no Google Cloud Storage.",
+                        "name": "tool_generate_compliance_signature",
+                        "parameters": null,
+                        "parameters_json_schema": {
+                          "properties": {
+                            "cooperado_nome": {
+                              "title": "Cooperado Nome",
+                              "type": "string"
+                            },
+                            "trip_id": {
+                              "title": "Trip Id",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "cooperado_nome",
+                            "trip_id"
+                          ],
+                          "title": "tool_generate_compliance_signatureParams",
+                          "type": "object"
+                        },
+                        "response": null,
+                        "response_json_schema": {
+                          "type": "string"
+                        },
+                        "behavior": null
+                      }
+                    ],
+                    "google_search_retrieval": null,
+                    "parallel_ai_search": null,
+                    "url_context": null,
+                    "mcp_servers": null,
+                    "exa_ai_search": null
+                  },
+                  {
+                    "retrieval": null,
+                    "computer_use": null,
+                    "file_search": null,
+                    "google_search": null,
+                    "google_maps": null,
+                    "code_execution": null,
+                    "enterprise_web_search": null,
+                    "function_declarations": [
+                      {
+                        "description": "Registra os metadados do documento validado no BigQuery para Analytics e auditoria no GCS.",
+                        "name": "tool_save_to_gcs_and_bigquery",
+                        "parameters": null,
+                        "parameters_json_schema": {
+                          "properties": {
+                            "filename": {
+                              "title": "Filename",
+                              "type": "string"
+                            },
+                            "doc_type": {
+                              "title": "Doc Type",
+                              "type": "string"
+                            },
+                            "status": {
+                              "title": "Status",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "filename",
+                            "doc_type",
+                            "status"
+                          ],
+                          "title": "tool_save_to_gcs_and_bigqueryParams",
+                          "type": "object"
+                        },
+                        "response": null,
+                        "response_json_schema": {
+                          "type": "string"
+                        },
+                        "behavior": null
+                      }
+                    ],
+                    "google_search_retrieval": null,
+                    "parallel_ai_search": null,
+                    "url_context": null,
+                    "mcp_servers": null,
+                    "exa_ai_search": null
+                  },
+                  {
+                    "retrieval": null,
+                    "computer_use": null,
+                    "file_search": null,
+                    "google_search": null,
+                    "google_maps": null,
+                    "code_execution": null,
+                    "enterprise_web_search": null,
+                    "function_declarations": [
+                      {
+                        "description": "Atualiza o ERP Escalasoft e libera a viagem do cooperado.",
+                        "name": "tool_update_escalasoft_erp",
+                        "parameters": null,
+                        "parameters_json_schema": {
+                          "properties": {
+                            "trip_id": {
+                              "title": "Trip Id",
+                              "type": "string"
+                            },
+                            "doc_type": {
+                              "title": "Doc Type",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "trip_id",
+                            "doc_type"
+                          ],
+                          "title": "tool_update_escalasoft_erpParams",
+                          "type": "object"
+                        },
+                        "response": null,
+                        "response_json_schema": {
+                          "type": "string"
+                        },
+                        "behavior": null
+                      }
+                    ],
+                    "google_search_retrieval": null,
+                    "parallel_ai_search": null,
+                    "url_context": null,
+                    "mcp_servers": null,
+                    "exa_ai_search": null
+                  }
+                ],
+                "sub_agents": []
+              }
+            },
+            "turns": [
+              {
+                "turn_index": 0,
+                "turn_id": "turn_0",
+                "events": [
+                  {
+                    "author": "rodacoop_compliance_agent",
+                    "content": {
+                      "parts": [
+                        {
+                          "media_resolution": null,
+                          "code_execution_result": null,
+                          "executable_code": null,
+                          "file_data": null,
+                          "function_call": {
+                            "id": "adk-eba8bf58-7acb-4d04-b05d-9a1b86d6086f",
+                            "args": {
+                              "trip_id": "V-98214"
+                            },
+                            "name": "tool_get_trip_context",
+                            "partial_args": null,
+                            "will_continue": null
+                          },
+                          "function_response": null,
+                          "inline_data": null,
+                          "text": null,
+                          "thought": null,
+                          "thought_signature": null,
+                          "video_metadata": null,
+                          "tool_call": null,
+                          "tool_response": null,
+                          "part_metadata": null,
+                          "audio_transcription": null,
+                          "media_processing": null
+                        }
+                      ],
+                      "role": "model"
+                    },
+                    "event_time": "2026-09-03T19:11:43.116698Z",
+                    "state_delta": null,
+                    "active_tools": null
+                  },
+                  {
+                    "author": "rodacoop_compliance_agent",
+                    "content": {
+                      "parts": [
+                        {
+                          "media_resolution": null,
+                          "code_execution_result": null,
+                          "executable_code": null,
+                          "file_data": null,
+                          "function_call": null,
+                          "function_response": {
+                            "will_continue": null,
+                            "scheduling": null,
+                            "parts": null,
+                            "id": "adk-eba8bf58-7acb-4d04-b05d-9a1b86d6086f",
+                            "name": "tool_get_trip_context",
+                            "response": {
+                              "result": "Viagem V-98214: Cooperado Roberto Silva, Ve\u00edculo BRA2E19, Motorista Carlos Eduardo, Pend\u00eancias: CRLV, CNH"
+                            }
+                          },
+                          "inline_data": null,
+                          "text": null,
+                          "thought": null,
+                          "thought_signature": null,
+                          "video_metadata": null,
+                          "tool_call": null,
+                          "tool_response": null,
+                          "part_metadata": null,
+                          "audio_transcription": null,
+                          "media_processing": null
+                        }
+                      ],
+                      "role": "user"
+                    },
+                    "event_time": "2026-09-03T19:11:49.327603Z",
+                    "state_delta": null,
+                    "active_tools": null
+                  },
+                  {
+                    "author": "rodacoop_compliance_agent",
+                    "content": {
+                      "parts": [
+                        {
+                          "media_resolution": null,
+                          "code_execution_result": null,
+                          "executable_code": null,
+                          "file_data": null,
+                          "function_call": null,
+                          "function_response": null,
+                          "inline_data": null,
+                          "text": "A situa\u00e7\u00e3o da viagem V-98214 \u00e9 a seguinte: o cooperado \u00e9 Roberto Silva, o ve\u00edculo \u00e9 BRA2E19 e o motorista \u00e9 Carlos Eduardo.\n\nNo entanto, o cadastro do motorista Carlos Eduardo *n\u00e3o est\u00e1 aprovado* no momento, pois existem pend\u00eancias relativas ao CRLV e \u00e0 CNH.",
+                          "thought": null,
+                          "thought_signature": null,
+                          "video_metadata": null,
+                          "tool_call": null,
+                          "tool_response": null,
+                          "part_metadata": null,
+                          "audio_transcription": null,
+                          "media_processing": null
+                        }
+                      ],
+                      "role": "model"
+                    },
+                    "event_time": "2026-09-03T19:11:49.354197Z",
+                    "state_delta": null,
+                    "active_tools": null
+                  }
+                ]
+              }
+            ]
+          },
+          "user_scenario": null,
+          "interactions_data_source": null
+        },
+        {
+          "prompt": {
+            "parts": [
+              {
+                "media_resolution": null,
+                "code_execution_result": null,
+                "executable_code": null,
+                "file_data": null,
+                "function_call": null,
+                "function_response": null,
+                "inline_data": null,
+                "text": "Qual o status da viagem V-98215 e quais as pend\u00eancias do motorista Joaquim Barbosa?",
+                "thought": null,
+                "thought_signature": null,
+                "video_metadata": null,
+                "tool_call": null,
+                "tool_response": null,
+                "part_metadata": null,
+                "audio_transcription": null,
+                "media_processing": null
+              }
+            ],
+            "role": "user"
+          },
+          "responses": [
+            {
+              "response": {
+                "parts": [
+                  {
+                    "media_resolution": null,
+                    "code_execution_result": null,
+                    "executable_code": null,
+                    "file_data": null,
+                    "function_call": null,
+                    "function_response": null,
+                    "inline_data": null,
+                    "text": "Para a viagem **V-98215**, o motorista cadastrado \u00e9 **Carlos Eduardo**. As pend\u00eancias para esta viagem s\u00e3o **CRLV e CNH**.\n\nN\u00e3o encontramos nenhum registro para o motorista Joaquim Barbosa associado \u00e0 viagem V-98215.",
+                    "thought": null,
+                    "thought_signature": null,
+                    "video_metadata": null,
+                    "tool_call": null,
+                    "tool_response": null,
+                    "part_metadata": null,
+                    "audio_transcription": null,
+                    "media_processing": null
+                  }
+                ],
+                "role": "model"
+              }
+            }
+          ],
+          "reference": {
+            "response": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": null,
+                  "function_response": null,
+                  "inline_data": null,
+                  "text": "A viagem V-98215 est\u00e1 com status BLOQUEADO / EM AN\u00c1LISE devido \u00e0s pend\u00eancias: CNH Vencida em 2023 e Exame Toxicol\u00f3gico Pendente.",
+                  "thought": null,
+                  "thought_signature": null,
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null,
+                  "audio_transcription": null,
+                  "media_processing": null
+                }
+              ],
+              "role": "model"
+            }
+          },
+          "system_instruction": null,
+          "conversation_history": null,
+          "rubric_groups": null,
+          "eval_case_id": "trip_blocked_cnh_expired",
+          "intermediate_events": null,
+          "agent_info": null,
+          "agent_data": {
+            "agents": {
+              "rodacoop_compliance_agent": {
+                "agent_id": "rodacoop_compliance_agent",
+                "agent_type": "LlmAgent",
+                "description": "Agente Especialista em Compliance Documental e Log\u00edstica Rodacoop (Google Cloud ADK)",
+                "instruction": "Voc\u00ea \u00e9 o Agente de Compliance Documental Rodacoop rodando no Google Cloud Agent Development Kit (ADK).\n- Quando o usu\u00e1rio fizer perguntas sobre exig\u00eancias, regras, documenta\u00e7\u00f5es obrigat\u00f3rias ou pol\u00edticas de compliance da cooperativa, invoque SEMPRE a ferramenta 'tool_read_compliance_policy_from_gcs' para consultar a documenta\u00e7\u00e3o oficial armazenada no Google Cloud Storage.\n- Ao receber documentos ou dados de uma viagem, consulte o ERP com 'tool_get_trip_context'.\n- Para auditoria e m\u00e9tricas, utilize 'tool_save_to_gcs_and_bigquery'.\n- Para formalizar o termo e assinar digitalmente, execute 'tool_generate_compliance_signature'.\n- Ao final da aprova\u00e7\u00e3o, libere a viagem com 'tool_update_escalasoft_erp'.",
+                "tools": [
+                  {
+                    "retrieval": null,
+                    "computer_use": null,
+                    "file_search": null,
+                    "google_search": null,
+                    "google_maps": null,
+                    "code_execution": null,
+                    "enterprise_web_search": null,
+                    "function_declarations": [
+                      {
+                        "description": "L\u00ea as pol\u00edticas oficiais de compliance e regulamentos de transporte diretamente do Google Cloud Storage (GCS).",
+                        "name": "tool_read_compliance_policy_from_gcs",
+                        "parameters": null,
+                        "parameters_json_schema": null,
+                        "response": null,
+                        "response_json_schema": {
+                          "type": "string"
+                        },
+                        "behavior": null
+                      }
+                    ],
+                    "google_search_retrieval": null,
+                    "parallel_ai_search": null,
+                    "url_context": null,
+                    "mcp_servers": null,
+                    "exa_ai_search": null
+                  },
+                  {
+                    "retrieval": null,
+                    "computer_use": null,
+                    "file_search": null,
+                    "google_search": null,
+                    "google_maps": null,
+                    "code_execution": null,
+                    "enterprise_web_search": null,
+                    "function_declarations": [
+                      {
+                        "description": "Busca o contexto cadastral completo da viagem e pend\u00eancias ativas no Escalasoft ERP.",
+                        "name": "tool_get_trip_context",
+                        "parameters": null,
+                        "parameters_json_schema": {
+                          "properties": {
+                            "trip_id": {
+                              "title": "Trip Id",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "trip_id"
+                          ],
+                          "title": "tool_get_trip_contextParams",
+                          "type": "object"
+                        },
+                        "response": null,
+                        "response_json_schema": {
+                          "type": "string"
+                        },
+                        "behavior": null
+                      }
+                    ],
+                    "google_search_retrieval": null,
+                    "parallel_ai_search": null,
+                    "url_context": null,
+                    "mcp_servers": null,
+                    "exa_ai_search": null
+                  },
+                  {
+                    "retrieval": null,
+                    "computer_use": null,
+                    "file_search": null,
+                    "google_search": null,
+                    "google_maps": null,
+                    "code_execution": null,
+                    "enterprise_web_search": null,
+                    "function_declarations": [
+                      {
+                        "description": "Gera o Termo de Compliance e Assinatura Digital nativa com Hash SHA-256 no Google Cloud Storage.",
+                        "name": "tool_generate_compliance_signature",
+                        "parameters": null,
+                        "parameters_json_schema": {
+                          "properties": {
+                            "cooperado_nome": {
+                              "title": "Cooperado Nome",
+                              "type": "string"
+                            },
+                            "trip_id": {
+                              "title": "Trip Id",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "cooperado_nome",
+                            "trip_id"
+                          ],
+                          "title": "tool_generate_compliance_signatureParams",
+                          "type": "object"
+                        },
+                        "response": null,
+                        "response_json_schema": {
+                          "type": "string"
+                        },
+                        "behavior": null
+                      }
+                    ],
+                    "google_search_retrieval": null,
+                    "parallel_ai_search": null,
+                    "url_context": null,
+                    "mcp_servers": null,
+                    "exa_ai_search": null
+                  },
+                  {
+                    "retrieval": null,
+                    "computer_use": null,
+                    "file_search": null,
+                    "google_search": null,
+                    "google_maps": null,
+                    "code_execution": null,
+                    "enterprise_web_search": null,
+                    "function_declarations": [
+                      {
+                        "description": "Registra os metadados do documento validado no BigQuery para Analytics e auditoria no GCS.",
+                        "name": "tool_save_to_gcs_and_bigquery",
+                        "parameters": null,
+                        "parameters_json_schema": {
+                          "properties": {
+                            "filename": {
+                              "title": "Filename",
+                              "type": "string"
+                            },
+                            "doc_type": {
+                              "title": "Doc Type",
+                              "type": "string"
+                            },
+                            "status": {
+                              "title": "Status",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "filename",
+                            "doc_type",
+                            "status"
+                          ],
+                          "title": "tool_save_to_gcs_and_bigqueryParams",
+                          "type": "object"
+                        },
+                        "response": null,
+                        "response_json_schema": {
+                          "type": "string"
+                        },
+                        "behavior": null
+                      }
+                    ],
+                    "google_search_retrieval": null,
+                    "parallel_ai_search": null,
+                    "url_context": null,
+                    "mcp_servers": null,
+                    "exa_ai_search": null
+                  },
+                  {
+                    "retrieval": null,
+                    "computer_use": null,
+                    "file_search": null,
+                    "google_search": null,
+                    "google_maps": null,
+                    "code_execution": null,
+                    "enterprise_web_search": null,
+                    "function_declarations": [
+                      {
+                        "description": "Atualiza o ERP Escalasoft e libera a viagem do cooperado.",
+                        "name": "tool_update_escalasoft_erp",
+                        "parameters": null,
+                        "parameters_json_schema": {
+                          "properties": {
+                            "trip_id": {
+                              "title": "Trip Id",
+                              "type": "string"
+                            },
+                            "doc_type": {
+                              "title": "Doc Type",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "trip_id",
+                            "doc_type"
+                          ],
+                          "title": "tool_update_escalasoft_erpParams",
+                          "type": "object"
+                        },
+                        "response": null,
+                        "response_json_schema": {
+                          "type": "string"
+                        },
+                        "behavior": null
+                      }
+                    ],
+                    "google_search_retrieval": null,
+                    "parallel_ai_search": null,
+                    "url_context": null,
+                    "mcp_servers": null,
+                    "exa_ai_search": null
+                  }
+                ],
+                "sub_agents": []
+              }
+            },
+            "turns": [
+              {
+                "turn_index": 0,
+                "turn_id": "turn_0",
+                "events": [
+                  {
+                    "author": "rodacoop_compliance_agent",
+                    "content": {
+                      "parts": [
+                        {
+                          "media_resolution": null,
+                          "code_execution_result": null,
+                          "executable_code": null,
+                          "file_data": null,
+                          "function_call": {
+                            "id": "adk-9f61873d-f509-4099-962e-1b6e045c944a",
+                            "args": {
+                              "trip_id": "V-98215"
+                            },
+                            "name": "tool_get_trip_context",
+                            "partial_args": null,
+                            "will_continue": null
+                          },
+                          "function_response": null,
+                          "inline_data": null,
+                          "text": null,
+                          "thought": null,
+                          "thought_signature": null,
+                          "video_metadata": null,
+                          "tool_call": null,
+                          "tool_response": null,
+                          "part_metadata": null,
+                          "audio_transcription": null,
+                          "media_processing": null
+                        }
+                      ],
+                      "role": "model"
+                    },
+                    "event_time": "2026-09-03T19:11:43.076829Z",
+                    "state_delta": null,
+                    "active_tools": null
+                  },
+                  {
+                    "author": "rodacoop_compliance_agent",
+                    "content": {
+                      "parts": [
+                        {
+                          "media_resolution": null,
+                          "code_execution_result": null,
+                          "executable_code": null,
+                          "file_data": null,
+                          "function_call": null,
+                          "function_response": {
+                            "will_continue": null,
+                            "scheduling": null,
+                            "parts": null,
+                            "id": "adk-9f61873d-f509-4099-962e-1b6e045c944a",
+                            "name": "tool_get_trip_context",
+                            "response": {
+                              "result": "Viagem V-98215: Cooperado Roberto Silva, Ve\u00edculo BRA2E19, Motorista Carlos Eduardo, Pend\u00eancias: CRLV, CNH"
+                            }
+                          },
+                          "inline_data": null,
+                          "text": null,
+                          "thought": null,
+                          "thought_signature": null,
+                          "video_metadata": null,
+                          "tool_call": null,
+                          "tool_response": null,
+                          "part_metadata": null,
+                          "audio_transcription": null,
+                          "media_processing": null
+                        }
+                      ],
+                      "role": "user"
+                    },
+                    "event_time": "2026-09-03T19:11:47.077699Z",
+                    "state_delta": null,
+                    "active_tools": null
+                  },
+                  {
+                    "author": "rodacoop_compliance_agent",
+                    "content": {
+                      "parts": [
+                        {
+                          "media_resolution": null,
+                          "code_execution_result": null,
+                          "executable_code": null,
+                          "file_data": null,
+                          "function_call": null,
+                          "function_response": null,
+                          "inline_data": null,
+                          "text": "Para a viagem **V-98215**, o motorista cadastrado \u00e9 **Carlos Eduardo**. As pend\u00eancias para esta viagem s\u00e3o **CRLV e CNH**.\n\nN\u00e3o encontramos nenhum registro para o motorista Joaquim Barbosa associado \u00e0 viagem V-98215.",
+                          "thought": null,
+                          "thought_signature": null,
+                          "video_metadata": null,
+                          "tool_call": null,
+                          "tool_response": null,
+                          "part_metadata": null,
+                          "audio_transcription": null,
+                          "media_processing": null
+                        }
+                      ],
+                      "role": "model"
+                    },
+                    "event_time": "2026-09-03T19:11:47.087907Z",
+                    "state_delta": null,
+                    "active_tools": null
+                  }
+                ]
+              }
+            ]
+          },
+          "user_scenario": null,
+          "interactions_data_source": null
+        },
+        {
+          "prompt": {
+            "parts": [
+              {
+                "media_resolution": null,
+                "code_execution_result": null,
+                "executable_code": null,
+                "file_data": null,
+                "function_call": null,
+                "function_response": null,
+                "inline_data": null,
+                "text": "Consulte a viagem V-98216 e informe se o ve\u00edculo QRS1T23 pode seguir viagem.",
+                "thought": null,
+                "thought_signature": null,
+                "video_metadata": null,
+                "tool_call": null,
+                "tool_response": null,
+                "part_metadata": null,
+                "audio_transcription": null,
+                "media_processing": null
+              }
+            ],
+            "role": "user"
+          },
+          "responses": [
+            {
+              "response": {
+                "parts": [
+                  {
+                    "media_resolution": null,
+                    "code_execution_result": null,
+                    "executable_code": null,
+                    "file_data": null,
+                    "function_call": null,
+                    "function_response": null,
+                    "inline_data": null,
+                    "text": "O ve\u00edculo QRS1T23 n\u00e3o pode seguir viagem na V-98216, pois o ve\u00edculo registrado para esta viagem \u00e9 o BRA2E19. Al\u00e9m disso, a viagem V-98216 possui pend\u00eancias de CRLV e CNH para o ve\u00edculo BRA2E19.",
+                    "thought": null,
+                    "thought_signature": null,
+                    "video_metadata": null,
+                    "tool_call": null,
+                    "tool_response": null,
+                    "part_metadata": null,
+                    "audio_transcription": null,
+                    "media_processing": null
+                  }
+                ],
+                "role": "model"
+              }
+            }
+          ],
+          "reference": {
+            "response": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": null,
+                  "function_response": null,
+                  "inline_data": null,
+                  "text": "A viagem V-98216 est\u00e1 bloqueada para o ve\u00edculo QRS1T23 devido ao CRLV n\u00e3o licenciado e laudo de cronotac\u00f3grafo expirado.",
+                  "thought": null,
+                  "thought_signature": null,
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null,
+                  "audio_transcription": null,
+                  "media_processing": null
+                }
+              ],
+              "role": "model"
+            }
+          },
+          "system_instruction": null,
+          "conversation_history": null,
+          "rubric_groups": null,
+          "eval_case_id": "trip_blocked_tacografo_expired",
+          "intermediate_events": null,
+          "agent_info": null,
+          "agent_data": {
+            "agents": {
+              "rodacoop_compliance_agent": {
+                "agent_id": "rodacoop_compliance_agent",
+                "agent_type": "LlmAgent",
+                "description": "Agente Especialista em Compliance Documental e Log\u00edstica Rodacoop (Google Cloud ADK)",
+                "instruction": "Voc\u00ea \u00e9 o Agente de Compliance Documental Rodacoop rodando no Google Cloud Agent Development Kit (ADK).\n- Quando o usu\u00e1rio fizer perguntas sobre exig\u00eancias, regras, documenta\u00e7\u00f5es obrigat\u00f3rias ou pol\u00edticas de compliance da cooperativa, invoque SEMPRE a ferramenta 'tool_read_compliance_policy_from_gcs' para consultar a documenta\u00e7\u00e3o oficial armazenada no Google Cloud Storage.\n- Ao receber documentos ou dados de uma viagem, consulte o ERP com 'tool_get_trip_context'.\n- Para auditoria e m\u00e9tricas, utilize 'tool_save_to_gcs_and_bigquery'.\n- Para formalizar o termo e assinar digitalmente, execute 'tool_generate_compliance_signature'.\n- Ao final da aprova\u00e7\u00e3o, libere a viagem com 'tool_update_escalasoft_erp'.",
+                "tools": [
+                  {
+                    "retrieval": null,
+                    "computer_use": null,
+                    "file_search": null,
+                    "google_search": null,
+                    "google_maps": null,
+                    "code_execution": null,
+                    "enterprise_web_search": null,
+                    "function_declarations": [
+                      {
+                        "description": "L\u00ea as pol\u00edticas oficiais de compliance e regulamentos de transporte diretamente do Google Cloud Storage (GCS).",
+                        "name": "tool_read_compliance_policy_from_gcs",
+                        "parameters": null,
+                        "parameters_json_schema": null,
+                        "response": null,
+                        "response_json_schema": {
+                          "type": "string"
+                        },
+                        "behavior": null
+                      }
+                    ],
+                    "google_search_retrieval": null,
+                    "parallel_ai_search": null,
+                    "url_context": null,
+                    "mcp_servers": null,
+                    "exa_ai_search": null
+                  },
+                  {
+                    "retrieval": null,
+                    "computer_use": null,
+                    "file_search": null,
+                    "google_search": null,
+                    "google_maps": null,
+                    "code_execution": null,
+                    "enterprise_web_search": null,
+                    "function_declarations": [
+                      {
+                        "description": "Busca o contexto cadastral completo da viagem e pend\u00eancias ativas no Escalasoft ERP.",
+                        "name": "tool_get_trip_context",
+                        "parameters": null,
+                        "parameters_json_schema": {
+                          "properties": {
+                            "trip_id": {
+                              "title": "Trip Id",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "trip_id"
+                          ],
+                          "title": "tool_get_trip_contextParams",
+                          "type": "object"
+                        },
+                        "response": null,
+                        "response_json_schema": {
+                          "type": "string"
+                        },
+                        "behavior": null
+                      }
+                    ],
+                    "google_search_retrieval": null,
+                    "parallel_ai_search": null,
+                    "url_context": null,
+                    "mcp_servers": null,
+                    "exa_ai_search": null
+                  },
+                  {
+                    "retrieval": null,
+                    "computer_use": null,
+                    "file_search": null,
+                    "google_search": null,
+                    "google_maps": null,
+                    "code_execution": null,
+                    "enterprise_web_search": null,
+                    "function_declarations": [
+                      {
+                        "description": "Gera o Termo de Compliance e Assinatura Digital nativa com Hash SHA-256 no Google Cloud Storage.",
+                        "name": "tool_generate_compliance_signature",
+                        "parameters": null,
+                        "parameters_json_schema": {
+                          "properties": {
+                            "cooperado_nome": {
+                              "title": "Cooperado Nome",
+                              "type": "string"
+                            },
+                            "trip_id": {
+                              "title": "Trip Id",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "cooperado_nome",
+                            "trip_id"
+                          ],
+                          "title": "tool_generate_compliance_signatureParams",
+                          "type": "object"
+                        },
+                        "response": null,
+                        "response_json_schema": {
+                          "type": "string"
+                        },
+                        "behavior": null
+                      }
+                    ],
+                    "google_search_retrieval": null,
+                    "parallel_ai_search": null,
+                    "url_context": null,
+                    "mcp_servers": null,
+                    "exa_ai_search": null
+                  },
+                  {
+                    "retrieval": null,
+                    "computer_use": null,
+                    "file_search": null,
+                    "google_search": null,
+                    "google_maps": null,
+                    "code_execution": null,
+                    "enterprise_web_search": null,
+                    "function_declarations": [
+                      {
+                        "description": "Registra os metadados do documento validado no BigQuery para Analytics e auditoria no GCS.",
+                        "name": "tool_save_to_gcs_and_bigquery",
+                        "parameters": null,
+                        "parameters_json_schema": {
+                          "properties": {
+                            "filename": {
+                              "title": "Filename",
+                              "type": "string"
+                            },
+                            "doc_type": {
+                              "title": "Doc Type",
+                              "type": "string"
+                            },
+                            "status": {
+                              "title": "Status",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "filename",
+                            "doc_type",
+                            "status"
+                          ],
+                          "title": "tool_save_to_gcs_and_bigqueryParams",
+                          "type": "object"
+                        },
+                        "response": null,
+                        "response_json_schema": {
+                          "type": "string"
+                        },
+                        "behavior": null
+                      }
+                    ],
+                    "google_search_retrieval": null,
+                    "parallel_ai_search": null,
+                    "url_context": null,
+                    "mcp_servers": null,
+                    "exa_ai_search": null
+                  },
+                  {
+                    "retrieval": null,
+                    "computer_use": null,
+                    "file_search": null,
+                    "google_search": null,
+                    "google_maps": null,
+                    "code_execution": null,
+                    "enterprise_web_search": null,
+                    "function_declarations": [
+                      {
+                        "description": "Atualiza o ERP Escalasoft e libera a viagem do cooperado.",
+                        "name": "tool_update_escalasoft_erp",
+                        "parameters": null,
+                        "parameters_json_schema": {
+                          "properties": {
+                            "trip_id": {
+                              "title": "Trip Id",
+                              "type": "string"
+                            },
+                            "doc_type": {
+                              "title": "Doc Type",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "trip_id",
+                            "doc_type"
+                          ],
+                          "title": "tool_update_escalasoft_erpParams",
+                          "type": "object"
+                        },
+                        "response": null,
+                        "response_json_schema": {
+                          "type": "string"
+                        },
+                        "behavior": null
+                      }
+                    ],
+                    "google_search_retrieval": null,
+                    "parallel_ai_search": null,
+                    "url_context": null,
+                    "mcp_servers": null,
+                    "exa_ai_search": null
+                  }
+                ],
+                "sub_agents": []
+              }
+            },
+            "turns": [
+              {
+                "turn_index": 0,
+                "turn_id": "turn_0",
+                "events": [
+                  {
+                    "author": "rodacoop_compliance_agent",
+                    "content": {
+                      "parts": [
+                        {
+                          "media_resolution": null,
+                          "code_execution_result": null,
+                          "executable_code": null,
+                          "file_data": null,
+                          "function_call": {
+                            "id": "adk-8594d8fd-7a04-4ea4-9127-d4bd36b5dcd4",
+                            "args": {
+                              "trip_id": "V-98216"
+                            },
+                            "name": "tool_get_trip_context",
+                            "partial_args": null,
+                            "will_continue": null
+                          },
+                          "function_response": null,
+                          "inline_data": null,
+                          "text": null,
+                          "thought": null,
+                          "thought_signature": null,
+                          "video_metadata": null,
+                          "tool_call": null,
+                          "tool_response": null,
+                          "part_metadata": null,
+                          "audio_transcription": null,
+                          "media_processing": null
+                        }
+                      ],
+                      "role": "model"
+                    },
+                    "event_time": "2026-09-03T19:11:43.282614Z",
+                    "state_delta": null,
+                    "active_tools": null
+                  },
+                  {
+                    "author": "rodacoop_compliance_agent",
+                    "content": {
+                      "parts": [
+                        {
+                          "media_resolution": null,
+                          "code_execution_result": null,
+                          "executable_code": null,
+                          "file_data": null,
+                          "function_call": null,
+                          "function_response": {
+                            "will_continue": null,
+                            "scheduling": null,
+                            "parts": null,
+                            "id": "adk-8594d8fd-7a04-4ea4-9127-d4bd36b5dcd4",
+                            "name": "tool_get_trip_context",
+                            "response": {
+                              "result": "Viagem V-98216: Cooperado Roberto Silva, Ve\u00edculo BRA2E19, Motorista Carlos Eduardo, Pend\u00eancias: CRLV, CNH"
+                            }
+                          },
+                          "inline_data": null,
+                          "text": null,
+                          "thought": null,
+                          "thought_signature": null,
+                          "video_metadata": null,
+                          "tool_call": null,
+                          "tool_response": null,
+                          "part_metadata": null,
+                          "audio_transcription": null,
+                          "media_processing": null
+                        }
+                      ],
+                      "role": "user"
+                    },
+                    "event_time": "2026-09-03T19:11:49.341957Z",
+                    "state_delta": null,
+                    "active_tools": null
+                  },
+                  {
+                    "author": "rodacoop_compliance_agent",
+                    "content": {
+                      "parts": [
+                        {
+                          "media_resolution": null,
+                          "code_execution_result": null,
+                          "executable_code": null,
+                          "file_data": null,
+                          "function_call": null,
+                          "function_response": null,
+                          "inline_data": null,
+                          "text": "O ve\u00edculo QRS1T23 n\u00e3o pode seguir viagem na V-98216, pois o ve\u00edculo registrado para esta viagem \u00e9 o BRA2E19. Al\u00e9m disso, a viagem V-98216 possui pend\u00eancias de CRLV e CNH para o ve\u00edculo BRA2E19.",
+                          "thought": null,
+                          "thought_signature": null,
+                          "video_metadata": null,
+                          "tool_call": null,
+                          "tool_response": null,
+                          "part_metadata": null,
+                          "audio_transcription": null,
+                          "media_processing": null
+                        }
+                      ],
+                      "role": "model"
+                    },
+                    "event_time": "2026-09-03T19:11:49.368019Z",
+                    "state_delta": null,
+                    "active_tools": null
+                  }
+                ]
+              }
+            ]
+          },
+          "user_scenario": null,
+          "interactions_data_source": null
+        }
+      ],
+      "eval_dataset_df": null,
+      "candidate_name": null
+    }
+  ],
+  "metadata": {
+    "candidate_names": [
+      "candidate_1"
+    ],
+    "dataset_name": null,
+    "dataset_id": null,
+    "creation_timestamp": "2026-09-03T19:12:04.493718Z",
+    "dataset": [
+      {
+        "prompt_display_text": "Quais documentos s\u00e3o obrigat\u00f3rios para liberar uma viagem interestadual de transporte de gr\u00e3os segundo as pol\u00edticas de compliance da cooperativa?",
+        "prompt_raw_json": "{\n  \"parts\": [\n    {\n      \"text\": \"Quais documentos s\u00e3o obrigat\u00f3rios para liberar uma viagem interestadual de transporte de gr\u00e3os segundo as pol\u00edticas de compliance da cooperativa?\"\n    }\n  ],\n  \"role\": \"user\"\n}",
+        "reference": "Os documentos obrigat\u00f3rios s\u00e3o CNH do motorista com EAR ativa, CRLV do ve\u00edculo com licenciamento do ano corrente e cadastro ativo na ANTT/RNTRC.",
+        "reference_raw_json": "{\n  \"parts\": [\n    {\n      \"text\": \"Os documentos obrigat\u00f3rios s\u00e3o CNH do motorista com EAR ativa, CRLV do ve\u00edculo com licenciamento do ano corrente e cadastro ativo na ANTT/RNTRC.\"\n    }\n  ],\n  \"role\": \"model\"\n}",
+        "response_display_text": "De acordo com a pol\u00edtica de compliance documental da Rodacoop (Vers\u00e3o: 2026.1 - Vig\u00eancia: 2026-2027), para a libera\u00e7\u00e3o de uma viagem interestadual de transporte de gr\u00e3os, os seguintes documentos s\u00e3o obrigat\u00f3rios:\n\n**2.1. Do Cooperado (Centralizador de Cobran\u00e7a e Responsabilidade)**\n*   Termo de Ades\u00e3o e Responsabilidade de Compliance homologado com assinatura digital v\u00e1lida.\n\n**2.2. Do Motorista (Condutor Designado)**\n*   **CNH (Carteira Nacional de Habilita\u00e7\u00e3o):**\n    *   Categoria profissional compat\u00edvel (C, D ou E).\n    *   Observa\u00e7\u00e3o obrigat\u00f3ria de EAR (Exerce Atividade Remunerada).\n    *   Exame Toxicol\u00f3gico peri\u00f3dico com resultado negativo e dentro do prazo de validade.\n    *   Validade f\u00edsica da habilita\u00e7\u00e3o regular.\n\n**2.3. Do Ve\u00edculo de Carga (Cavalo Mec\u00e2nico e Reboque/Semirreboque)**\n*   **CRLV (Certificado de Registro e Licenciamento de Ve\u00edculo):**\n    *   Exerc\u00edcio anual vigente quitado (IPVA, DPVAT e taxa de licenciamento).\n    *   Sem restri\u00e7\u00f5es judiciais ou bloqueios administrativos.\n*   **RNTRC / ANTT:** Registro Nacional de Transportadores Rodovi\u00e1rios de Cargas ativo e vinculado \u00e0 placa.\n*   **Laudo de Inspe\u00e7\u00e3o Veicular e Cronotac\u00f3grafo:** Certificado de verifica\u00e7\u00e3o metrol\u00f3gica do tac\u00f3grafo v\u00e1lido.\n\n**2.4. Documenta\u00e7\u00e3o Fiscal e de Carga (Emiss\u00e3o Escalasoft / SEFAZ)**\n*   **CT-e (Conhecimento de Transporte Eletr\u00f4nico):** Autorizado e validado na SEFAZ.\n*   **MDF-e (Manifesto Eletr\u00f4nico de Documentos Fiscais):** Emitido com as placas do ve\u00edculo e condutor associados.\n*   **Ap\u00f3lice de Seguro de Transporte:** Seguro Obrigat\u00f3rio de Responsabilidade Civil do Transportador Rodovi\u00e1rio de Carga (RCTR-C) e RC-DC (Desaparecimento de Carga).",
+        "response_raw_json": "{\n  \"parts\": [\n    {\n      \"text\": \"De acordo com a pol\u00edtica de compliance documental da Rodacoop (Vers\u00e3o: 2026.1 - Vig\u00eancia: 2026-2027), para a libera\u00e7\u00e3o de uma viagem interestadual de transporte de gr\u00e3os, os seguintes documentos s\u00e3o obrigat\u00f3rios:\\n\\n**2.1. Do Cooperado (Centralizador de Cobran\u00e7a e Responsabilidade)**\\n*   Termo de Ades\u00e3o e Responsabilidade de Compliance homologado com assinatura digital v\u00e1lida.\\n\\n**2.2. Do Motorista (Condutor Designado)**\\n*   **CNH (Carteira Nacional de Habilita\u00e7\u00e3o):**\\n    *   Categoria profissional compat\u00edvel (C, D ou E).\\n    *   Observa\u00e7\u00e3o obrigat\u00f3ria de EAR (Exerce Atividade Remunerada).\\n    *   Exame Toxicol\u00f3gico peri\u00f3dico com resultado negativo e dentro do prazo de validade.\\n    *   Validade f\u00edsica da habilita\u00e7\u00e3o regular.\\n\\n**2.3. Do Ve\u00edculo de Carga (Cavalo Mec\u00e2nico e Reboque/Semirreboque)**\\n*   **CRLV (Certificado de Registro e Licenciamento de Ve\u00edculo):**\\n    *   Exerc\u00edcio anual vigente quitado (IPVA, DPVAT e taxa de licenciamento).\\n    *   Sem restri\u00e7\u00f5es judiciais ou bloqueios administrativos.\\n*   **RNTRC / ANTT:** Registro Nacional de Transportadores Rodovi\u00e1rios de Cargas ativo e vinculado \u00e0 placa.\\n*   **Laudo de Inspe\u00e7\u00e3o Veicular e Cronotac\u00f3grafo:** Certificado de verifica\u00e7\u00e3o metrol\u00f3gica do tac\u00f3grafo v\u00e1lido.\\n\\n**2.4. Documenta\u00e7\u00e3o Fiscal e de Carga (Emiss\u00e3o Escalasoft / SEFAZ)**\\n*   **CT-e (Conhecimento de Transporte Eletr\u00f4nico):** Autorizado e validado na SEFAZ.\\n*   **MDF-e (Manifesto Eletr\u00f4nico de Documentos Fiscais):** Emitido com as placas do ve\u00edculo e condutor associados.\\n*   **Ap\u00f3lice de Seguro de Transporte:** Seguro Obrigat\u00f3rio de Responsabilidade Civil do Transportador Rodovi\u00e1rio de Carga (RCTR-C) e RC-DC (Desaparecimento de Carga).\"\n    }\n  ],\n  \"role\": \"model\"\n}",
+        "intermediate_events": null,
+        "agent_data": "{\"agents\": {\"rodacoop_compliance_agent\": {\"agent_id\": \"rodacoop_compliance_agent\", \"agent_type\": \"LlmAgent\", \"description\": \"Agente Especialista em Compliance Documental e Log\u00edstica Rodacoop (Google Cloud ADK)\", \"instruction\": \"Voc\u00ea \u00e9 o Agente de Compliance Documental Rodacoop rodando no Google Cloud Agent Development Kit (ADK).\\n- Quando o usu\u00e1rio fizer perguntas sobre exig\u00eancias, regras, documenta\u00e7\u00f5es obrigat\u00f3rias ou pol\u00edticas de compliance da cooperativa, invoque SEMPRE a ferramenta 'tool_read_compliance_policy_from_gcs' para consultar a documenta\u00e7\u00e3o oficial armazenada no Google Cloud Storage.\\n- Ao receber documentos ou dados de uma viagem, consulte o ERP com 'tool_get_trip_context'.\\n- Para auditoria e m\u00e9tricas, utilize 'tool_save_to_gcs_and_bigquery'.\\n- Para formalizar o termo e assinar digitalmente, execute 'tool_generate_compliance_signature'.\\n- Ao final da aprova\u00e7\u00e3o, libere a viagem com 'tool_update_escalasoft_erp'.\", \"tools\": [{\"function_declarations\": [{\"description\": \"L\u00ea as pol\u00edticas oficiais de compliance e regulamentos de transporte diretamente do Google Cloud Storage (GCS).\", \"name\": \"tool_read_compliance_policy_from_gcs\", \"response_json_schema\": {\"type\": \"string\"}}]}, {\"function_declarations\": [{\"description\": \"Busca o contexto cadastral completo da viagem e pend\u00eancias ativas no Escalasoft ERP.\", \"name\": \"tool_get_trip_context\", \"parameters_json_schema\": {\"properties\": {\"trip_id\": {\"title\": \"Trip Id\", \"type\": \"string\"}}, \"required\": [\"trip_id\"], \"title\": \"tool_get_trip_contextParams\", \"type\": \"object\"}, \"response_json_schema\": {\"type\": \"string\"}}]}, {\"function_declarations\": [{\"description\": \"Gera o Termo de Compliance e Assinatura Digital nativa com Hash SHA-256 no Google Cloud Storage.\", \"name\": \"tool_generate_compliance_signature\", \"parameters_json_schema\": {\"properties\": {\"cooperado_nome\": {\"title\": \"Cooperado Nome\", \"type\": \"string\"}, \"trip_id\": {\"title\": \"Trip Id\", \"type\": \"string\"}}, \"required\": [\"cooperado_nome\", \"trip_id\"], \"title\": \"tool_generate_compliance_signatureParams\", \"type\": \"object\"}, \"response_json_schema\": {\"type\": \"string\"}}]}, {\"function_declarations\": [{\"description\": \"Registra os metadados do documento validado no BigQuery para Analytics e auditoria no GCS.\", \"name\": \"tool_save_to_gcs_and_bigquery\", \"parameters_json_schema\": {\"properties\": {\"filename\": {\"title\": \"Filename\", \"type\": \"string\"}, \"doc_type\": {\"title\": \"Doc Type\", \"type\": \"string\"}, \"status\": {\"title\": \"Status\", \"type\": \"string\"}}, \"required\": [\"filename\", \"doc_type\", \"status\"], \"title\": \"tool_save_to_gcs_and_bigqueryParams\", \"type\": \"object\"}, \"response_json_schema\": {\"type\": \"string\"}}]}, {\"function_declarations\": [{\"description\": \"Atualiza o ERP Escalasoft e libera a viagem do cooperado.\", \"name\": \"tool_update_escalasoft_erp\", \"parameters_json_schema\": {\"properties\": {\"trip_id\": {\"title\": \"Trip Id\", \"type\": \"string\"}, \"doc_type\": {\"title\": \"Doc Type\", \"type\": \"string\"}}, \"required\": [\"trip_id\", \"doc_type\"], \"title\": \"tool_update_escalasoft_erpParams\", \"type\": \"object\"}, \"response_json_schema\": {\"type\": \"string\"}}]}], \"sub_agents\": []}}, \"turns\": [{\"turn_index\": 0, \"turn_id\": \"turn_0\", \"events\": [{\"author\": \"rodacoop_compliance_agent\", \"content\": {\"parts\": [{\"function_call\": {\"id\": \"adk-c5ac62fc-bfe7-4354-873f-fd6c653fb9d9\", \"args\": {}, \"name\": \"tool_read_compliance_policy_from_gcs\"}}], \"role\": \"model\"}, \"event_time\": \"2026-09-03T19:11:43.166790Z\"}, {\"author\": \"rodacoop_compliance_agent\", \"content\": {\"parts\": [{\"function_response\": {\"id\": \"adk-c5ac62fc-bfe7-4354-873f-fd6c653fb9d9\", \"name\": \"tool_read_compliance_policy_from_gcs\", \"response\": {\"result\": \"# POL\u00cdTICA DE COMPLIANCE DOCUMENTAL E TRANSPORTE DE CARGAS - RODACOOP\\nVers\u00e3o: 2026.1 - Vig\u00eancia: 2026-2027\\n\u00c1rea: Diretoria de Opera\u00e7\u00f5es, Log\u00edstica e Compliance\\n\\n## 1. OBJETIVO\\nDefinir os requisitos obrigat\u00f3rios e crit\u00e9rios de conformidade documental para a libera\u00e7\u00e3o de viagens intermunicipais e interestaduais de transporte de gr\u00e3os e cargas agroindustriais vinculadas \u00e0 cooperativa.\\n\\n## 2. DOCUMENTA\u00c7\u00c3O OBRIGAT\u00d3RIA PARA LIBERA\u00c7\u00c3O DE VIAGEM\\n\\n### 2.1. Do Cooperado (Centralizador de Cobran\u00e7a e Responsabilidade)\\n- O Cooperado \u00e9 o respons\u00e1vel direto perante a cooperativa por todas as pend\u00eancias da frota e dos condutores vinculados \u00e0 sua conta.\\n- Termo de Ades\u00e3o e Responsabilidade de Compliance homologado com assinatura digital v\u00e1lida registrada em ambiente seguro (Google Cloud Storage).\\n\\n### 2.2. Do Motorista (Condutor Designado)\\n- **CNH (Carteira Nacional de Habilita\u00e7\u00e3o):**\\n  - Categoria profissional compat\u00edvel (C, D ou E).\\n  - Observa\u00e7\u00e3o obrigat\u00f3ria de EAR (Exerce Atividade Remunerada).\\n  - Exame Toxicol\u00f3gico peri\u00f3dico com resultado negativo e dentro do prazo de validade (art. 148-A do CTB).\\n  - Validade f\u00edsica da habilita\u00e7\u00e3o regular perante a base nacional do SENATRAN.\\n\\n### 2.3. Do Ve\u00edculo de Carga (Cavalo Mec\u00e2nico e Reboque/Semirreboque)\\n- **CRLV (Certificado de Registro e Licenciamento de Ve\u00edculo):**\\n  - Exerc\u00edcio anual vigente quitado (IPVA, DPVAT e taxa de licenciamento).\\n  - Sem restri\u00e7\u00f5es judiciais ou bloqueios administrativos impeditivos de circula\u00e7\u00e3o.\\n- **RNTRC / ANTT:**\\n  - Registro Nacional de Transportadores Rodovi\u00e1rios de Cargas ativo e devidamente vinculado \u00e0 placa no sistema da Ag\u00eancia Nacional de Transportes Terrestres.\\n- **Laudo de Inspe\u00e7\u00e3o Veicular e Cronotac\u00f3grafo:**\\n  - Certificado de verifica\u00e7\u00e3o metrol\u00f3gica do tac\u00f3grafo v\u00e1lido emitido pelo IPEM/INMETRO.\\n\\n### 2.4. Documenta\u00e7\u00e3o Fiscal e de Carga (Emiss\u00e3o Escalasoft / SEFAZ)\\n- **CT-e (Conhecimento de Transporte Eletr\u00f4nico):** Autorizado e validado na SEFAZ.\\n- **MDF-e (Manifesto Eletr\u00f4nico de Documentos Fiscais):** Emitido com as placas do ve\u00edculo e condutor associados.\\n- **Ap\u00f3lice de Seguro de Transporte:** Seguro Obrigat\u00f3rio de Responsabilidade Civil do Transportador Rodovi\u00e1rio de Carga (RCTR-C) e RC-DC (Desaparecimento de Carga).\\n\\n## 3. PROCEDIMENTO OPERACIONAL DE VALIDA\u00c7\u00c3O VIA AGENTE\\n1. Consulta autom\u00e1tica ao sistema Escalasoft ERP para identifica\u00e7\u00e3o da viagem.\\n2. An\u00e1lise de OCR e intelig\u00eancia multimodal sobre o documento digitalizado.\\n3. Grava\u00e7\u00e3o de auditoria no Google Cloud Storage e Google BigQuery.\\n4. Emiss\u00e3o de Hash SHA-256 e Certificado de Compliance.\\n5. Libera\u00e7\u00e3o imediata do status no ERP Escalasoft.\\n\"}}}], \"role\": \"user\"}, \"event_time\": \"2026-09-03T19:11:50.742675Z\"}, {\"author\": \"rodacoop_compliance_agent\", \"content\": {\"parts\": [{\"text\": \"De acordo com a pol\u00edtica de compliance documental da Rodacoop (Vers\u00e3o: 2026.1 - Vig\u00eancia: 2026-2027), para a libera\u00e7\u00e3o de uma viagem interestadual de transporte de gr\u00e3os, os seguintes documentos s\u00e3o obrigat\u00f3rios:\\n\\n**2.1. Do Cooperado (Centralizador de Cobran\u00e7a e Responsabilidade)**\\n*   Termo de Ades\u00e3o e Responsabilidade de Compliance homologado com assinatura digital v\u00e1lida.\\n\\n**2.2. Do Motorista (Condutor Designado)**\\n*   **CNH (Carteira Nacional de Habilita\u00e7\u00e3o):**\\n    *   Categoria profissional compat\u00edvel (C, D ou E).\\n    *   Observa\u00e7\u00e3o obrigat\u00f3ria de EAR (Exerce Atividade Remunerada).\\n    *   Exame Toxicol\u00f3gico peri\u00f3dico com resultado negativo e dentro do prazo de validade.\\n    *   Validade f\u00edsica da habilita\u00e7\u00e3o regular.\\n\\n**2.3. Do Ve\u00edculo de Carga (Cavalo Mec\u00e2nico e Reboque/Semirreboque)**\\n*   **CRLV (Certificado de Registro e Licenciamento de Ve\u00edculo):**\\n    *   Exerc\u00edcio anual vigente quitado (IPVA, DPVAT e taxa de licenciamento).\\n    *   Sem restri\u00e7\u00f5es judiciais ou bloqueios administrativos.\\n*   **RNTRC / ANTT:** Registro Nacional de Transportadores Rodovi\u00e1rios de Cargas ativo e vinculado \u00e0 placa.\\n*   **Laudo de Inspe\u00e7\u00e3o Veicular e Cronotac\u00f3grafo:** Certificado de verifica\u00e7\u00e3o metrol\u00f3gica do tac\u00f3grafo v\u00e1lido.\\n\\n**2.4. Documenta\u00e7\u00e3o Fiscal e de Carga (Emiss\u00e3o Escalasoft / SEFAZ)**\\n*   **CT-e (Conhecimento de Transporte Eletr\u00f4nico):** Autorizado e validado na SEFAZ.\\n*   **MDF-e (Manifesto Eletr\u00f4nico de Documentos Fiscais):** Emitido com as placas do ve\u00edculo e condutor associados.\\n*   **Ap\u00f3lice de Seguro de Transporte:** Seguro Obrigat\u00f3rio de Responsabilidade Civil do Transportador Rodovi\u00e1rio de Carga (RCTR-C) e RC-DC (Desaparecimento de Carga).\"}], \"role\": \"model\"}, \"event_time\": \"2026-09-03T19:11:50.780413Z\"}]}]}"
+      },
+      {
+        "prompt_display_text": "Minha CNH venceu em 2023, posso liberar o carregamento para a viagem V-98214?",
+        "prompt_raw_json": "{\n  \"parts\": [\n    {\n      \"text\": \"Minha CNH venceu em 2023, posso liberar o carregamento para a viagem V-98214?\"\n    }\n  ],\n  \"role\": \"user\"\n}",
+        "reference": "N\u00e3o. CNHs vencidas bloqueiam a libera\u00e7\u00e3o da viagem segundo as regras de compliance da Rodacoop.",
+        "reference_raw_json": "{\n  \"parts\": [\n    {\n      \"text\": \"N\u00e3o. CNHs vencidas bloqueiam a libera\u00e7\u00e3o da viagem segundo as regras de compliance da Rodacoop.\"\n    }\n  ],\n  \"role\": \"model\"\n}",
+        "response_display_text": "N\u00e3o, de acordo com a nossa Pol\u00edtica de Compliance, a CNH (Carteira Nacional de Habilita\u00e7\u00e3o) do motorista deve ter **validade f\u00edsica regular**. Como sua CNH venceu em 2023, ela n\u00e3o atende a este requisito, e a libera\u00e7\u00e3o do carregamento para a viagem V-98214 n\u00e3o pode ser realizada.",
+        "response_raw_json": "{\n  \"parts\": [\n    {\n      \"text\": \"N\u00e3o, de acordo com a nossa Pol\u00edtica de Compliance, a CNH (Carteira Nacional de Habilita\u00e7\u00e3o) do motorista deve ter **validade f\u00edsica regular**. Como sua CNH venceu em 2023, ela n\u00e3o atende a este requisito, e a libera\u00e7\u00e3o do carregamento para a viagem V-98214 n\u00e3o pode ser realizada.\"\n    }\n  ],\n  \"role\": \"model\"\n}",
+        "intermediate_events": null,
+        "agent_data": "{\"agents\": {\"rodacoop_compliance_agent\": {\"agent_id\": \"rodacoop_compliance_agent\", \"agent_type\": \"LlmAgent\", \"description\": \"Agente Especialista em Compliance Documental e Log\u00edstica Rodacoop (Google Cloud ADK)\", \"instruction\": \"Voc\u00ea \u00e9 o Agente de Compliance Documental Rodacoop rodando no Google Cloud Agent Development Kit (ADK).\\n- Quando o usu\u00e1rio fizer perguntas sobre exig\u00eancias, regras, documenta\u00e7\u00f5es obrigat\u00f3rias ou pol\u00edticas de compliance da cooperativa, invoque SEMPRE a ferramenta 'tool_read_compliance_policy_from_gcs' para consultar a documenta\u00e7\u00e3o oficial armazenada no Google Cloud Storage.\\n- Ao receber documentos ou dados de uma viagem, consulte o ERP com 'tool_get_trip_context'.\\n- Para auditoria e m\u00e9tricas, utilize 'tool_save_to_gcs_and_bigquery'.\\n- Para formalizar o termo e assinar digitalmente, execute 'tool_generate_compliance_signature'.\\n- Ao final da aprova\u00e7\u00e3o, libere a viagem com 'tool_update_escalasoft_erp'.\", \"tools\": [{\"function_declarations\": [{\"description\": \"L\u00ea as pol\u00edticas oficiais de compliance e regulamentos de transporte diretamente do Google Cloud Storage (GCS).\", \"name\": \"tool_read_compliance_policy_from_gcs\", \"response_json_schema\": {\"type\": \"string\"}}]}, {\"function_declarations\": [{\"description\": \"Busca o contexto cadastral completo da viagem e pend\u00eancias ativas no Escalasoft ERP.\", \"name\": \"tool_get_trip_context\", \"parameters_json_schema\": {\"properties\": {\"trip_id\": {\"title\": \"Trip Id\", \"type\": \"string\"}}, \"required\": [\"trip_id\"], \"title\": \"tool_get_trip_contextParams\", \"type\": \"object\"}, \"response_json_schema\": {\"type\": \"string\"}}]}, {\"function_declarations\": [{\"description\": \"Gera o Termo de Compliance e Assinatura Digital nativa com Hash SHA-256 no Google Cloud Storage.\", \"name\": \"tool_generate_compliance_signature\", \"parameters_json_schema\": {\"properties\": {\"cooperado_nome\": {\"title\": \"Cooperado Nome\", \"type\": \"string\"}, \"trip_id\": {\"title\": \"Trip Id\", \"type\": \"string\"}}, \"required\": [\"cooperado_nome\", \"trip_id\"], \"title\": \"tool_generate_compliance_signatureParams\", \"type\": \"object\"}, \"response_json_schema\": {\"type\": \"string\"}}]}, {\"function_declarations\": [{\"description\": \"Registra os metadados do documento validado no BigQuery para Analytics e auditoria no GCS.\", \"name\": \"tool_save_to_gcs_and_bigquery\", \"parameters_json_schema\": {\"properties\": {\"filename\": {\"title\": \"Filename\", \"type\": \"string\"}, \"doc_type\": {\"title\": \"Doc Type\", \"type\": \"string\"}, \"status\": {\"title\": \"Status\", \"type\": \"string\"}}, \"required\": [\"filename\", \"doc_type\", \"status\"], \"title\": \"tool_save_to_gcs_and_bigqueryParams\", \"type\": \"object\"}, \"response_json_schema\": {\"type\": \"string\"}}]}, {\"function_declarations\": [{\"description\": \"Atualiza o ERP Escalasoft e libera a viagem do cooperado.\", \"name\": \"tool_update_escalasoft_erp\", \"parameters_json_schema\": {\"properties\": {\"trip_id\": {\"title\": \"Trip Id\", \"type\": \"string\"}, \"doc_type\": {\"title\": \"Doc Type\", \"type\": \"string\"}}, \"required\": [\"trip_id\", \"doc_type\"], \"title\": \"tool_update_escalasoft_erpParams\", \"type\": \"object\"}, \"response_json_schema\": {\"type\": \"string\"}}]}], \"sub_agents\": []}}, \"turns\": [{\"turn_index\": 0, \"turn_id\": \"turn_0\", \"events\": [{\"author\": \"rodacoop_compliance_agent\", \"content\": {\"parts\": [{\"function_call\": {\"id\": \"adk-e3bf2dc0-1c22-41cf-9af3-3098d6d1c196\", \"args\": {}, \"name\": \"tool_read_compliance_policy_from_gcs\"}}], \"role\": \"model\"}, \"event_time\": \"2026-09-03T19:11:43.221685Z\"}, {\"author\": \"rodacoop_compliance_agent\", \"content\": {\"parts\": [{\"function_response\": {\"id\": \"adk-e3bf2dc0-1c22-41cf-9af3-3098d6d1c196\", \"name\": \"tool_read_compliance_policy_from_gcs\", \"response\": {\"result\": \"# POL\u00cdTICA DE COMPLIANCE DOCUMENTAL E TRANSPORTE DE CARGAS - RODACOOP\\nVers\u00e3o: 2026.1 - Vig\u00eancia: 2026-2027\\n\u00c1rea: Diretoria de Opera\u00e7\u00f5es, Log\u00edstica e Compliance\\n\\n## 1. OBJETIVO\\nDefinir os requisitos obrigat\u00f3rios e crit\u00e9rios de conformidade documental para a libera\u00e7\u00e3o de viagens intermunicipais e interestaduais de transporte de gr\u00e3os e cargas agroindustriais vinculadas \u00e0 cooperativa.\\n\\n## 2. DOCUMENTA\u00c7\u00c3O OBRIGAT\u00d3RIA PARA LIBERA\u00c7\u00c3O DE VIAGEM\\n\\n### 2.1. Do Cooperado (Centralizador de Cobran\u00e7a e Responsabilidade)\\n- O Cooperado \u00e9 o respons\u00e1vel direto perante a cooperativa por todas as pend\u00eancias da frota e dos condutores vinculados \u00e0 sua conta.\\n- Termo de Ades\u00e3o e Responsabilidade de Compliance homologado com assinatura digital v\u00e1lida registrada em ambiente seguro (Google Cloud Storage).\\n\\n### 2.2. Do Motorista (Condutor Designado)\\n- **CNH (Carteira Nacional de Habilita\u00e7\u00e3o):**\\n  - Categoria profissional compat\u00edvel (C, D ou E).\\n  - Observa\u00e7\u00e3o obrigat\u00f3ria de EAR (Exerce Atividade Remunerada).\\n  - Exame Toxicol\u00f3gico peri\u00f3dico com resultado negativo e dentro do prazo de validade (art. 148-A do CTB).\\n  - Validade f\u00edsica da habilita\u00e7\u00e3o regular perante a base nacional do SENATRAN.\\n\\n### 2.3. Do Ve\u00edculo de Carga (Cavalo Mec\u00e2nico e Reboque/Semirreboque)\\n- **CRLV (Certificado de Registro e Licenciamento de Ve\u00edculo):**\\n  - Exerc\u00edcio anual vigente quitado (IPVA, DPVAT e taxa de licenciamento).\\n  - Sem restri\u00e7\u00f5es judiciais ou bloqueios administrativos impeditivos de circula\u00e7\u00e3o.\\n- **RNTRC / ANTT:**\\n  - Registro Nacional de Transportadores Rodovi\u00e1rios de Cargas ativo e devidamente vinculado \u00e0 placa no sistema da Ag\u00eancia Nacional de Transportes Terrestres.\\n- **Laudo de Inspe\u00e7\u00e3o Veicular e Cronotac\u00f3grafo:**\\n  - Certificado de verifica\u00e7\u00e3o metrol\u00f3gica do tac\u00f3grafo v\u00e1lido emitido pelo IPEM/INMETRO.\\n\\n### 2.4. Documenta\u00e7\u00e3o Fiscal e de Carga (Emiss\u00e3o Escalasoft / SEFAZ)\\n- **CT-e (Conhecimento de Transporte Eletr\u00f4nico):** Autorizado e validado na SEFAZ.\\n- **MDF-e (Manifesto Eletr\u00f4nico de Documentos Fiscais):** Emitido com as placas do ve\u00edculo e condutor associados.\\n- **Ap\u00f3lice de Seguro de Transporte:** Seguro Obrigat\u00f3rio de Responsabilidade Civil do Transportador Rodovi\u00e1rio de Carga (RCTR-C) e RC-DC (Desaparecimento de Carga).\\n\\n## 3. PROCEDIMENTO OPERACIONAL DE VALIDA\u00c7\u00c3O VIA AGENTE\\n1. Consulta autom\u00e1tica ao sistema Escalasoft ERP para identifica\u00e7\u00e3o da viagem.\\n2. An\u00e1lise de OCR e intelig\u00eancia multimodal sobre o documento digitalizado.\\n3. Grava\u00e7\u00e3o de auditoria no Google Cloud Storage e Google BigQuery.\\n4. Emiss\u00e3o de Hash SHA-256 e Certificado de Compliance.\\n5. Libera\u00e7\u00e3o imediata do status no ERP Escalasoft.\\n\"}}}], \"role\": \"user\"}, \"event_time\": \"2026-09-03T19:11:49.282979Z\"}, {\"author\": \"rodacoop_compliance_agent\", \"content\": {\"parts\": [{\"text\": \"N\u00e3o, de acordo com a nossa Pol\u00edtica de Compliance, a CNH (Carteira Nacional de Habilita\u00e7\u00e3o) do motorista deve ter **validade f\u00edsica regular**. Como sua CNH venceu em 2023, ela n\u00e3o atende a este requisito, e a libera\u00e7\u00e3o do carregamento para a viagem V-98214 n\u00e3o pode ser realizada.\"}], \"role\": \"model\"}, \"event_time\": \"2026-09-03T19:11:49.395413Z\"}]}]}"
+      },
+      {
+        "prompt_display_text": "Verifique a situa\u00e7\u00e3o da viagem V-98214 e se o cadastro do motorista Carlos Eduardo est\u00e1 aprovado.",
+        "prompt_raw_json": "{\n  \"parts\": [\n    {\n      \"text\": \"Verifique a situa\u00e7\u00e3o da viagem V-98214 e se o cadastro do motorista Carlos Eduardo est\u00e1 aprovado.\"\n    }\n  ],\n  \"role\": \"user\"\n}",
+        "reference": "A viagem V-98214 est\u00e1 com status LIBERADO no Escalasoft ERP. Os documentos CNH e CRLV do motorista Carlos Eduardo foram validados e o Termo de Compliance foi assinado.",
+        "reference_raw_json": "{\n  \"parts\": [\n    {\n      \"text\": \"A viagem V-98214 est\u00e1 com status LIBERADO no Escalasoft ERP. Os documentos CNH e CRLV do motorista Carlos Eduardo foram validados e o Termo de Compliance foi assinado.\"\n    }\n  ],\n  \"role\": \"model\"\n}",
+        "response_display_text": "A situa\u00e7\u00e3o da viagem V-98214 \u00e9 a seguinte: o cooperado \u00e9 Roberto Silva, o ve\u00edculo \u00e9 BRA2E19 e o motorista \u00e9 Carlos Eduardo.\n\nNo entanto, o cadastro do motorista Carlos Eduardo *n\u00e3o est\u00e1 aprovado* no momento, pois existem pend\u00eancias relativas ao CRLV e \u00e0 CNH.",
+        "response_raw_json": "{\n  \"parts\": [\n    {\n      \"text\": \"A situa\u00e7\u00e3o da viagem V-98214 \u00e9 a seguinte: o cooperado \u00e9 Roberto Silva, o ve\u00edculo \u00e9 BRA2E19 e o motorista \u00e9 Carlos Eduardo.\\n\\nNo entanto, o cadastro do motorista Carlos Eduardo *n\u00e3o est\u00e1 aprovado* no momento, pois existem pend\u00eancias relativas ao CRLV e \u00e0 CNH.\"\n    }\n  ],\n  \"role\": \"model\"\n}",
+        "intermediate_events": null,
+        "agent_data": "{\"agents\": {\"rodacoop_compliance_agent\": {\"agent_id\": \"rodacoop_compliance_agent\", \"agent_type\": \"LlmAgent\", \"description\": \"Agente Especialista em Compliance Documental e Log\u00edstica Rodacoop (Google Cloud ADK)\", \"instruction\": \"Voc\u00ea \u00e9 o Agente de Compliance Documental Rodacoop rodando no Google Cloud Agent Development Kit (ADK).\\n- Quando o usu\u00e1rio fizer perguntas sobre exig\u00eancias, regras, documenta\u00e7\u00f5es obrigat\u00f3rias ou pol\u00edticas de compliance da cooperativa, invoque SEMPRE a ferramenta 'tool_read_compliance_policy_from_gcs' para consultar a documenta\u00e7\u00e3o oficial armazenada no Google Cloud Storage.\\n- Ao receber documentos ou dados de uma viagem, consulte o ERP com 'tool_get_trip_context'.\\n- Para auditoria e m\u00e9tricas, utilize 'tool_save_to_gcs_and_bigquery'.\\n- Para formalizar o termo e assinar digitalmente, execute 'tool_generate_compliance_signature'.\\n- Ao final da aprova\u00e7\u00e3o, libere a viagem com 'tool_update_escalasoft_erp'.\", \"tools\": [{\"function_declarations\": [{\"description\": \"L\u00ea as pol\u00edticas oficiais de compliance e regulamentos de transporte diretamente do Google Cloud Storage (GCS).\", \"name\": \"tool_read_compliance_policy_from_gcs\", \"response_json_schema\": {\"type\": \"string\"}}]}, {\"function_declarations\": [{\"description\": \"Busca o contexto cadastral completo da viagem e pend\u00eancias ativas no Escalasoft ERP.\", \"name\": \"tool_get_trip_context\", \"parameters_json_schema\": {\"properties\": {\"trip_id\": {\"title\": \"Trip Id\", \"type\": \"string\"}}, \"required\": [\"trip_id\"], \"title\": \"tool_get_trip_contextParams\", \"type\": \"object\"}, \"response_json_schema\": {\"type\": \"string\"}}]}, {\"function_declarations\": [{\"description\": \"Gera o Termo de Compliance e Assinatura Digital nativa com Hash SHA-256 no Google Cloud Storage.\", \"name\": \"tool_generate_compliance_signature\", \"parameters_json_schema\": {\"properties\": {\"cooperado_nome\": {\"title\": \"Cooperado Nome\", \"type\": \"string\"}, \"trip_id\": {\"title\": \"Trip Id\", \"type\": \"string\"}}, \"required\": [\"cooperado_nome\", \"trip_id\"], \"title\": \"tool_generate_compliance_signatureParams\", \"type\": \"object\"}, \"response_json_schema\": {\"type\": \"string\"}}]}, {\"function_declarations\": [{\"description\": \"Registra os metadados do documento validado no BigQuery para Analytics e auditoria no GCS.\", \"name\": \"tool_save_to_gcs_and_bigquery\", \"parameters_json_schema\": {\"properties\": {\"filename\": {\"title\": \"Filename\", \"type\": \"string\"}, \"doc_type\": {\"title\": \"Doc Type\", \"type\": \"string\"}, \"status\": {\"title\": \"Status\", \"type\": \"string\"}}, \"required\": [\"filename\", \"doc_type\", \"status\"], \"title\": \"tool_save_to_gcs_and_bigqueryParams\", \"type\": \"object\"}, \"response_json_schema\": {\"type\": \"string\"}}]}, {\"function_declarations\": [{\"description\": \"Atualiza o ERP Escalasoft e libera a viagem do cooperado.\", \"name\": \"tool_update_escalasoft_erp\", \"parameters_json_schema\": {\"properties\": {\"trip_id\": {\"title\": \"Trip Id\", \"type\": \"string\"}, \"doc_type\": {\"title\": \"Doc Type\", \"type\": \"string\"}}, \"required\": [\"trip_id\", \"doc_type\"], \"title\": \"tool_update_escalasoft_erpParams\", \"type\": \"object\"}, \"response_json_schema\": {\"type\": \"string\"}}]}], \"sub_agents\": []}}, \"turns\": [{\"turn_index\": 0, \"turn_id\": \"turn_0\", \"events\": [{\"author\": \"rodacoop_compliance_agent\", \"content\": {\"parts\": [{\"function_call\": {\"id\": \"adk-eba8bf58-7acb-4d04-b05d-9a1b86d6086f\", \"args\": {\"trip_id\": \"V-98214\"}, \"name\": \"tool_get_trip_context\"}}], \"role\": \"model\"}, \"event_time\": \"2026-09-03T19:11:43.116698Z\"}, {\"author\": \"rodacoop_compliance_agent\", \"content\": {\"parts\": [{\"function_response\": {\"id\": \"adk-eba8bf58-7acb-4d04-b05d-9a1b86d6086f\", \"name\": \"tool_get_trip_context\", \"response\": {\"result\": \"Viagem V-98214: Cooperado Roberto Silva, Ve\u00edculo BRA2E19, Motorista Carlos Eduardo, Pend\u00eancias: CRLV, CNH\"}}}], \"role\": \"user\"}, \"event_time\": \"2026-09-03T19:11:49.327603Z\"}, {\"author\": \"rodacoop_compliance_agent\", \"content\": {\"parts\": [{\"text\": \"A situa\u00e7\u00e3o da viagem V-98214 \u00e9 a seguinte: o cooperado \u00e9 Roberto Silva, o ve\u00edculo \u00e9 BRA2E19 e o motorista \u00e9 Carlos Eduardo.\\n\\nNo entanto, o cadastro do motorista Carlos Eduardo *n\u00e3o est\u00e1 aprovado* no momento, pois existem pend\u00eancias relativas ao CRLV e \u00e0 CNH.\"}], \"role\": \"model\"}, \"event_time\": \"2026-09-03T19:11:49.354197Z\"}]}]}"
+      },
+      {
+        "prompt_display_text": "Qual o status da viagem V-98215 e quais as pend\u00eancias do motorista Joaquim Barbosa?",
+        "prompt_raw_json": "{\n  \"parts\": [\n    {\n      \"text\": \"Qual o status da viagem V-98215 e quais as pend\u00eancias do motorista Joaquim Barbosa?\"\n    }\n  ],\n  \"role\": \"user\"\n}",
+        "reference": "A viagem V-98215 est\u00e1 com status BLOQUEADO / EM AN\u00c1LISE devido \u00e0s pend\u00eancias: CNH Vencida em 2023 e Exame Toxicol\u00f3gico Pendente.",
+        "reference_raw_json": "{\n  \"parts\": [\n    {\n      \"text\": \"A viagem V-98215 est\u00e1 com status BLOQUEADO / EM AN\u00c1LISE devido \u00e0s pend\u00eancias: CNH Vencida em 2023 e Exame Toxicol\u00f3gico Pendente.\"\n    }\n  ],\n  \"role\": \"model\"\n}",
+        "response_display_text": "Para a viagem **V-98215**, o motorista cadastrado \u00e9 **Carlos Eduardo**. As pend\u00eancias para esta viagem s\u00e3o **CRLV e CNH**.\n\nN\u00e3o encontramos nenhum registro para o motorista Joaquim Barbosa associado \u00e0 viagem V-98215.",
+        "response_raw_json": "{\n  \"parts\": [\n    {\n      \"text\": \"Para a viagem **V-98215**, o motorista cadastrado \u00e9 **Carlos Eduardo**. As pend\u00eancias para esta viagem s\u00e3o **CRLV e CNH**.\\n\\nN\u00e3o encontramos nenhum registro para o motorista Joaquim Barbosa associado \u00e0 viagem V-98215.\"\n    }\n  ],\n  \"role\": \"model\"\n}",
+        "intermediate_events": null,
+        "agent_data": "{\"agents\": {\"rodacoop_compliance_agent\": {\"agent_id\": \"rodacoop_compliance_agent\", \"agent_type\": \"LlmAgent\", \"description\": \"Agente Especialista em Compliance Documental e Log\u00edstica Rodacoop (Google Cloud ADK)\", \"instruction\": \"Voc\u00ea \u00e9 o Agente de Compliance Documental Rodacoop rodando no Google Cloud Agent Development Kit (ADK).\\n- Quando o usu\u00e1rio fizer perguntas sobre exig\u00eancias, regras, documenta\u00e7\u00f5es obrigat\u00f3rias ou pol\u00edticas de compliance da cooperativa, invoque SEMPRE a ferramenta 'tool_read_compliance_policy_from_gcs' para consultar a documenta\u00e7\u00e3o oficial armazenada no Google Cloud Storage.\\n- Ao receber documentos ou dados de uma viagem, consulte o ERP com 'tool_get_trip_context'.\\n- Para auditoria e m\u00e9tricas, utilize 'tool_save_to_gcs_and_bigquery'.\\n- Para formalizar o termo e assinar digitalmente, execute 'tool_generate_compliance_signature'.\\n- Ao final da aprova\u00e7\u00e3o, libere a viagem com 'tool_update_escalasoft_erp'.\", \"tools\": [{\"function_declarations\": [{\"description\": \"L\u00ea as pol\u00edticas oficiais de compliance e regulamentos de transporte diretamente do Google Cloud Storage (GCS).\", \"name\": \"tool_read_compliance_policy_from_gcs\", \"response_json_schema\": {\"type\": \"string\"}}]}, {\"function_declarations\": [{\"description\": \"Busca o contexto cadastral completo da viagem e pend\u00eancias ativas no Escalasoft ERP.\", \"name\": \"tool_get_trip_context\", \"parameters_json_schema\": {\"properties\": {\"trip_id\": {\"title\": \"Trip Id\", \"type\": \"string\"}}, \"required\": [\"trip_id\"], \"title\": \"tool_get_trip_contextParams\", \"type\": \"object\"}, \"response_json_schema\": {\"type\": \"string\"}}]}, {\"function_declarations\": [{\"description\": \"Gera o Termo de Compliance e Assinatura Digital nativa com Hash SHA-256 no Google Cloud Storage.\", \"name\": \"tool_generate_compliance_signature\", \"parameters_json_schema\": {\"properties\": {\"cooperado_nome\": {\"title\": \"Cooperado Nome\", \"type\": \"string\"}, \"trip_id\": {\"title\": \"Trip Id\", \"type\": \"string\"}}, \"required\": [\"cooperado_nome\", \"trip_id\"], \"title\": \"tool_generate_compliance_signatureParams\", \"type\": \"object\"}, \"response_json_schema\": {\"type\": \"string\"}}]}, {\"function_declarations\": [{\"description\": \"Registra os metadados do documento validado no BigQuery para Analytics e auditoria no GCS.\", \"name\": \"tool_save_to_gcs_and_bigquery\", \"parameters_json_schema\": {\"properties\": {\"filename\": {\"title\": \"Filename\", \"type\": \"string\"}, \"doc_type\": {\"title\": \"Doc Type\", \"type\": \"string\"}, \"status\": {\"title\": \"Status\", \"type\": \"string\"}}, \"required\": [\"filename\", \"doc_type\", \"status\"], \"title\": \"tool_save_to_gcs_and_bigqueryParams\", \"type\": \"object\"}, \"response_json_schema\": {\"type\": \"string\"}}]}, {\"function_declarations\": [{\"description\": \"Atualiza o ERP Escalasoft e libera a viagem do cooperado.\", \"name\": \"tool_update_escalasoft_erp\", \"parameters_json_schema\": {\"properties\": {\"trip_id\": {\"title\": \"Trip Id\", \"type\": \"string\"}, \"doc_type\": {\"title\": \"Doc Type\", \"type\": \"string\"}}, \"required\": [\"trip_id\", \"doc_type\"], \"title\": \"tool_update_escalasoft_erpParams\", \"type\": \"object\"}, \"response_json_schema\": {\"type\": \"string\"}}]}], \"sub_agents\": []}}, \"turns\": [{\"turn_index\": 0, \"turn_id\": \"turn_0\", \"events\": [{\"author\": \"rodacoop_compliance_agent\", \"content\": {\"parts\": [{\"function_call\": {\"id\": \"adk-9f61873d-f509-4099-962e-1b6e045c944a\", \"args\": {\"trip_id\": \"V-98215\"}, \"name\": \"tool_get_trip_context\"}}], \"role\": \"model\"}, \"event_time\": \"2026-09-03T19:11:43.076829Z\"}, {\"author\": \"rodacoop_compliance_agent\", \"content\": {\"parts\": [{\"function_response\": {\"id\": \"adk-9f61873d-f509-4099-962e-1b6e045c944a\", \"name\": \"tool_get_trip_context\", \"response\": {\"result\": \"Viagem V-98215: Cooperado Roberto Silva, Ve\u00edculo BRA2E19, Motorista Carlos Eduardo, Pend\u00eancias: CRLV, CNH\"}}}], \"role\": \"user\"}, \"event_time\": \"2026-09-03T19:11:47.077699Z\"}, {\"author\": \"rodacoop_compliance_agent\", \"content\": {\"parts\": [{\"text\": \"Para a viagem **V-98215**, o motorista cadastrado \u00e9 **Carlos Eduardo**. As pend\u00eancias para esta viagem s\u00e3o **CRLV e CNH**.\\n\\nN\u00e3o encontramos nenhum registro para o motorista Joaquim Barbosa associado \u00e0 viagem V-98215.\"}], \"role\": \"model\"}, \"event_time\": \"2026-09-03T19:11:47.087907Z\"}]}]}"
+      },
+      {
+        "prompt_display_text": "Consulte a viagem V-98216 e informe se o ve\u00edculo QRS1T23 pode seguir viagem.",
+        "prompt_raw_json": "{\n  \"parts\": [\n    {\n      \"text\": \"Consulte a viagem V-98216 e informe se o ve\u00edculo QRS1T23 pode seguir viagem.\"\n    }\n  ],\n  \"role\": \"user\"\n}",
+        "reference": "A viagem V-98216 est\u00e1 bloqueada para o ve\u00edculo QRS1T23 devido ao CRLV n\u00e3o licenciado e laudo de cronotac\u00f3grafo expirado.",
+        "reference_raw_json": "{\n  \"parts\": [\n    {\n      \"text\": \"A viagem V-98216 est\u00e1 bloqueada para o ve\u00edculo QRS1T23 devido ao CRLV n\u00e3o licenciado e laudo de cronotac\u00f3grafo expirado.\"\n    }\n  ],\n  \"role\": \"model\"\n}",
+        "response_display_text": "O ve\u00edculo QRS1T23 n\u00e3o pode seguir viagem na V-98216, pois o ve\u00edculo registrado para esta viagem \u00e9 o BRA2E19. Al\u00e9m disso, a viagem V-98216 possui pend\u00eancias de CRLV e CNH para o ve\u00edculo BRA2E19.",
+        "response_raw_json": "{\n  \"parts\": [\n    {\n      \"text\": \"O ve\u00edculo QRS1T23 n\u00e3o pode seguir viagem na V-98216, pois o ve\u00edculo registrado para esta viagem \u00e9 o BRA2E19. Al\u00e9m disso, a viagem V-98216 possui pend\u00eancias de CRLV e CNH para o ve\u00edculo BRA2E19.\"\n    }\n  ],\n  \"role\": \"model\"\n}",
+        "intermediate_events": null,
+        "agent_data": "{\"agents\": {\"rodacoop_compliance_agent\": {\"agent_id\": \"rodacoop_compliance_agent\", \"agent_type\": \"LlmAgent\", \"description\": \"Agente Especialista em Compliance Documental e Log\u00edstica Rodacoop (Google Cloud ADK)\", \"instruction\": \"Voc\u00ea \u00e9 o Agente de Compliance Documental Rodacoop rodando no Google Cloud Agent Development Kit (ADK).\\n- Quando o usu\u00e1rio fizer perguntas sobre exig\u00eancias, regras, documenta\u00e7\u00f5es obrigat\u00f3rias ou pol\u00edticas de compliance da cooperativa, invoque SEMPRE a ferramenta 'tool_read_compliance_policy_from_gcs' para consultar a documenta\u00e7\u00e3o oficial armazenada no Google Cloud Storage.\\n- Ao receber documentos ou dados de uma viagem, consulte o ERP com 'tool_get_trip_context'.\\n- Para auditoria e m\u00e9tricas, utilize 'tool_save_to_gcs_and_bigquery'.\\n- Para formalizar o termo e assinar digitalmente, execute 'tool_generate_compliance_signature'.\\n- Ao final da aprova\u00e7\u00e3o, libere a viagem com 'tool_update_escalasoft_erp'.\", \"tools\": [{\"function_declarations\": [{\"description\": \"L\u00ea as pol\u00edticas oficiais de compliance e regulamentos de transporte diretamente do Google Cloud Storage (GCS).\", \"name\": \"tool_read_compliance_policy_from_gcs\", \"response_json_schema\": {\"type\": \"string\"}}]}, {\"function_declarations\": [{\"description\": \"Busca o contexto cadastral completo da viagem e pend\u00eancias ativas no Escalasoft ERP.\", \"name\": \"tool_get_trip_context\", \"parameters_json_schema\": {\"properties\": {\"trip_id\": {\"title\": \"Trip Id\", \"type\": \"string\"}}, \"required\": [\"trip_id\"], \"title\": \"tool_get_trip_contextParams\", \"type\": \"object\"}, \"response_json_schema\": {\"type\": \"string\"}}]}, {\"function_declarations\": [{\"description\": \"Gera o Termo de Compliance e Assinatura Digital nativa com Hash SHA-256 no Google Cloud Storage.\", \"name\": \"tool_generate_compliance_signature\", \"parameters_json_schema\": {\"properties\": {\"cooperado_nome\": {\"title\": \"Cooperado Nome\", \"type\": \"string\"}, \"trip_id\": {\"title\": \"Trip Id\", \"type\": \"string\"}}, \"required\": [\"cooperado_nome\", \"trip_id\"], \"title\": \"tool_generate_compliance_signatureParams\", \"type\": \"object\"}, \"response_json_schema\": {\"type\": \"string\"}}]}, {\"function_declarations\": [{\"description\": \"Registra os metadados do documento validado no BigQuery para Analytics e auditoria no GCS.\", \"name\": \"tool_save_to_gcs_and_bigquery\", \"parameters_json_schema\": {\"properties\": {\"filename\": {\"title\": \"Filename\", \"type\": \"string\"}, \"doc_type\": {\"title\": \"Doc Type\", \"type\": \"string\"}, \"status\": {\"title\": \"Status\", \"type\": \"string\"}}, \"required\": [\"filename\", \"doc_type\", \"status\"], \"title\": \"tool_save_to_gcs_and_bigqueryParams\", \"type\": \"object\"}, \"response_json_schema\": {\"type\": \"string\"}}]}, {\"function_declarations\": [{\"description\": \"Atualiza o ERP Escalasoft e libera a viagem do cooperado.\", \"name\": \"tool_update_escalasoft_erp\", \"parameters_json_schema\": {\"properties\": {\"trip_id\": {\"title\": \"Trip Id\", \"type\": \"string\"}, \"doc_type\": {\"title\": \"Doc Type\", \"type\": \"string\"}}, \"required\": [\"trip_id\", \"doc_type\"], \"title\": \"tool_update_escalasoft_erpParams\", \"type\": \"object\"}, \"response_json_schema\": {\"type\": \"string\"}}]}], \"sub_agents\": []}}, \"turns\": [{\"turn_index\": 0, \"turn_id\": \"turn_0\", \"events\": [{\"author\": \"rodacoop_compliance_agent\", \"content\": {\"parts\": [{\"function_call\": {\"id\": \"adk-8594d8fd-7a04-4ea4-9127-d4bd36b5dcd4\", \"args\": {\"trip_id\": \"V-98216\"}, \"name\": \"tool_get_trip_context\"}}], \"role\": \"model\"}, \"event_time\": \"2026-09-03T19:11:43.282614Z\"}, {\"author\": \"rodacoop_compliance_agent\", \"content\": {\"parts\": [{\"function_response\": {\"id\": \"adk-8594d8fd-7a04-4ea4-9127-d4bd36b5dcd4\", \"name\": \"tool_get_trip_context\", \"response\": {\"result\": \"Viagem V-98216: Cooperado Roberto Silva, Ve\u00edculo BRA2E19, Motorista Carlos Eduardo, Pend\u00eancias: CRLV, CNH\"}}}], \"role\": \"user\"}, \"event_time\": \"2026-09-03T19:11:49.341957Z\"}, {\"author\": \"rodacoop_compliance_agent\", \"content\": {\"parts\": [{\"text\": \"O ve\u00edculo QRS1T23 n\u00e3o pode seguir viagem na V-98216, pois o ve\u00edculo registrado para esta viagem \u00e9 o BRA2E19. Al\u00e9m disso, a viagem V-98216 possui pend\u00eancias de CRLV e CNH para o ve\u00edculo BRA2E19.\"}], \"role\": \"model\"}, \"event_time\": \"2026-09-03T19:11:49.368019Z\"}]}]}"
+      }
+    ]
+  },
+  "agent_info": null
+}

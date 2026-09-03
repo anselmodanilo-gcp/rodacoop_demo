@@ -1,0 +1,1145 @@
+{
+  "eval_cases": [
+    {
+      "prompt": {
+        "parts": [
+          {
+            "text": "Quais documentos são obrigatórios para liberar uma viagem interestadual de transporte de grãos segundo as políticas de compliance da cooperativa?"
+          }
+        ],
+        "role": "user"
+      },
+      "responses": [
+        {
+          "response": {
+            "parts": [
+              {
+                "text": "De acordo com a política de compliance documental da Rodacoop (Versão: 2026.1 - Vigência: 2026-2027), para a liberação de uma viagem interestadual de transporte de grãos, os seguintes documentos são obrigatórios:\n\n**2.1. Do Cooperado (Centralizador de Cobrança e Responsabilidade)**\n*   Termo de Adesão e Responsabilidade de Compliance homologado com assinatura digital válida.\n\n**2.2. Do Motorista (Condutor Designado)**\n*   **CNH (Carteira Nacional de Habilitação):**\n    *   Categoria profissional compatível (C, D ou E).\n    *   Observação obrigatória de EAR (Exerce Atividade Remunerada).\n    *   Exame Toxicológico periódico com resultado negativo e dentro do prazo de validade.\n    *   Validade física da habilitação regular.\n\n**2.3. Do Veículo de Carga (Cavalo Mecânico e Reboque/Semirreboque)**\n*   **CRLV (Certificado de Registro e Licenciamento de Veículo):**\n    *   Exercício anual vigente quitado (IPVA, DPVAT e taxa de licenciamento).\n    *   Sem restrições judiciais ou bloqueios administrativos.\n*   **RNTRC / ANTT:** Registro Nacional de Transportadores Rodoviários de Cargas ativo e vinculado à placa.\n*   **Laudo de Inspeção Veicular e Cronotacógrafo:** Certificado de verificação metrológica do tacógrafo válido.\n\n**2.4. Documentação Fiscal e de Carga (Emissão Escalasoft / SEFAZ)**\n*   **CT-e (Conhecimento de Transporte Eletrônico):** Autorizado e validado na SEFAZ.\n*   **MDF-e (Manifesto Eletrônico de Documentos Fiscais):** Emitido com as placas do veículo e condutor associados.\n*   **Apólice de Seguro de Transporte:** Seguro Obrigatório de Responsabilidade Civil do Transportador Rodoviário de Carga (RCTR-C) e RC-DC (Desaparecimento de Carga)."
+              }
+            ],
+            "role": "model"
+          }
+        }
+      ],
+      "reference": {
+        "response": {
+          "parts": [
+            {
+              "text": "Os documentos obrigatórios são CNH do motorista com EAR ativa, CRLV do veículo com licenciamento do ano corrente e cadastro ativo na ANTT/RNTRC."
+            }
+          ],
+          "role": "model"
+        }
+      },
+      "eval_case_id": "policy_query_interstate_grains",
+      "agent_data": {
+        "agents": {
+          "rodacoop_compliance_agent": {
+            "agent_id": "rodacoop_compliance_agent",
+            "agent_type": "LlmAgent",
+            "description": "Agente Especialista em Compliance Documental e Logística Rodacoop (Google Cloud ADK)",
+            "instruction": "Você é o Agente de Compliance Documental Rodacoop rodando no Google Cloud Agent Development Kit (ADK).\n- Quando o usuário fizer perguntas sobre exigências, regras, documentações obrigatórias ou políticas de compliance da cooperativa, invoque SEMPRE a ferramenta 'tool_read_compliance_policy_from_gcs' para consultar a documentação oficial armazenada no Google Cloud Storage.\n- Ao receber documentos ou dados de uma viagem, consulte o ERP com 'tool_get_trip_context'.\n- Para auditoria e métricas, utilize 'tool_save_to_gcs_and_bigquery'.\n- Para formalizar o termo e assinar digitalmente, execute 'tool_generate_compliance_signature'.\n- Ao final da aprovação, libere a viagem com 'tool_update_escalasoft_erp'.",
+            "tools": [
+              {
+                "function_declarations": [
+                  {
+                    "description": "Lê as políticas oficiais de compliance e regulamentos de transporte diretamente do Google Cloud Storage (GCS).",
+                    "name": "tool_read_compliance_policy_from_gcs",
+                    "response_json_schema": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              {
+                "function_declarations": [
+                  {
+                    "description": "Busca o contexto cadastral completo da viagem e pendências ativas no Escalasoft ERP.",
+                    "name": "tool_get_trip_context",
+                    "parameters_json_schema": {
+                      "properties": {
+                        "trip_id": {
+                          "title": "Trip Id",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "trip_id"
+                      ],
+                      "title": "tool_get_trip_contextParams",
+                      "type": "object"
+                    },
+                    "response_json_schema": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              {
+                "function_declarations": [
+                  {
+                    "description": "Gera o Termo de Compliance e Assinatura Digital nativa com Hash SHA-256 no Google Cloud Storage.",
+                    "name": "tool_generate_compliance_signature",
+                    "parameters_json_schema": {
+                      "properties": {
+                        "cooperado_nome": {
+                          "title": "Cooperado Nome",
+                          "type": "string"
+                        },
+                        "trip_id": {
+                          "title": "Trip Id",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "cooperado_nome",
+                        "trip_id"
+                      ],
+                      "title": "tool_generate_compliance_signatureParams",
+                      "type": "object"
+                    },
+                    "response_json_schema": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              {
+                "function_declarations": [
+                  {
+                    "description": "Registra os metadados do documento validado no BigQuery para Analytics e auditoria no GCS.",
+                    "name": "tool_save_to_gcs_and_bigquery",
+                    "parameters_json_schema": {
+                      "properties": {
+                        "filename": {
+                          "title": "Filename",
+                          "type": "string"
+                        },
+                        "doc_type": {
+                          "title": "Doc Type",
+                          "type": "string"
+                        },
+                        "status": {
+                          "title": "Status",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "filename",
+                        "doc_type",
+                        "status"
+                      ],
+                      "title": "tool_save_to_gcs_and_bigqueryParams",
+                      "type": "object"
+                    },
+                    "response_json_schema": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              {
+                "function_declarations": [
+                  {
+                    "description": "Atualiza o ERP Escalasoft e libera a viagem do cooperado.",
+                    "name": "tool_update_escalasoft_erp",
+                    "parameters_json_schema": {
+                      "properties": {
+                        "trip_id": {
+                          "title": "Trip Id",
+                          "type": "string"
+                        },
+                        "doc_type": {
+                          "title": "Doc Type",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "trip_id",
+                        "doc_type"
+                      ],
+                      "title": "tool_update_escalasoft_erpParams",
+                      "type": "object"
+                    },
+                    "response_json_schema": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              }
+            ],
+            "sub_agents": []
+          }
+        },
+        "turns": [
+          {
+            "turn_index": 0,
+            "turn_id": "turn_0",
+            "events": [
+              {
+                "author": "rodacoop_compliance_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_call": {
+                        "id": "adk-c5ac62fc-bfe7-4354-873f-fd6c653fb9d9",
+                        "args": {},
+                        "name": "tool_read_compliance_policy_from_gcs"
+                      }
+                    }
+                  ],
+                  "role": "model"
+                },
+                "event_time": "2026-09-03T19:11:43.166790Z"
+              },
+              {
+                "author": "rodacoop_compliance_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_response": {
+                        "id": "adk-c5ac62fc-bfe7-4354-873f-fd6c653fb9d9",
+                        "name": "tool_read_compliance_policy_from_gcs",
+                        "response": {
+                          "result": "# POLÍTICA DE COMPLIANCE DOCUMENTAL E TRANSPORTE DE CARGAS - RODACOOP\nVersão: 2026.1 - Vigência: 2026-2027\nÁrea: Diretoria de Operações, Logística e Compliance\n\n## 1. OBJETIVO\nDefinir os requisitos obrigatórios e critérios de conformidade documental para a liberação de viagens intermunicipais e interestaduais de transporte de grãos e cargas agroindustriais vinculadas à cooperativa.\n\n## 2. DOCUMENTAÇÃO OBRIGATÓRIA PARA LIBERAÇÃO DE VIAGEM\n\n### 2.1. Do Cooperado (Centralizador de Cobrança e Responsabilidade)\n- O Cooperado é o responsável direto perante a cooperativa por todas as pendências da frota e dos condutores vinculados à sua conta.\n- Termo de Adesão e Responsabilidade de Compliance homologado com assinatura digital válida registrada em ambiente seguro (Google Cloud Storage).\n\n### 2.2. Do Motorista (Condutor Designado)\n- **CNH (Carteira Nacional de Habilitação):**\n  - Categoria profissional compatível (C, D ou E).\n  - Observação obrigatória de EAR (Exerce Atividade Remunerada).\n  - Exame Toxicológico periódico com resultado negativo e dentro do prazo de validade (art. 148-A do CTB).\n  - Validade física da habilitação regular perante a base nacional do SENATRAN.\n\n### 2.3. Do Veículo de Carga (Cavalo Mecânico e Reboque/Semirreboque)\n- **CRLV (Certificado de Registro e Licenciamento de Veículo):**\n  - Exercício anual vigente quitado (IPVA, DPVAT e taxa de licenciamento).\n  - Sem restrições judiciais ou bloqueios administrativos impeditivos de circulação.\n- **RNTRC / ANTT:**\n  - Registro Nacional de Transportadores Rodoviários de Cargas ativo e devidamente vinculado à placa no sistema da Agência Nacional de Transportes Terrestres.\n- **Laudo de Inspeção Veicular e Cronotacógrafo:**\n  - Certificado de verificação metrológica do tacógrafo válido emitido pelo IPEM/INMETRO.\n\n### 2.4. Documentação Fiscal e de Carga (Emissão Escalasoft / SEFAZ)\n- **CT-e (Conhecimento de Transporte Eletrônico):** Autorizado e validado na SEFAZ.\n- **MDF-e (Manifesto Eletrônico de Documentos Fiscais):** Emitido com as placas do veículo e condutor associados.\n- **Apólice de Seguro de Transporte:** Seguro Obrigatório de Responsabilidade Civil do Transportador Rodoviário de Carga (RCTR-C) e RC-DC (Desaparecimento de Carga).\n\n## 3. PROCEDIMENTO OPERACIONAL DE VALIDAÇÃO VIA AGENTE\n1. Consulta automática ao sistema Escalasoft ERP para identificação da viagem.\n2. Análise de OCR e inteligência multimodal sobre o documento digitalizado.\n3. Gravação de auditoria no Google Cloud Storage e Google BigQuery.\n4. Emissão de Hash SHA-256 e Certificado de Compliance.\n5. Liberação imediata do status no ERP Escalasoft.\n"
+                        }
+                      }
+                    }
+                  ],
+                  "role": "user"
+                },
+                "event_time": "2026-09-03T19:11:50.742675Z"
+              },
+              {
+                "author": "rodacoop_compliance_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "text": "De acordo com a política de compliance documental da Rodacoop (Versão: 2026.1 - Vigência: 2026-2027), para a liberação de uma viagem interestadual de transporte de grãos, os seguintes documentos são obrigatórios:\n\n**2.1. Do Cooperado (Centralizador de Cobrança e Responsabilidade)**\n*   Termo de Adesão e Responsabilidade de Compliance homologado com assinatura digital válida.\n\n**2.2. Do Motorista (Condutor Designado)**\n*   **CNH (Carteira Nacional de Habilitação):**\n    *   Categoria profissional compatível (C, D ou E).\n    *   Observação obrigatória de EAR (Exerce Atividade Remunerada).\n    *   Exame Toxicológico periódico com resultado negativo e dentro do prazo de validade.\n    *   Validade física da habilitação regular.\n\n**2.3. Do Veículo de Carga (Cavalo Mecânico e Reboque/Semirreboque)**\n*   **CRLV (Certificado de Registro e Licenciamento de Veículo):**\n    *   Exercício anual vigente quitado (IPVA, DPVAT e taxa de licenciamento).\n    *   Sem restrições judiciais ou bloqueios administrativos.\n*   **RNTRC / ANTT:** Registro Nacional de Transportadores Rodoviários de Cargas ativo e vinculado à placa.\n*   **Laudo de Inspeção Veicular e Cronotacógrafo:** Certificado de verificação metrológica do tacógrafo válido.\n\n**2.4. Documentação Fiscal e de Carga (Emissão Escalasoft / SEFAZ)**\n*   **CT-e (Conhecimento de Transporte Eletrônico):** Autorizado e validado na SEFAZ.\n*   **MDF-e (Manifesto Eletrônico de Documentos Fiscais):** Emitido com as placas do veículo e condutor associados.\n*   **Apólice de Seguro de Transporte:** Seguro Obrigatório de Responsabilidade Civil do Transportador Rodoviário de Carga (RCTR-C) e RC-DC (Desaparecimento de Carga)."
+                    }
+                  ],
+                  "role": "model"
+                },
+                "event_time": "2026-09-03T19:11:50.780413Z"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "prompt": {
+        "parts": [
+          {
+            "text": "Minha CNH venceu em 2023, posso liberar o carregamento para a viagem V-98214?"
+          }
+        ],
+        "role": "user"
+      },
+      "responses": [
+        {
+          "response": {
+            "parts": [
+              {
+                "text": "Não, de acordo com a nossa Política de Compliance, a CNH (Carteira Nacional de Habilitação) do motorista deve ter **validade física regular**. Como sua CNH venceu em 2023, ela não atende a este requisito, e a liberação do carregamento para a viagem V-98214 não pode ser realizada."
+              }
+            ],
+            "role": "model"
+          }
+        }
+      ],
+      "reference": {
+        "response": {
+          "parts": [
+            {
+              "text": "Não. CNHs vencidas bloqueiam a liberação da viagem segundo as regras de compliance da Rodacoop."
+            }
+          ],
+          "role": "model"
+        }
+      },
+      "eval_case_id": "cnh_validation_status",
+      "agent_data": {
+        "agents": {
+          "rodacoop_compliance_agent": {
+            "agent_id": "rodacoop_compliance_agent",
+            "agent_type": "LlmAgent",
+            "description": "Agente Especialista em Compliance Documental e Logística Rodacoop (Google Cloud ADK)",
+            "instruction": "Você é o Agente de Compliance Documental Rodacoop rodando no Google Cloud Agent Development Kit (ADK).\n- Quando o usuário fizer perguntas sobre exigências, regras, documentações obrigatórias ou políticas de compliance da cooperativa, invoque SEMPRE a ferramenta 'tool_read_compliance_policy_from_gcs' para consultar a documentação oficial armazenada no Google Cloud Storage.\n- Ao receber documentos ou dados de uma viagem, consulte o ERP com 'tool_get_trip_context'.\n- Para auditoria e métricas, utilize 'tool_save_to_gcs_and_bigquery'.\n- Para formalizar o termo e assinar digitalmente, execute 'tool_generate_compliance_signature'.\n- Ao final da aprovação, libere a viagem com 'tool_update_escalasoft_erp'.",
+            "tools": [
+              {
+                "function_declarations": [
+                  {
+                    "description": "Lê as políticas oficiais de compliance e regulamentos de transporte diretamente do Google Cloud Storage (GCS).",
+                    "name": "tool_read_compliance_policy_from_gcs",
+                    "response_json_schema": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              {
+                "function_declarations": [
+                  {
+                    "description": "Busca o contexto cadastral completo da viagem e pendências ativas no Escalasoft ERP.",
+                    "name": "tool_get_trip_context",
+                    "parameters_json_schema": {
+                      "properties": {
+                        "trip_id": {
+                          "title": "Trip Id",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "trip_id"
+                      ],
+                      "title": "tool_get_trip_contextParams",
+                      "type": "object"
+                    },
+                    "response_json_schema": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              {
+                "function_declarations": [
+                  {
+                    "description": "Gera o Termo de Compliance e Assinatura Digital nativa com Hash SHA-256 no Google Cloud Storage.",
+                    "name": "tool_generate_compliance_signature",
+                    "parameters_json_schema": {
+                      "properties": {
+                        "cooperado_nome": {
+                          "title": "Cooperado Nome",
+                          "type": "string"
+                        },
+                        "trip_id": {
+                          "title": "Trip Id",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "cooperado_nome",
+                        "trip_id"
+                      ],
+                      "title": "tool_generate_compliance_signatureParams",
+                      "type": "object"
+                    },
+                    "response_json_schema": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              {
+                "function_declarations": [
+                  {
+                    "description": "Registra os metadados do documento validado no BigQuery para Analytics e auditoria no GCS.",
+                    "name": "tool_save_to_gcs_and_bigquery",
+                    "parameters_json_schema": {
+                      "properties": {
+                        "filename": {
+                          "title": "Filename",
+                          "type": "string"
+                        },
+                        "doc_type": {
+                          "title": "Doc Type",
+                          "type": "string"
+                        },
+                        "status": {
+                          "title": "Status",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "filename",
+                        "doc_type",
+                        "status"
+                      ],
+                      "title": "tool_save_to_gcs_and_bigqueryParams",
+                      "type": "object"
+                    },
+                    "response_json_schema": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              {
+                "function_declarations": [
+                  {
+                    "description": "Atualiza o ERP Escalasoft e libera a viagem do cooperado.",
+                    "name": "tool_update_escalasoft_erp",
+                    "parameters_json_schema": {
+                      "properties": {
+                        "trip_id": {
+                          "title": "Trip Id",
+                          "type": "string"
+                        },
+                        "doc_type": {
+                          "title": "Doc Type",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "trip_id",
+                        "doc_type"
+                      ],
+                      "title": "tool_update_escalasoft_erpParams",
+                      "type": "object"
+                    },
+                    "response_json_schema": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              }
+            ],
+            "sub_agents": []
+          }
+        },
+        "turns": [
+          {
+            "turn_index": 0,
+            "turn_id": "turn_0",
+            "events": [
+              {
+                "author": "rodacoop_compliance_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_call": {
+                        "id": "adk-e3bf2dc0-1c22-41cf-9af3-3098d6d1c196",
+                        "args": {},
+                        "name": "tool_read_compliance_policy_from_gcs"
+                      }
+                    }
+                  ],
+                  "role": "model"
+                },
+                "event_time": "2026-09-03T19:11:43.221685Z"
+              },
+              {
+                "author": "rodacoop_compliance_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_response": {
+                        "id": "adk-e3bf2dc0-1c22-41cf-9af3-3098d6d1c196",
+                        "name": "tool_read_compliance_policy_from_gcs",
+                        "response": {
+                          "result": "# POLÍTICA DE COMPLIANCE DOCUMENTAL E TRANSPORTE DE CARGAS - RODACOOP\nVersão: 2026.1 - Vigência: 2026-2027\nÁrea: Diretoria de Operações, Logística e Compliance\n\n## 1. OBJETIVO\nDefinir os requisitos obrigatórios e critérios de conformidade documental para a liberação de viagens intermunicipais e interestaduais de transporte de grãos e cargas agroindustriais vinculadas à cooperativa.\n\n## 2. DOCUMENTAÇÃO OBRIGATÓRIA PARA LIBERAÇÃO DE VIAGEM\n\n### 2.1. Do Cooperado (Centralizador de Cobrança e Responsabilidade)\n- O Cooperado é o responsável direto perante a cooperativa por todas as pendências da frota e dos condutores vinculados à sua conta.\n- Termo de Adesão e Responsabilidade de Compliance homologado com assinatura digital válida registrada em ambiente seguro (Google Cloud Storage).\n\n### 2.2. Do Motorista (Condutor Designado)\n- **CNH (Carteira Nacional de Habilitação):**\n  - Categoria profissional compatível (C, D ou E).\n  - Observação obrigatória de EAR (Exerce Atividade Remunerada).\n  - Exame Toxicológico periódico com resultado negativo e dentro do prazo de validade (art. 148-A do CTB).\n  - Validade física da habilitação regular perante a base nacional do SENATRAN.\n\n### 2.3. Do Veículo de Carga (Cavalo Mecânico e Reboque/Semirreboque)\n- **CRLV (Certificado de Registro e Licenciamento de Veículo):**\n  - Exercício anual vigente quitado (IPVA, DPVAT e taxa de licenciamento).\n  - Sem restrições judiciais ou bloqueios administrativos impeditivos de circulação.\n- **RNTRC / ANTT:**\n  - Registro Nacional de Transportadores Rodoviários de Cargas ativo e devidamente vinculado à placa no sistema da Agência Nacional de Transportes Terrestres.\n- **Laudo de Inspeção Veicular e Cronotacógrafo:**\n  - Certificado de verificação metrológica do tacógrafo válido emitido pelo IPEM/INMETRO.\n\n### 2.4. Documentação Fiscal e de Carga (Emissão Escalasoft / SEFAZ)\n- **CT-e (Conhecimento de Transporte Eletrônico):** Autorizado e validado na SEFAZ.\n- **MDF-e (Manifesto Eletrônico de Documentos Fiscais):** Emitido com as placas do veículo e condutor associados.\n- **Apólice de Seguro de Transporte:** Seguro Obrigatório de Responsabilidade Civil do Transportador Rodoviário de Carga (RCTR-C) e RC-DC (Desaparecimento de Carga).\n\n## 3. PROCEDIMENTO OPERACIONAL DE VALIDAÇÃO VIA AGENTE\n1. Consulta automática ao sistema Escalasoft ERP para identificação da viagem.\n2. Análise de OCR e inteligência multimodal sobre o documento digitalizado.\n3. Gravação de auditoria no Google Cloud Storage e Google BigQuery.\n4. Emissão de Hash SHA-256 e Certificado de Compliance.\n5. Liberação imediata do status no ERP Escalasoft.\n"
+                        }
+                      }
+                    }
+                  ],
+                  "role": "user"
+                },
+                "event_time": "2026-09-03T19:11:49.282979Z"
+              },
+              {
+                "author": "rodacoop_compliance_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "text": "Não, de acordo com a nossa Política de Compliance, a CNH (Carteira Nacional de Habilitação) do motorista deve ter **validade física regular**. Como sua CNH venceu em 2023, ela não atende a este requisito, e a liberação do carregamento para a viagem V-98214 não pode ser realizada."
+                    }
+                  ],
+                  "role": "model"
+                },
+                "event_time": "2026-09-03T19:11:49.395413Z"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "prompt": {
+        "parts": [
+          {
+            "text": "Verifique a situação da viagem V-98214 e se o cadastro do motorista Carlos Eduardo está aprovado."
+          }
+        ],
+        "role": "user"
+      },
+      "responses": [
+        {
+          "response": {
+            "parts": [
+              {
+                "text": "A situação da viagem V-98214 é a seguinte: o cooperado é Roberto Silva, o veículo é BRA2E19 e o motorista é Carlos Eduardo.\n\nNo entanto, o cadastro do motorista Carlos Eduardo *não está aprovado* no momento, pois existem pendências relativas ao CRLV e à CNH."
+              }
+            ],
+            "role": "model"
+          }
+        }
+      ],
+      "reference": {
+        "response": {
+          "parts": [
+            {
+              "text": "A viagem V-98214 está com status LIBERADO no Escalasoft ERP. Os documentos CNH e CRLV do motorista Carlos Eduardo foram validados e o Termo de Compliance foi assinado."
+            }
+          ],
+          "role": "model"
+        }
+      },
+      "eval_case_id": "trip_release_check_approved",
+      "agent_data": {
+        "agents": {
+          "rodacoop_compliance_agent": {
+            "agent_id": "rodacoop_compliance_agent",
+            "agent_type": "LlmAgent",
+            "description": "Agente Especialista em Compliance Documental e Logística Rodacoop (Google Cloud ADK)",
+            "instruction": "Você é o Agente de Compliance Documental Rodacoop rodando no Google Cloud Agent Development Kit (ADK).\n- Quando o usuário fizer perguntas sobre exigências, regras, documentações obrigatórias ou políticas de compliance da cooperativa, invoque SEMPRE a ferramenta 'tool_read_compliance_policy_from_gcs' para consultar a documentação oficial armazenada no Google Cloud Storage.\n- Ao receber documentos ou dados de uma viagem, consulte o ERP com 'tool_get_trip_context'.\n- Para auditoria e métricas, utilize 'tool_save_to_gcs_and_bigquery'.\n- Para formalizar o termo e assinar digitalmente, execute 'tool_generate_compliance_signature'.\n- Ao final da aprovação, libere a viagem com 'tool_update_escalasoft_erp'.",
+            "tools": [
+              {
+                "function_declarations": [
+                  {
+                    "description": "Lê as políticas oficiais de compliance e regulamentos de transporte diretamente do Google Cloud Storage (GCS).",
+                    "name": "tool_read_compliance_policy_from_gcs",
+                    "response_json_schema": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              {
+                "function_declarations": [
+                  {
+                    "description": "Busca o contexto cadastral completo da viagem e pendências ativas no Escalasoft ERP.",
+                    "name": "tool_get_trip_context",
+                    "parameters_json_schema": {
+                      "properties": {
+                        "trip_id": {
+                          "title": "Trip Id",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "trip_id"
+                      ],
+                      "title": "tool_get_trip_contextParams",
+                      "type": "object"
+                    },
+                    "response_json_schema": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              {
+                "function_declarations": [
+                  {
+                    "description": "Gera o Termo de Compliance e Assinatura Digital nativa com Hash SHA-256 no Google Cloud Storage.",
+                    "name": "tool_generate_compliance_signature",
+                    "parameters_json_schema": {
+                      "properties": {
+                        "cooperado_nome": {
+                          "title": "Cooperado Nome",
+                          "type": "string"
+                        },
+                        "trip_id": {
+                          "title": "Trip Id",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "cooperado_nome",
+                        "trip_id"
+                      ],
+                      "title": "tool_generate_compliance_signatureParams",
+                      "type": "object"
+                    },
+                    "response_json_schema": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              {
+                "function_declarations": [
+                  {
+                    "description": "Registra os metadados do documento validado no BigQuery para Analytics e auditoria no GCS.",
+                    "name": "tool_save_to_gcs_and_bigquery",
+                    "parameters_json_schema": {
+                      "properties": {
+                        "filename": {
+                          "title": "Filename",
+                          "type": "string"
+                        },
+                        "doc_type": {
+                          "title": "Doc Type",
+                          "type": "string"
+                        },
+                        "status": {
+                          "title": "Status",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "filename",
+                        "doc_type",
+                        "status"
+                      ],
+                      "title": "tool_save_to_gcs_and_bigqueryParams",
+                      "type": "object"
+                    },
+                    "response_json_schema": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              {
+                "function_declarations": [
+                  {
+                    "description": "Atualiza o ERP Escalasoft e libera a viagem do cooperado.",
+                    "name": "tool_update_escalasoft_erp",
+                    "parameters_json_schema": {
+                      "properties": {
+                        "trip_id": {
+                          "title": "Trip Id",
+                          "type": "string"
+                        },
+                        "doc_type": {
+                          "title": "Doc Type",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "trip_id",
+                        "doc_type"
+                      ],
+                      "title": "tool_update_escalasoft_erpParams",
+                      "type": "object"
+                    },
+                    "response_json_schema": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              }
+            ],
+            "sub_agents": []
+          }
+        },
+        "turns": [
+          {
+            "turn_index": 0,
+            "turn_id": "turn_0",
+            "events": [
+              {
+                "author": "rodacoop_compliance_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_call": {
+                        "id": "adk-eba8bf58-7acb-4d04-b05d-9a1b86d6086f",
+                        "args": {
+                          "trip_id": "V-98214"
+                        },
+                        "name": "tool_get_trip_context"
+                      }
+                    }
+                  ],
+                  "role": "model"
+                },
+                "event_time": "2026-09-03T19:11:43.116698Z"
+              },
+              {
+                "author": "rodacoop_compliance_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_response": {
+                        "id": "adk-eba8bf58-7acb-4d04-b05d-9a1b86d6086f",
+                        "name": "tool_get_trip_context",
+                        "response": {
+                          "result": "Viagem V-98214: Cooperado Roberto Silva, Veículo BRA2E19, Motorista Carlos Eduardo, Pendências: CRLV, CNH"
+                        }
+                      }
+                    }
+                  ],
+                  "role": "user"
+                },
+                "event_time": "2026-09-03T19:11:49.327603Z"
+              },
+              {
+                "author": "rodacoop_compliance_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "text": "A situação da viagem V-98214 é a seguinte: o cooperado é Roberto Silva, o veículo é BRA2E19 e o motorista é Carlos Eduardo.\n\nNo entanto, o cadastro do motorista Carlos Eduardo *não está aprovado* no momento, pois existem pendências relativas ao CRLV e à CNH."
+                    }
+                  ],
+                  "role": "model"
+                },
+                "event_time": "2026-09-03T19:11:49.354197Z"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "prompt": {
+        "parts": [
+          {
+            "text": "Qual o status da viagem V-98215 e quais as pendências do motorista Joaquim Barbosa?"
+          }
+        ],
+        "role": "user"
+      },
+      "responses": [
+        {
+          "response": {
+            "parts": [
+              {
+                "text": "Para a viagem **V-98215**, o motorista cadastrado é **Carlos Eduardo**. As pendências para esta viagem são **CRLV e CNH**.\n\nNão encontramos nenhum registro para o motorista Joaquim Barbosa associado à viagem V-98215."
+              }
+            ],
+            "role": "model"
+          }
+        }
+      ],
+      "reference": {
+        "response": {
+          "parts": [
+            {
+              "text": "A viagem V-98215 está com status BLOQUEADO / EM ANÁLISE devido às pendências: CNH Vencida em 2023 e Exame Toxicológico Pendente."
+            }
+          ],
+          "role": "model"
+        }
+      },
+      "eval_case_id": "trip_blocked_cnh_expired",
+      "agent_data": {
+        "agents": {
+          "rodacoop_compliance_agent": {
+            "agent_id": "rodacoop_compliance_agent",
+            "agent_type": "LlmAgent",
+            "description": "Agente Especialista em Compliance Documental e Logística Rodacoop (Google Cloud ADK)",
+            "instruction": "Você é o Agente de Compliance Documental Rodacoop rodando no Google Cloud Agent Development Kit (ADK).\n- Quando o usuário fizer perguntas sobre exigências, regras, documentações obrigatórias ou políticas de compliance da cooperativa, invoque SEMPRE a ferramenta 'tool_read_compliance_policy_from_gcs' para consultar a documentação oficial armazenada no Google Cloud Storage.\n- Ao receber documentos ou dados de uma viagem, consulte o ERP com 'tool_get_trip_context'.\n- Para auditoria e métricas, utilize 'tool_save_to_gcs_and_bigquery'.\n- Para formalizar o termo e assinar digitalmente, execute 'tool_generate_compliance_signature'.\n- Ao final da aprovação, libere a viagem com 'tool_update_escalasoft_erp'.",
+            "tools": [
+              {
+                "function_declarations": [
+                  {
+                    "description": "Lê as políticas oficiais de compliance e regulamentos de transporte diretamente do Google Cloud Storage (GCS).",
+                    "name": "tool_read_compliance_policy_from_gcs",
+                    "response_json_schema": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              {
+                "function_declarations": [
+                  {
+                    "description": "Busca o contexto cadastral completo da viagem e pendências ativas no Escalasoft ERP.",
+                    "name": "tool_get_trip_context",
+                    "parameters_json_schema": {
+                      "properties": {
+                        "trip_id": {
+                          "title": "Trip Id",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "trip_id"
+                      ],
+                      "title": "tool_get_trip_contextParams",
+                      "type": "object"
+                    },
+                    "response_json_schema": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              {
+                "function_declarations": [
+                  {
+                    "description": "Gera o Termo de Compliance e Assinatura Digital nativa com Hash SHA-256 no Google Cloud Storage.",
+                    "name": "tool_generate_compliance_signature",
+                    "parameters_json_schema": {
+                      "properties": {
+                        "cooperado_nome": {
+                          "title": "Cooperado Nome",
+                          "type": "string"
+                        },
+                        "trip_id": {
+                          "title": "Trip Id",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "cooperado_nome",
+                        "trip_id"
+                      ],
+                      "title": "tool_generate_compliance_signatureParams",
+                      "type": "object"
+                    },
+                    "response_json_schema": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              {
+                "function_declarations": [
+                  {
+                    "description": "Registra os metadados do documento validado no BigQuery para Analytics e auditoria no GCS.",
+                    "name": "tool_save_to_gcs_and_bigquery",
+                    "parameters_json_schema": {
+                      "properties": {
+                        "filename": {
+                          "title": "Filename",
+                          "type": "string"
+                        },
+                        "doc_type": {
+                          "title": "Doc Type",
+                          "type": "string"
+                        },
+                        "status": {
+                          "title": "Status",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "filename",
+                        "doc_type",
+                        "status"
+                      ],
+                      "title": "tool_save_to_gcs_and_bigqueryParams",
+                      "type": "object"
+                    },
+                    "response_json_schema": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              {
+                "function_declarations": [
+                  {
+                    "description": "Atualiza o ERP Escalasoft e libera a viagem do cooperado.",
+                    "name": "tool_update_escalasoft_erp",
+                    "parameters_json_schema": {
+                      "properties": {
+                        "trip_id": {
+                          "title": "Trip Id",
+                          "type": "string"
+                        },
+                        "doc_type": {
+                          "title": "Doc Type",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "trip_id",
+                        "doc_type"
+                      ],
+                      "title": "tool_update_escalasoft_erpParams",
+                      "type": "object"
+                    },
+                    "response_json_schema": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              }
+            ],
+            "sub_agents": []
+          }
+        },
+        "turns": [
+          {
+            "turn_index": 0,
+            "turn_id": "turn_0",
+            "events": [
+              {
+                "author": "rodacoop_compliance_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_call": {
+                        "id": "adk-9f61873d-f509-4099-962e-1b6e045c944a",
+                        "args": {
+                          "trip_id": "V-98215"
+                        },
+                        "name": "tool_get_trip_context"
+                      }
+                    }
+                  ],
+                  "role": "model"
+                },
+                "event_time": "2026-09-03T19:11:43.076829Z"
+              },
+              {
+                "author": "rodacoop_compliance_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_response": {
+                        "id": "adk-9f61873d-f509-4099-962e-1b6e045c944a",
+                        "name": "tool_get_trip_context",
+                        "response": {
+                          "result": "Viagem V-98215: Cooperado Roberto Silva, Veículo BRA2E19, Motorista Carlos Eduardo, Pendências: CRLV, CNH"
+                        }
+                      }
+                    }
+                  ],
+                  "role": "user"
+                },
+                "event_time": "2026-09-03T19:11:47.077699Z"
+              },
+              {
+                "author": "rodacoop_compliance_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "text": "Para a viagem **V-98215**, o motorista cadastrado é **Carlos Eduardo**. As pendências para esta viagem são **CRLV e CNH**.\n\nNão encontramos nenhum registro para o motorista Joaquim Barbosa associado à viagem V-98215."
+                    }
+                  ],
+                  "role": "model"
+                },
+                "event_time": "2026-09-03T19:11:47.087907Z"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "prompt": {
+        "parts": [
+          {
+            "text": "Consulte a viagem V-98216 e informe se o veículo QRS1T23 pode seguir viagem."
+          }
+        ],
+        "role": "user"
+      },
+      "responses": [
+        {
+          "response": {
+            "parts": [
+              {
+                "text": "O veículo QRS1T23 não pode seguir viagem na V-98216, pois o veículo registrado para esta viagem é o BRA2E19. Além disso, a viagem V-98216 possui pendências de CRLV e CNH para o veículo BRA2E19."
+              }
+            ],
+            "role": "model"
+          }
+        }
+      ],
+      "reference": {
+        "response": {
+          "parts": [
+            {
+              "text": "A viagem V-98216 está bloqueada para o veículo QRS1T23 devido ao CRLV não licenciado e laudo de cronotacógrafo expirado."
+            }
+          ],
+          "role": "model"
+        }
+      },
+      "eval_case_id": "trip_blocked_tacografo_expired",
+      "agent_data": {
+        "agents": {
+          "rodacoop_compliance_agent": {
+            "agent_id": "rodacoop_compliance_agent",
+            "agent_type": "LlmAgent",
+            "description": "Agente Especialista em Compliance Documental e Logística Rodacoop (Google Cloud ADK)",
+            "instruction": "Você é o Agente de Compliance Documental Rodacoop rodando no Google Cloud Agent Development Kit (ADK).\n- Quando o usuário fizer perguntas sobre exigências, regras, documentações obrigatórias ou políticas de compliance da cooperativa, invoque SEMPRE a ferramenta 'tool_read_compliance_policy_from_gcs' para consultar a documentação oficial armazenada no Google Cloud Storage.\n- Ao receber documentos ou dados de uma viagem, consulte o ERP com 'tool_get_trip_context'.\n- Para auditoria e métricas, utilize 'tool_save_to_gcs_and_bigquery'.\n- Para formalizar o termo e assinar digitalmente, execute 'tool_generate_compliance_signature'.\n- Ao final da aprovação, libere a viagem com 'tool_update_escalasoft_erp'.",
+            "tools": [
+              {
+                "function_declarations": [
+                  {
+                    "description": "Lê as políticas oficiais de compliance e regulamentos de transporte diretamente do Google Cloud Storage (GCS).",
+                    "name": "tool_read_compliance_policy_from_gcs",
+                    "response_json_schema": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              {
+                "function_declarations": [
+                  {
+                    "description": "Busca o contexto cadastral completo da viagem e pendências ativas no Escalasoft ERP.",
+                    "name": "tool_get_trip_context",
+                    "parameters_json_schema": {
+                      "properties": {
+                        "trip_id": {
+                          "title": "Trip Id",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "trip_id"
+                      ],
+                      "title": "tool_get_trip_contextParams",
+                      "type": "object"
+                    },
+                    "response_json_schema": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              {
+                "function_declarations": [
+                  {
+                    "description": "Gera o Termo de Compliance e Assinatura Digital nativa com Hash SHA-256 no Google Cloud Storage.",
+                    "name": "tool_generate_compliance_signature",
+                    "parameters_json_schema": {
+                      "properties": {
+                        "cooperado_nome": {
+                          "title": "Cooperado Nome",
+                          "type": "string"
+                        },
+                        "trip_id": {
+                          "title": "Trip Id",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "cooperado_nome",
+                        "trip_id"
+                      ],
+                      "title": "tool_generate_compliance_signatureParams",
+                      "type": "object"
+                    },
+                    "response_json_schema": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              {
+                "function_declarations": [
+                  {
+                    "description": "Registra os metadados do documento validado no BigQuery para Analytics e auditoria no GCS.",
+                    "name": "tool_save_to_gcs_and_bigquery",
+                    "parameters_json_schema": {
+                      "properties": {
+                        "filename": {
+                          "title": "Filename",
+                          "type": "string"
+                        },
+                        "doc_type": {
+                          "title": "Doc Type",
+                          "type": "string"
+                        },
+                        "status": {
+                          "title": "Status",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "filename",
+                        "doc_type",
+                        "status"
+                      ],
+                      "title": "tool_save_to_gcs_and_bigqueryParams",
+                      "type": "object"
+                    },
+                    "response_json_schema": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              {
+                "function_declarations": [
+                  {
+                    "description": "Atualiza o ERP Escalasoft e libera a viagem do cooperado.",
+                    "name": "tool_update_escalasoft_erp",
+                    "parameters_json_schema": {
+                      "properties": {
+                        "trip_id": {
+                          "title": "Trip Id",
+                          "type": "string"
+                        },
+                        "doc_type": {
+                          "title": "Doc Type",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "trip_id",
+                        "doc_type"
+                      ],
+                      "title": "tool_update_escalasoft_erpParams",
+                      "type": "object"
+                    },
+                    "response_json_schema": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              }
+            ],
+            "sub_agents": []
+          }
+        },
+        "turns": [
+          {
+            "turn_index": 0,
+            "turn_id": "turn_0",
+            "events": [
+              {
+                "author": "rodacoop_compliance_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_call": {
+                        "id": "adk-8594d8fd-7a04-4ea4-9127-d4bd36b5dcd4",
+                        "args": {
+                          "trip_id": "V-98216"
+                        },
+                        "name": "tool_get_trip_context"
+                      }
+                    }
+                  ],
+                  "role": "model"
+                },
+                "event_time": "2026-09-03T19:11:43.282614Z"
+              },
+              {
+                "author": "rodacoop_compliance_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_response": {
+                        "id": "adk-8594d8fd-7a04-4ea4-9127-d4bd36b5dcd4",
+                        "name": "tool_get_trip_context",
+                        "response": {
+                          "result": "Viagem V-98216: Cooperado Roberto Silva, Veículo BRA2E19, Motorista Carlos Eduardo, Pendências: CRLV, CNH"
+                        }
+                      }
+                    }
+                  ],
+                  "role": "user"
+                },
+                "event_time": "2026-09-03T19:11:49.341957Z"
+              },
+              {
+                "author": "rodacoop_compliance_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "text": "O veículo QRS1T23 não pode seguir viagem na V-98216, pois o veículo registrado para esta viagem é o BRA2E19. Além disso, a viagem V-98216 possui pendências de CRLV e CNH para o veículo BRA2E19."
+                    }
+                  ],
+                  "role": "model"
+                },
+                "event_time": "2026-09-03T19:11:49.368019Z"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
