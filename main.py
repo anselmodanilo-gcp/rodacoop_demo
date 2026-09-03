@@ -253,6 +253,43 @@ def trigger_escalasoft_trip_sync(trip_id: str = "VG-2026-9941", whatsapp_to: Opt
 
 # --- ROTAS & ENTERPRISE PORTAL ---
 
+@app.get("/agent/adk/spec")
+def get_adk_agent_spec():
+    """
+    Inspector do Agente Cloud ADK:
+    Retorna a especificação das ferramentas (Tool Declarations), modelo e raciocínio multi-step
+    do agente no padrão do Agent Development Kit / Vertex AI Agent Engine.
+    """
+    return {
+        "agent_name": "Rodacoop Compliance Agent",
+        "agent_framework": "Google Cloud ADK (Agent Development Kit)",
+        "model": "gemini-2.0-flash-exp",
+        "platform": "Gemini Enterprise & Vertex AI Agent Engine",
+        "gcp_project_id": PROJECT_ID,
+        "tools_declarations": [
+            {
+                "name": "get_trip_context",
+                "description": "Recupera os dados cadastrais da viagem do dia (Placa, CPF, Motorista, Cooperado, Pendencias).",
+                "parameters": {"trip_id": "STRING"}
+            },
+            {
+                "name": "generate_compliance_signature",
+                "description": "Gera o Termo de Compliance e Assinatura Digital nativa com Hash SHA-256 no Google Cloud Storage.",
+                "parameters": {"cooperado_nome": "STRING", "trip_id": "STRING"}
+            },
+            {
+                "name": "save_to_gcs_and_bigquery",
+                "description": "Registra os metadados do documento validado no BigQuery para Analytics e auditoria no GCS.",
+                "parameters": {"filename": "STRING", "doc_type": "STRING", "status": "STRING", "extracted_data": "OBJECT"}
+            },
+            {
+                "name": "update_escalasoft_erp",
+                "description": "Atualiza o ERP Escalasoft e libera a viagem do cooperado.",
+                "parameters": {"trip_id": "STRING", "doc_type": "STRING", "gcs_uri": "STRING"}
+            }
+        ]
+    }
+
 @app.get("/health")
 def health():
     return {
