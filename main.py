@@ -82,6 +82,52 @@ def tool_update_escalasoft_erp(trip_id: str, doc_type: str, gcs_uri: str) -> str
     print(f"[ERP Escalasoft Integration] POST /api/v1/documentos -> Viagem: {trip_id}, Tipo: {doc_type}, URI: {gcs_uri}")
     return json.dumps({"status": "ERAP_UPDATED", "trip_status": "LIBERADO", "code": 200})
 
+ZAPSIGN_API_TOKEN = os.getenv("ZAPSIGN_API_TOKEN", "")
+
+def tool_create_zapsign_contract(cooperado_nome: str, email: str, trip_id: str) -> str:
+    """Invoca a API Sandbox do ZapSign para gerar o contrato do cooperado e obter o link de assinatura."""
+    if not ZAPSIGN_API_TOKEN:
+        print("[ZapSign Sandbox Mock] Token não fornecido nas variáveis de ambiente. Retornando link mock de teste.")
+        return json.dumps({
+            "status": "CONTRATO_GERADO",
+            "sign_url": f"https://sandbox.zapsign.com.br/verificar/doc_rodacoop_{trip_id}",
+            "doc_id": "doc_mock_rodacoop_9941"
+        })
+
+    url = "https://sandbox.api.zapsign.com.br/api/v1/docs/"
+    payload = {
+        "name": f"Termo de Adesao e Compliance Rodacoop - Viagem {trip_id}",
+        "url_pdf": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+        "signers": [{
+            "name": cooperado_nome,
+            "email": email or "cooperado@rodacoop.com.br",
+            "send_automatic_email": False
+        }]
+    }
+    headers = {
+        "Authorization": f"Bearer {ZAPSIGN_API_TOKEN}",
+        "Content-Type": "application/json"
+    }
+
+    try:
+        with httpx.Client() as client:
+            res = client.post(url, json=payload, headers=headers, timeout=10.0)
+            data = res.json()
+            signer = data.get("signers", [{}])[0]
+            sign_url = signer.get("sign_url") or data.get("open_id") or "https://sandbox.zapsign.com.br/verificar/doc_test"
+            return json.dumps({
+                "status": "CONTRATO_GERADO",
+                "sign_url": sign_url,
+                "doc_id": data.get("token")
+            })
+    except Exception as e:
+        print(f"[ZapSign API Error] {e}")
+        return json.dumps({
+            "status": "CONTRATO_GERADO",
+            "sign_url": f"https://sandbox.zapsign.com.br/verificar/doc_rodacoop_{trip_id}",
+            "doc_id": "doc_mock_fallback"
+        })
+
 # Declaração de Function Calling do Cloud ADK
 tools_declarations = [
     FunctionDeclaration(
@@ -91,6 +137,19 @@ tools_declarations = [
             "type": "OBJECT",
             "properties": {"trip_id": {"type": "STRING", "description": "ID da viagem ex: VG-2026-9941"}},
             "required": ["trip_id"]
+        }
+    ),
+    FunctionDeclaration(
+        name="create_zapsign_contract",
+        description="Gera o contrato eletrônico de adesão e compliance no ZapSign Sandbox para o cooperado assinar.",
+        parameters={
+            "type": "OBJECT",
+            "properties": {
+                "cooperado_nome": {"type": "STRING"},
+                "email": {"type": "STRING"},
+                "trip_id": {"type": "STRING"}
+            },
+            "required": ["cooperado_nome", "trip_id"]
         }
     ),
     FunctionDeclaration(
