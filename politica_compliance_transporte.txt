@@ -1,0 +1,40 @@
+# POLÍTICA DE COMPLIANCE DOCUMENTAL E TRANSPORTE DE CARGAS - RODACOOP
+Versão: 2026.1 - Vigência: 2026-2027
+Área: Diretoria de Operações, Logística e Compliance
+
+## 1. OBJETIVO
+Definir os requisitos obrigatórios e critérios de conformidade documental para a liberação de viagens intermunicipais e interestaduais de transporte de grãos e cargas agroindustriais vinculadas à cooperativa.
+
+## 2. DOCUMENTAÇÃO OBRIGATÓRIA PARA LIBERAÇÃO DE VIAGEM
+
+### 2.1. Do Cooperado (Centralizador de Cobrança e Responsabilidade)
+- O Cooperado é o responsável direto perante a cooperativa por todas as pendências da frota e dos condutores vinculados à sua conta.
+- Termo de Adesão e Responsabilidade de Compliance homologado com assinatura digital válida registrada em ambiente seguro (Google Cloud Storage).
+
+### 2.2. Do Motorista (Condutor Designado)
+- **CNH (Carteira Nacional de Habilitação):**
+  - Categoria profissional compatível (C, D ou E).
+  - Observação obrigatória de EAR (Exerce Atividade Remunerada).
+  - Exame Toxicológico periódico com resultado negativo e dentro do prazo de validade (art. 148-A do CTB).
+  - Validade física da habilitação regular perante a base nacional do SENATRAN.
+
+### 2.3. Do Veículo de Carga (Cavalo Mecânico e Reboque/Semirreboque)
+- **CRLV (Certificado de Registro e Licenciamento de Veículo):**
+  - Exercício anual vigente quitado (IPVA, DPVAT e taxa de licenciamento).
+  - Sem restrições judiciais ou bloqueios administrativos impeditivos de circulação.
+- **RNTRC / ANTT:**
+  - Registro Nacional de Transportadores Rodoviários de Cargas ativo e devidamente vinculado à placa no sistema da Agência Nacional de Transportes Terrestres.
+- **Laudo de Inspeção Veicular e Cronotacógrafo:**
+  - Certificado de verificação metrológica do tacógrafo válido emitido pelo IPEM/INMETRO.
+
+### 2.4. Documentação Fiscal e de Carga (Emissão Escalasoft / SEFAZ)
+- **CT-e (Conhecimento de Transporte Eletrônico):** Autorizado e validado na SEFAZ.
+- **MDF-e (Manifesto Eletrônico de Documentos Fiscais):** Emitido com as placas do veículo e condutor associados.
+- **Apólice de Seguro de Transporte:** Seguro Obrigatório de Responsabilidade Civil do Transportador Rodoviário de Carga (RCTR-C) e RC-DC (Desaparecimento de Carga).
+
+## 3. PROCEDIMENTO OPERACIONAL DE VALIDAÇÃO VIA AGENTE
+1. Consulta automática ao sistema Escalasoft ERP para identificação da viagem.
+2. Análise de OCR e inteligência multimodal sobre o documento digitalizado.
+3. Gravação de auditoria no Google Cloud Storage e Google BigQuery.
+4. Emissão de Hash SHA-256 e Certificado de Compliance.
+5. Liberação imediata do status no ERP Escalasoft.

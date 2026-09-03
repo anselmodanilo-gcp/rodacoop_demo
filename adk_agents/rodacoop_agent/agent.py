@@ -1,5 +1,15 @@
 from google.adk import Agent
-from google.genai import types
+from google.cloud import storage
+
+def tool_read_compliance_policy_from_gcs() -> str:
+    """Lê as políticas oficiais de compliance e regulamentos de transporte diretamente do Google Cloud Storage (GCS)."""
+    try:
+        client = storage.Client(project="demotelemetria")
+        bucket = client.bucket("demotelemetria-compliance-docs")
+        blob = bucket.blob("compliance/politica_compliance_transporte.txt")
+        return blob.download_as_text()
+    except Exception as e:
+        return f"Erro ao acessar GCS: {e}"
 
 def tool_get_trip_context(trip_id: str) -> str:
     """Busca o contexto cadastral completo da viagem e pendências ativas no Escalasoft ERP."""
@@ -23,21 +33,15 @@ root_agent = Agent(
     description="Agente Especialista em Compliance Documental e Logística Rodacoop (Google Cloud ADK)",
     model="gemini-2.5-flash",
     instruction=(
-        "Você é o Agente Especialista de Compliance Documental Rodacoop rodando no Google Cloud Agent Development Kit (ADK).\n\n"
-        "REGRAS DE COMPLIANCE E DOCUMENTAÇÃO OBRIGATÓRIA DA COOPERATIVA (Transporte Rodoviário / Agronegócio):\n"
-        "Para liberar qualquer viagem (interestadual ou intermunicipal), são estritamente obrigatórios:\n"
-        "1. Motorista: CNH válida (Categoria C, D ou E) com EAR (Exerce Atividade Remunerada) e Exame Toxicológico em dia.\n"
-        "2. Veículo (Cavalo e Carreta): CRLV do exercício vigente e Certificado de Registro Nacional de Transportadores Rodoviários de Cargas (RNTRC/ANTT) ativo.\n"
-        "3. Carga e Fiscal: MDF-e / CT-e autorizados pela SEFAZ e Seguro RCTR-C / RC-DC ativo.\n"
-        "4. Cooperativa / Compliance: Termo de Compliance e Responsabilidade assinado digitalmente pelo Cooperado (com certificação e registro de auditoria no Google Cloud Storage e BigQuery).\n\n"
-        "SEU FLUXO DE TRABALHO AUTOMATIZADO:\n"
-        "- Sempre esclareça com clareza as dúvidas sobre documentos necessários e exigências de compliance.\n"
-        "- Se o usuário mencionar ou enviar pendências de uma viagem (ex: 'VG-2026-9941'), execute 'tool_get_trip_context' para checar o status no Escalasoft ERP.\n"
-        "- Para registrar ou auditar documentos validados, execute 'tool_save_to_gcs_and_bigquery'.\n"
-        "- Para formalizar o termo de responsabilidade, invoque 'tool_generate_compliance_signature'.\n"
-        "- Após conferência e conformidade documental, execute 'tool_update_escalasoft_erp' para liberar a viagem no ERP."
+        "Você é o Agente de Compliance Documental Rodacoop rodando no Google Cloud Agent Development Kit (ADK).\n"
+        "- Quando o usuário fizer perguntas sobre exigências, regras, documentações obrigatórias ou políticas de compliance da cooperativa, invoque SEMPRE a ferramenta 'tool_read_compliance_policy_from_gcs' para consultar a documentação oficial armazenada no Google Cloud Storage.\n"
+        "- Ao receber documentos ou dados de uma viagem, consulte o ERP com 'tool_get_trip_context'.\n"
+        "- Para auditoria e métricas, utilize 'tool_save_to_gcs_and_bigquery'.\n"
+        "- Para formalizar o termo e assinar digitalmente, execute 'tool_generate_compliance_signature'.\n"
+        "- Ao final da aprovação, libere a viagem com 'tool_update_escalasoft_erp'."
     ),
     tools=[
+        tool_read_compliance_policy_from_gcs,
         tool_get_trip_context,
         tool_generate_compliance_signature,
         tool_save_to_gcs_and_bigquery,
