@@ -263,7 +263,7 @@ def get_adk_agent_spec():
     return {
         "agent_name": "Rodacoop Compliance Agent",
         "agent_framework": "Google Cloud ADK (Agent Development Kit)",
-        "model": "gemini-2.0-flash-exp",
+        "model": "gemini-2.5-flash",
         "platform": "Gemini Enterprise & Vertex AI Agent Engine",
         "gcp_project_id": PROJECT_ID,
         "tools_declarations": [
@@ -301,7 +301,7 @@ def get_adk_agent_runtime():
         "runtime_status": "ONLINE",
         "agent_engine": "Vertex AI Agent Engine Runtime",
         "framework": "Google Cloud ADK v2026.09",
-        "model": "gemini-2.0-flash-exp",
+        "model": "gemini-2.5-flash",
         "active_session": "live_session_rodacoop_9941",
         "gcp_infrastructure": {
             "project_id": PROJECT_ID,
@@ -330,7 +330,7 @@ def invoke_agent_runtime(prompt: str, trip_id: str = "VG-2026-9941"):
     Permite testar e interagir diretamente com o Agente via REST API sem passar pelo WhatsApp.
     """
     try:
-        model = GenerativeModel("gemini-2.0-flash-exp", tools=[adk_agent_tools])
+        model = GenerativeModel("gemini-2.5-flash", tools=[adk_agent_tools])
         chat = model.start_chat()
         full_prompt = f"Viagem: {trip_id}. Instrução: {prompt}"
         res = chat.send_message(full_prompt)
@@ -397,7 +397,7 @@ async def twilio_adk_inbound_webhook(
 
     # Execução do Agente Multi-Step ADK
     try:
-        model = GenerativeModel("gemini-2.0-flash-exp", tools=[adk_agent_tools])
+        model = GenerativeModel("gemini-2.5-flash", tools=[adk_agent_tools])
         chat = model.start_chat()
 
         doc_part = Part.from_data(data=file_bytes, mime_type=MediaContentType0 or "image/jpeg")
