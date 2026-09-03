@@ -5,6 +5,8 @@ import streamlit as st
 import plotly.express as px
 from google.cloud import bigquery
 
+import httpx
+
 st.set_page_config(
     page_title="Rodacoop | Control Tower & Analytics",
     page_icon="🚚",
@@ -28,6 +30,35 @@ st.markdown("""
     }
 </style>
 """, unsafe_allow_html=True)
+
+# SIDEBAR: CENTRAL DE ADMINISTRAÇÃO E DISPARO DE DEMO
+st.sidebar.image("https://img.icons8.com/color/96/truck.png", width=70)
+st.sidebar.title("🎛️ Central de Administração")
+st.sidebar.caption("Simulador ERP Escalasoft & Triggers")
+
+API_BASE_URL = os.getenv("API_BASE_URL", "http://localhost:8080")
+
+st.sidebar.subheader("🚀 Iniciar Fluxo de Viagem")
+trip_id_input = st.sidebar.text_input("ID da Viagem ERP", value="VG-2026-9941")
+whatsapp_input = st.sidebar.text_input("WhatsApp do Cooperado (Opcional)", value="+5511988887777")
+
+if st.sidebar.button("📲 Disparar Notificação para o Cooperado", type="primary", use_container_width=True):
+    try:
+        url = f"{API_BASE_URL}/webhook/escalasoft/trip-sync?trip_id={trip_id_input}"
+        if whatsapp_input:
+            url += f"&whatsapp_to=whatsapp:{whatsapp_input.replace('whatsapp:', '')}"
+        
+        with httpx.Client() as client:
+            res = client.post(url, timeout=10.0)
+            if res.status_code == 200:
+                st.sidebar.success(f"✅ Viagem {trip_id_input} sincronizada! Notificação enviada ao WhatsApp do Cooperado.")
+            else:
+                st.sidebar.error(f"Erro ao disparar ({res.status_code}): {res.text}")
+    except Exception as e:
+        st.sidebar.error(f"Erro ao conectar com a API: {e}")
+
+st.sidebar.divider()
+st.sidebar.info("💡 **Dica de Pitch:** Ao clicar no botão acima, o Escalasoft consolida as pendências do Veículo e Motorista e notifica o Cooperado imediatamente via Twilio WhatsApp.")
 
 st.title("🚚 Rodacoop — Control Tower & Compliance Analytics")
 st.caption("Painel em Tempo Real de Onboarding e Validação Documental com Gemini Enterprise e BigQuery")

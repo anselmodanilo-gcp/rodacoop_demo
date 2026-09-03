@@ -216,6 +216,66 @@ def escalasoft_attach_document(trip_id: str, doc_type: str, gcs_uri: str):
     raise HTTPException(status_code=404, detail="Viagem não encontrada no Escalasoft ERP")
 
 
+@app.post("/webhook/escalasoft/trip-sync")
+def trigger_escalasoft_trip_sync(trip_id: str = "VG-2026-9941", whatsapp_to: Optional[str] = None):
+    """
+    Webhook do Escalasoft ERP / CRM: 
+    Consolida as pendências da viagem (Veículo + Motorista + Cooperado) e envia 
+    a notificação ativa inicial no WhatsApp do Cooperado via Twilio API.
+    """
+    trip = next((t for t in MOCK_DB["viagens_dia"] if t["viagem_id"] == trip_id), None)
+    if not trip:
+        raise HTTPException(status_code=404, detail="Viagem não encontrada no Escalasoft")
+
+    cooperado = trip.get("cooperado", {})
+    veiculo = trip.get("veiculo", {})
+    motorista = trip.get("motorista", {})
+    pendencias = trip.get("pendencias", [])
+
+    to_number = whatsapp_to or f"whatsapp:{cooperado.get('telefone', '+5511988887777')}"
+
+    # Consolidação das pendências (Regra de Negócio)
+    lista_pendencias = "\n".join([f"• *{p['titular']}* ({p['tipo']}): {p['descricao']}" for p in pendencias])
+
+    mensagem = (
+        f"🚚 *RODACOOP - Notificação de Pendência de Viagem*\n\n"
+        f"Olá, *{cooperado.get('nome')}*!\n"
+        f"Identificamos documentos pendentes para a viagem *{trip_id}*.\n\n"
+        f"📌 *Relação de Pendências Consolidadas:*\n"
+        f"{lista_pendencias}\n\n"
+        f"Veículo: *{veiculo.get('placa')} ({veiculo.get('modelo')})*\n"
+        f"Motorista: *{motorista.get('nome')}*\n\n"
+        f"📸 *Por favor, responda esta mensagem enviando a foto ou PDF dos documentos para regularização imediata com nossa IA.*"
+    )
+
+    # Disparo via Twilio
+    if twilio_client and TWILIO_ACCOUNT_SID != "AC_MOCK_SID":
+        try:
+            msg = twilio_client.messages.create(
+                from_=TWILIO_WHATSAPP_NUMBER,
+                to=to_number,
+                body=mensagem
+            )
+            return {
+                "status": "DISPARADO",
+                "sid": msg.sid,
+                "trip_id": trip_id,
+                "cooperado": cooperado.get("nome"),
+                "whatsapp_destinatario": to_number,
+                "mensagem_enviada": mensagem
+            }
+        except Exception as e:
+            print(f"[Twilio Dispatch Error] {e}")
+
+    return {
+        "status": "SIMULADO_LOCAL",
+        "trip_id": trip_id,
+        "cooperado": cooperado.get("nome"),
+        "whatsapp_destinatario": to_number,
+        "mensagem_enviada": mensagem
+    }
+
+
 # --- ROTAS & ENTERPRISE PORTAL ---
 
 @app.get("/health")
