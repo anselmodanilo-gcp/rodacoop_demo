@@ -94,7 +94,7 @@ def tool_create_zapsign_contract(cooperado_nome: str, email: str, trip_id: str) 
         "url_pdf": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
         "signers": [{
             "name": cooperado_nome,
-            "email": email or "cooperado@rodacoop.com.br",
+            "email": email or "cooperado_transporte@anselmodanilo.altostrat.com",
             "send_automatic_email": False
         }]
     }
@@ -347,7 +347,7 @@ async def twilio_adk_inbound_webhook(
                 elif fn_name == "create_zapsign_contract":
                     tool_output = tool_create_zapsign_contract(
                         fn_args.get("cooperado_nome", "Roberto Silva Alcantara"),
-                        fn_args.get("email", "roberto@rodacoop.com.br"),
+                        fn_args.get("email", "cooperado_transporte@anselmodanilo.altostrat.com"),
                         fn_args.get("trip_id", "VG-2026-9941")
                     )
                 elif fn_name == "save_to_gcs_and_bigquery":
@@ -372,7 +372,7 @@ async def twilio_adk_inbound_webhook(
     except Exception as e:
         print(f"[ADK Agent Error] Fallback executado: {e}")
         # Log analítico no BigQuery, ZapSign e resposta
-        zapsign_res = json.loads(tool_create_zapsign_contract("Roberto Silva Alcantara", "roberto@rodacoop.com.br", "VG-2026-9941"))
+        zapsign_res = json.loads(tool_create_zapsign_contract("Roberto Silva Alcantara", "cooperado_transporte@anselmodanilo.altostrat.com", "VG-2026-9941"))
         tool_save_to_gcs_and_bigquery(filename, "CRLV", "APROVADO", {"placa": "BRA2E19"})
         tool_update_escalasoft_erp("VG-2026-9941", "CRLV", gcs_uri)
         msg_final = (
