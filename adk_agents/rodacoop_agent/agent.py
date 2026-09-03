@@ -21,7 +21,7 @@ def tool_update_escalasoft_erp(trip_id: str, doc_type: str) -> str:
 root_agent = Agent(
     name="rodacoop_compliance_agent",
     description="Agente de Compliance Documental Rodacoop utilizando o Google Cloud Agent Development Kit (ADK)",
-    model="gemini-1.5-flash",
+    model="gemini-2.5-flash",
     instruction=(
         "Você é o Agente de Compliance Documental Rodacoop rodando no Google Cloud Agent Development Kit (ADK).\n"
         "1. Ao receber a foto ou PDF da CNH ou CRLV, consulte o contexto da viagem usando 'tool_get_trip_context'.\n"
