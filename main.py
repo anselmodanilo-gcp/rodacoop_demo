@@ -125,6 +125,40 @@ tools_declarations = [
 adk_agent_tools = Tool(function_declarations=tools_declarations)
 
 
+# --- MINI SISTEMA MOCK DO ESCALASOFT ERP ---
+
+@app.get("/escalasoft/api/v1/viagens")
+def escalasoft_list_trips():
+    """Endpoint simulando o Escalasoft ERP retornando as viagens do dia e suas pendências."""
+    return MOCK_DB
+
+@app.get("/escalasoft/api/v1/viagens/{trip_id}")
+def escalasoft_get_trip(trip_id: str):
+    """Endpoint simulando consulta detalhada de uma viagem no Escalasoft."""
+    trip = next((t for t in MOCK_DB["viagens_dia"] if t["viagem_id"] == trip_id), None)
+    if not trip:
+        raise HTTPException(status_code=404, detail="Viagem não encontrada no Escalasoft ERP")
+    return trip
+
+@app.post("/escalasoft/api/v1/documentos/anexar")
+def escalasoft_attach_document(trip_id: str, doc_type: str, gcs_uri: str):
+    """
+    Endpoint simulando o POST do CRM para o Escalasoft ERP anexando o documento aprovado
+    e liberando o status da viagem em tempo real.
+    """
+    trip = next((t for t in MOCK_DB["viagens_dia"] if t["viagem_id"] == trip_id), None)
+    if trip:
+        trip["status_viagem"] = "LIBERADO"
+        return {
+            "status": "SUCCESS",
+            "message": f"Documento {doc_type} anexado ao cadastro no Escalasoft com sucesso.",
+            "trip_id": trip_id,
+            "gcs_uri": gcs_uri,
+            "novo_status_viagem": "LIBERADO"
+        }
+    raise HTTPException(status_code=404, detail="Viagem não encontrada no Escalasoft ERP")
+
+
 # --- ROTAS & ENTERPRISE PORTAL ---
 
 @app.get("/health")
