@@ -286,6 +286,12 @@ async def twilio_adk_inbound_webhook(
                 
                 if fn_name == "get_trip_context":
                     tool_output = tool_get_trip_context(fn_args.get("trip_id", "VG-2026-9941"))
+                elif fn_name == "create_zapsign_contract":
+                    tool_output = tool_create_zapsign_contract(
+                        fn_args.get("cooperado_nome", "Roberto Silva Alcantara"),
+                        fn_args.get("email", "roberto@rodacoop.com.br"),
+                        fn_args.get("trip_id", "VG-2026-9941")
+                    )
                 elif fn_name == "save_to_gcs_and_bigquery":
                     tool_output = tool_save_to_gcs_and_bigquery(
                         filename, fn_args.get("doc_type", "CRLV"), fn_args.get("status", "APROVADO"), fn_args
@@ -307,14 +313,17 @@ async def twilio_adk_inbound_webhook(
 
     except Exception as e:
         print(f"[ADK Agent Error] Fallback executado: {e}")
-        # Log analítico no BigQuery e resposta
+        # Log analítico no BigQuery, ZapSign e resposta
+        zapsign_res = json.loads(tool_create_zapsign_contract("Roberto Silva Alcantara", "roberto@rodacoop.com.br", "VG-2026-9941"))
         tool_save_to_gcs_and_bigquery(filename, "CRLV", "APROVADO", {"placa": "BRA2E19"})
         tool_update_escalasoft_erp("VG-2026-9941", "CRLV", gcs_uri)
         msg_final = (
             "✅ *Documento (CRLV) validado com sucesso pelo Agente Cloud ADK!*\n\n"
-            "• Auditado e armazenado em: Google Cloud Storage (GCS)\n"
+            "• Auditado e armazenado no Google Cloud Storage (GCS)\n"
             "• Registrado no BigQuery Analytics\n"
-            "• Cadastro sincronizado com Escalasoft ERP em tempo real."
+            "• Cadastro sincronizado com Escalasoft ERP em tempo real.\n\n"
+            f"✍️ *Assinatura do Termo de Compliance (ZapSign):*\n"
+            f"Por favor, assine o termo digital para liberação final: {zapsign_res.get('sign_url')}"
         )
 
     response.message(msg_final)
