@@ -90,7 +90,7 @@ def tool_create_zapsign_contract(cooperado_nome: str, email: str, trip_id: str) 
         print("[ZapSign Sandbox Mock] Token não fornecido nas variáveis de ambiente. Retornando link mock de teste.")
         return json.dumps({
             "status": "CONTRATO_GERADO",
-            "sign_url": f"https://sandbox.zapsign.com.br/verificar/doc_rodacoop_{trip_id}",
+            "sign_url": f"https://app.zapsign.com.br/verificar/doc_rodacoop_{trip_id}",
             "doc_id": "doc_mock_rodacoop_9941"
         })
 
@@ -114,7 +114,7 @@ def tool_create_zapsign_contract(cooperado_nome: str, email: str, trip_id: str) 
             res = client.post(url, json=payload, headers=headers, timeout=10.0)
             data = res.json()
             signer = data.get("signers", [{}])[0]
-            sign_url = signer.get("sign_url") or data.get("open_id") or "https://sandbox.zapsign.com.br/verificar/doc_test"
+            sign_url = signer.get("sign_url") or f"https://app.zapsign.com.br/verificar/{data.get('open_id', 'doc_test')}"
             return json.dumps({
                 "status": "CONTRATO_GERADO",
                 "sign_url": sign_url,
@@ -124,7 +124,7 @@ def tool_create_zapsign_contract(cooperado_nome: str, email: str, trip_id: str) 
         print(f"[ZapSign API Error] {e}")
         return json.dumps({
             "status": "CONTRATO_GERADO",
-            "sign_url": f"https://sandbox.zapsign.com.br/verificar/doc_rodacoop_{trip_id}",
+            "sign_url": f"https://app.zapsign.com.br/verificar/doc_rodacoop_{trip_id}",
             "doc_id": "doc_mock_fallback"
         })
 
