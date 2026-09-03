@@ -1,0 +1,32 @@
+{
+  "viagens_dia": [
+    {
+      "viagem_id": "VG-2026-9941",
+      "data": "2026-09-03",
+      "origem": "CD Mercado Livre Cajamar",
+      "destino": "Base Campinas",
+      "cooperado": {
+        "id": "COOP-882",
+        "nome": "Roberto Silva Alcantara",
+        "telefone_whatsapp": "+5511988887777",
+        "pendencias": []
+      },
+      "motorista": {
+        "id": "MOT-104",
+        "nome": "Carlos Eduardo Gomes",
+        "cpf": "123.456.789-00",
+        "pendencias": [
+          { "tipo": "CNH", "obrigatorio": true }
+        ]
+      },
+      "veiculo": {
+        "id": "VEIC-550",
+        "placa": "BRA2E19",
+        "renavam": "00987654321",
+        "pendencias": [
+          { "tipo": "CRLV", "exercicio_minimo": 2025, "obrigatorio": true }
+        ]
+      }
+    }
+  ]
+}
